@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+
+<?import javafx.scene.image.ImageView?>
+<Group fx:controller="Controllers.MainMenuController" xmlns:fx="http://javafx.com/fxml">
+    <ImageView>
+
+    </ImageView>
+</Group>
