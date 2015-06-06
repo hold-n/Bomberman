@@ -2,6 +2,9 @@ package Controllers;
 
 import GameLogic.Game;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import static GameLogic.Config.MENU_HEIGHT;
+import static GameLogic.Config.MENU_WIDTH;
 
 
 /**
@@ -15,11 +18,19 @@ public class MainMenuController {
         game = gameToBind;
     }
 
-    public void runGame(ActionEvent event) {
+    @FXML
+    private void runGame(ActionEvent event) {
         game.launchGameLoop();
     }
 
-    public void exitGame(ActionEvent event) {
+    @FXML
+    private void exitGame(ActionEvent event) {
         System.exit(0);
     }
+
+    @FXML
+    private Double windowWidth() { return (double) MENU_WIDTH; }
+
+    @FXML
+    private Double windowHeight() { return (double) MENU_HEIGHT; }
 }

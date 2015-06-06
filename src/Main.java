@@ -10,6 +10,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         Game game = new Game(primaryStage);
         game.run();
+        // TODO: handle main menu load exception
     }
 
     public static void main(String[] args) {
