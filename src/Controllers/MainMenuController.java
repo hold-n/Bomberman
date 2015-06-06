@@ -1,7 +1,8 @@
 package Controllers;
 
 import GameLogic.Game;
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
+
 
 /**
  * Created by Max on 04.06.2015.
@@ -14,7 +15,11 @@ public class MainMenuController {
         game = gameToBind;
     }
 
-    public void RunGame(ActionEvent event) {
+    public void runGame(ActionEvent event) {
         game.launchGameLoop();
+    }
+
+    public void exitGame(ActionEvent event) {
+        System.exit(0);
     }
 }

@@ -57,7 +57,8 @@ public class Game {
      * </p>
      */
     public void launchGameLoop() {
-        GameWorld world = new GameWorld(this);
-        world.run();
+        GameWindow window = new GameWindow(this);
+        stage.setScene(window.getScene());
+        window.run();
     }
 }

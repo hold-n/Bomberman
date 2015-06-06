@@ -28,6 +28,11 @@ public final class Config {
         }
     }
 
+    // TODO: exception handling
+    public static final String TITLE =
+            properties.getProperty("title");
+    public static final int FPS =
+            Integer.valueOf(properties.getProperty("fps"));
     public static final int MENU_HEIGHT =
             Integer.valueOf(properties.getProperty("menu.height"));
     public static final int MENU_WIDTH =
@@ -36,6 +41,6 @@ public final class Config {
             Integer.valueOf(properties.getProperty("window.height"));
     public static final int WINDOW_WIDTH =
             Integer.valueOf(properties.getProperty("window.width"));
-    public static final String TITLE =
-            properties.getProperty("title");
+    public static final int HEADER_HEIGHT =
+            Integer.valueOf(properties.getProperty("header.height"));
 }

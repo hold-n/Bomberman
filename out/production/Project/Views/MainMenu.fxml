@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<?import javafx.scene.image.ImageView?>
-<Group fx:controller="Controllers.MainMenuController" xmlns:fx="http://javafx.com/fxml">
-    <ImageView>
+<AnchorPane fx:controller="Controllers.MainMenuController" xmlns:fx="http://javafx.com/fxml" >
+    <children>
+        <!--<ImageView>-->
 
-    </ImageView>
-</Group>
+        <!--</ImageView>-->
+        <Button onAction="#runGame" text="Start" prefHeight="500" prefWidth="500"/>
+    </children>
+</AnchorPane>
