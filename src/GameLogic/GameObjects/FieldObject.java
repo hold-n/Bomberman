@@ -19,14 +19,15 @@ public abstract class FieldObject {
     protected GameValue velocityY = new GameValue(0);
 
     protected GameWindow gameWindow;
+    // Particular field just for convenience
     protected Iterable<FieldObject> objectCollection;
 
     public double getX() { return x.getLogical(); }
     public double getY() { return y.getLogical(); }
     public double getSizeX() { return sizeX.getLogical(); }
     public double getSizeY() { return sizeY.getLogical(); }
-    public double getvelocityX() { return velocityX.getLogical(); }
-    public double getvelocityY() { return velocityY.getLogical(); }
+    public double getVelocityX() { return velocityX.getLogical(); }
+    public double getVelocityY() { return velocityY.getLogical(); }
 
     public void setX(double value) { x.setValue(value); }
     public void setY(double value) { y.setValue(value); }
@@ -54,6 +55,7 @@ public abstract class FieldObject {
 
     protected Image getSprite() { return null; }
     public void update(long now) {}
+    // only active objects check for collisions
     public void checkCollisions() {}
     public abstract void draw(GraphicsContext context);
 }

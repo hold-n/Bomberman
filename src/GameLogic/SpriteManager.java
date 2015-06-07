@@ -13,14 +13,18 @@ public class SpriteManager {
             new Image(SOLID_TILE_URL, TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
     private static final Image explodableTile =
             new Image(EXPLODABLE_TILE_URL, TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
+    private static final Image portalTile =
+            new Image(PORTAL_TILE_URL, TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
     private static final Image[] playerFront = new Image[PLAYER_FRAMES_NUM];
     private static final Image[] playerBack = new Image[PLAYER_FRAMES_NUM];
     private static final Image[] playerSideRight = new Image[PLAYER_FRAMES_NUM];
     private static final Image[] playerSideLeft = new Image[PLAYER_FRAMES_NUM];
+    private static final Image[] bomb = new Image[BOMB_FRAMES];
 
     static {
         GameValue playerHeight = new GameValue(PLAYER_HEIGHT);
         GameValue playerWidth = new GameValue(PLAYER_WIDTH);
+        GameValue bombSize = new GameValue(BOMB_SIZE);
         for (int i = 0; i < PLAYER_FRAMES_NUM; i++) {
             String url = PLAYER_FRONT_START + (new Integer(i)).toString() + PLAYER_FRONT_END;
             playerFront[i] =
@@ -39,6 +43,11 @@ public class SpriteManager {
             playerSideLeft[i] =
                     new Image(url, playerWidth.getGraphic(), playerHeight.getGraphic(), true, true);
         }
+        for (int i = 0; i < BOMB_FRAMES; i++) {
+            String url = BOMB_START + (new Integer(i)).toString() + BOMB_END;
+            bomb[i] =
+                    new Image(url, bombSize.getGraphic(), bombSize.getGraphic(), true, true);
+        }
     }
 
     public static Image getBackgroundTile() {
@@ -51,6 +60,14 @@ public class SpriteManager {
 
     public static Image getExplodableTile() {
         return explodableTile;
+    }
+
+    public static Image getPortalTile() {
+        return portalTile;
+    }
+
+    public static Image getBomb(int frame) {
+        return bomb[frame % BOMB_FRAMES];
     }
 
     public static Image getPlayerFront(int frame) {

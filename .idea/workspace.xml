@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderCounter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderImage.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderObject.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderText.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderTimer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GameLogic/SpriteManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/ImpassableTile.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/PortalTile.java" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\Project\GameLogic\GameObjects\Bonus.class" afterPath="" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\Project\GameLogic\GameObjects\GameObject.class" afterPath="" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\Project\GameLogic\GameObjects\Moveable.class" afterPath="" />
@@ -15,6 +11,7 @@
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\Project\GameLogic\GameObjects\Tile.class" afterPath="" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\Project\GameLogic\GameWorld.class" afterPath="" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\Project\Main$1.class" afterPath="" />
+      <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\Project\Resources\Bomb\Bomb_f03.png" afterPath="" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\Project\Resources\Bomberman\Flame\Flame_F02.png" afterPath="" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\Project\Resources\Bomberman\Flame\Flame_F03.png" afterPath="" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\Project\Resources\Bomberman\Flame\Flame_F04.png" afterPath="" />
@@ -35,6 +32,7 @@
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\src\GameLogic\GameObjects\Moveable.java" afterPath="" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\src\GameLogic\GameObjects\SpriteManager.java" afterPath="" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\src\GameLogic\GameObjects\Tile.java" afterPath="" />
+      <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\src\Resources\Bomb\Bomb_f03.png" afterPath="" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\src\Resources\Bomberman\Flame\Flame_F02.png" afterPath="" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\src\Resources\Bomberman\Flame\Flame_F03.png" afterPath="" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\src\Resources\Bomberman\Flame\Flame_F04.png" afterPath="" />
@@ -43,26 +41,34 @@
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\src\Resources\Bomberman\Powerups\BombPowerup.png" afterPath="" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\src\Resources\Bomberman\Powerups\FlamePowerup.png" afterPath="" />
       <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\src\Resources\Bomberman\Powerups\SpeedPowerup.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/Tiles/BackgroundTile.class" afterPath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/Tiles/BackgroundTile.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/Bomb.class" afterPath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/Bomb.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Resources/Bomb/Bomb_f01.png" afterPath="$PROJECT_DIR$/out/production/Project/Resources/Bomb/Bomb_f01.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Resources/Bomb/Bomb_f01.png" afterPath="$PROJECT_DIR$/src/Resources/Bomb/Bomb_f01.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Resources/Bomb/Bomb_f02.png" afterPath="$PROJECT_DIR$/out/production/Project/Resources/Bomb/Bomb_f02.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Resources/Bomb/Bomb_f02.png" afterPath="$PROJECT_DIR$/src/Resources/Bomb/Bomb_f02.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/GameLogic/Config.class" afterPath="$PROJECT_DIR$/out/production/Project/GameLogic/Config.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/Tiles/ExplodableTile.class" afterPath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/Tiles/ExplodableTile.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/FieldObject.class" afterPath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/FieldObject.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/GameLogic/GameWindow$1.class" afterPath="$PROJECT_DIR$/out/production/Project/GameLogic/GameWindow$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/GameLogic/GameWindow$2.class" afterPath="$PROJECT_DIR$/out/production/Project/GameLogic/GameWindow$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/GameLogic/GameWindow$3.class" afterPath="$PROJECT_DIR$/out/production/Project/GameLogic/GameWindow$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/GameLogic/GameWindow.class" afterPath="$PROJECT_DIR$/out/production/Project/GameLogic/GameWindow.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Controllers/MainMenuController.class" afterPath="$PROJECT_DIR$/out/production/Project/Controllers/MainMenuController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/Player$1.class" afterPath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/Player$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/Player.class" afterPath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/Player.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/Tiles/SolidTile.class" afterPath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/Tiles/SolidTile.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/GameLogic/SpriteManager.class" afterPath="$PROJECT_DIR$/out/production/Project/GameLogic/SpriteManager.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/Tiles/Tile.class" afterPath="$PROJECT_DIR$/out/production/Project/GameLogic/GameObjects/Tiles/Tile.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/BackgroundTile.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/BackgroundTile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/Bonus.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/Bonus.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/Bomb.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/Bomb.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/Config.java" afterPath="$PROJECT_DIR$/src/GameLogic/Config.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/ExplodableTile.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/ExplodableTile.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/FieldObject.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/FieldObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/Game.java" afterPath="$PROJECT_DIR$/src/GameLogic/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameValue.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameValue.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameWindow.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controllers/MainMenuController.java" afterPath="$PROJECT_DIR$/src/Controllers/MainMenuController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderCounter.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderCounter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderImage.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderImage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderObject.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderTimer.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderTimer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/Player.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/Player.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/SolidTile.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/SolidTile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/Tile.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/Tile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/SpriteManager.java" afterPath="$PROJECT_DIR$/src/GameLogic/SpriteManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/config.properties" afterPath="$PROJECT_DIR$/out/production/Project/config.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/config.properties" afterPath="$PROJECT_DIR$/src/config.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -128,58 +134,52 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GameWindow.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameWindow.java">
+      <file leaf-file-name="config.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/config.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="3502">
-              <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850">
+              <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImpassableTile.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/ImpassableTile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6359143" vertical-offset="56" max-vertical-offset="680">
+              <caret line="28" column="15" selection-start-line="28" selection-start-column="15" selection-end-line="28" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#943#952#0" expanded="true" />
-                <element signature="e#1086#1100#0" expanded="true" />
-                <element signature="e#1168#1181#0" expanded="true" />
-                <element signature="e#1286#1292#0" expanded="true" />
-                <element signature="e#1354#1361#0" expanded="true" />
-                <element signature="e#1424#1432#0" expanded="true" />
-                <element signature="e#1491#1497#0" expanded="true" />
-                <element signature="e#1566#1577#0" expanded="true" />
-                <element signature="e#4009#4010#0" expanded="true" />
-                <element signature="e#4039#4040#0" expanded="true" />
-                <element signature="e#4081#4082#0" expanded="true" />
-                <element signature="e#4115#4116#0" expanded="true" />
-                <element signature="e#5183#5448#0" expanded="true" />
-                <element signature="e#5447#5448#0" expanded="true" />
-                <element signature="e#5482#5697#0" expanded="true" />
-                <element signature="e#5696#5697#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HeaderTimer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderTimer.java">
+      <file leaf-file-name="SolidTile.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/SolidTile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding>
-                <element signature="e#458#459#0" expanded="true" />
-                <element signature="e#533#534#0" expanded="true" />
-                <element signature="e#596#597#0" expanded="true" />
-                <element signature="e#659#660#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#288#289#0" expanded="true" />
+                <element signature="e#329#330#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FieldObject.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/FieldObject.java">
+      <file leaf-file-name="HeaderImage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderImage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="379" max-vertical-offset="1088">
-              <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+              <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1896#1897#0" expanded="true" />
-                <element signature="e#1924#1925#0" expanded="true" />
+                <element signature="e#372#373#0" expanded="true" />
+                <element signature="e#399#400#0" expanded="true" />
+                <element signature="e#462#463#0" expanded="true" />
+                <element signature="e#508#509#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -188,21 +188,11 @@
       <file leaf-file-name="Config.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameLogic/Config.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1093" max-vertical-offset="1802">
-              <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1157" max-vertical-offset="2023">
+              <caret line="77" column="43" selection-start-line="77" selection-start-column="43" selection-end-line="77" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.properties" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/config.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6079078" vertical-offset="124" max-vertical-offset="731">
-              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -210,37 +200,21 @@
       <file leaf-file-name="SpriteManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameLogic/SpriteManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="1309">
-              <caret line="38" column="26" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="290" max-vertical-offset="1292">
+              <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2112#2113#0" expanded="true" />
-                <element signature="e#2149#2150#0" expanded="true" />
-                <element signature="e#2191#2192#0" expanded="true" />
-                <element signature="e#2223#2224#0" expanded="true" />
-                <element signature="e#2270#2271#0" expanded="true" />
-                <element signature="e#2307#2308#0" expanded="true" />
-                <element signature="e#2360#2361#0" expanded="true" />
-                <element signature="e#2421#2422#0" expanded="true" />
-                <element signature="e#2473#2474#0" expanded="true" />
-                <element signature="e#2533#2534#0" expanded="true" />
-                <element signature="e#2586#2587#0" expanded="true" />
-                <element signature="e#2651#2652#0" expanded="true" />
-                <element signature="e#2703#2704#0" expanded="true" />
-                <element signature="e#2767#2768#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Bonus.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/Bonus.java">
+      <file leaf-file-name="HeaderObject.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-              <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -248,22 +222,21 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1041" max-vertical-offset="2669">
-              <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2232" max-vertical-offset="3247">
+              <caret line="182" column="23" selection-start-line="182" selection-start-column="23" selection-end-line="182" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4189#4190#0" expanded="true" />
-                <element signature="e#4225#4226#0" expanded="true" />
+                <element signature="e#682#689#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Explosion.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Explosion.java">
+      <file leaf-file-name="Tile.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/Tile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-              <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="39" max-vertical-offset="646">
+              <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -271,12 +244,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameValue.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameValue.java">
+      <file leaf-file-name="FieldObject.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/FieldObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
-              <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1088">
+              <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -311,30 +286,33 @@
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/SpriteManager.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Explostion.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Bomb.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Explosion.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/SpriteManager.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/Tile.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/ExplodableTime.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/BackgroundTile.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObject.java" />
-        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderImage.java" />
         <option value="$PROJECT_DIR$/src/Views/MainMenu.fxml" />
         <option value="$PROJECT_DIR$/src/Controllers/MainMenuController.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/Game.java" />
-        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/ExplodableTile.java" />
-        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/SolidTile.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameValue.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderText.java" />
-        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderObject.java" />
-        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderTimer.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/Bonus.java" />
-        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/FieldObject.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameWindow.java" />
+        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Bomb.java" />
+        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/ExplodableTile.java" />
+        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/SolidTile.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/Config.java" />
+        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/PortalTile.java" />
+        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderObject.java" />
+        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderImage.java" />
+        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderCounter.java" />
+        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderTimer.java" />
+        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/FieldObject.java" />
+        <option value="$PROJECT_DIR$/src/config.properties" />
         <option value="$PROJECT_DIR$/src/GameLogic/SpriteManager.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Player.java" />
-        <option value="$PROJECT_DIR$/src/config.properties" />
+        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/ImpassableTile.java" />
       </list>
     </option>
   </component>
@@ -847,7 +825,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="9" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -856,53 +834,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="221">
-          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#943#952#0" expanded="true" />
-            <element signature="e#1086#1100#0" expanded="true" />
-            <element signature="e#1168#1181#0" expanded="true" />
-            <element signature="e#1286#1292#0" expanded="true" />
-            <element signature="e#1354#1361#0" expanded="true" />
-            <element signature="e#1424#1432#0" expanded="true" />
-            <element signature="e#1491#1497#0" expanded="true" />
-            <element signature="e#1566#1577#0" expanded="true" />
-            <element signature="e#4009#4010#0" expanded="true" />
-            <element signature="e#4039#4040#0" expanded="true" />
-            <element signature="e#4081#4082#0" expanded="true" />
-            <element signature="e#4115#4116#0" expanded="true" />
-            <element signature="e#5183#5448#0" expanded="true" />
-            <element signature="e#5447#5448#0" expanded="true" />
-            <element signature="e#5482#5697#0" expanded="true" />
-            <element signature="e#5696#5697#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/FieldObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="238">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Views/MainMenu.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="153">
-          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controllers/MainMenuController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="221">
@@ -951,14 +882,16 @@
             <element signature="e#1424#1432#0" expanded="true" />
             <element signature="e#1491#1497#0" expanded="true" />
             <element signature="e#1566#1577#0" expanded="true" />
-            <element signature="e#4009#4010#0" expanded="true" />
-            <element signature="e#4039#4040#0" expanded="true" />
-            <element signature="e#4081#4082#0" expanded="true" />
-            <element signature="e#4115#4116#0" expanded="true" />
-            <element signature="e#5183#5448#0" expanded="true" />
-            <element signature="e#5447#5448#0" expanded="true" />
-            <element signature="e#5482#5697#0" expanded="true" />
-            <element signature="e#5696#5697#0" expanded="true" />
+            <element signature="method#addTile#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeTile#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addBonus#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeBonus#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addPlayer#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removePlayer#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addBomb#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeBomb#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addExplosion#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeExplosion#0;class#GameWindow#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1022,14 +955,16 @@
             <element signature="e#1424#1432#0" expanded="true" />
             <element signature="e#1491#1497#0" expanded="true" />
             <element signature="e#1566#1577#0" expanded="true" />
-            <element signature="e#4009#4010#0" expanded="true" />
-            <element signature="e#4039#4040#0" expanded="true" />
-            <element signature="e#4081#4082#0" expanded="true" />
-            <element signature="e#4115#4116#0" expanded="true" />
-            <element signature="e#5183#5448#0" expanded="true" />
-            <element signature="e#5447#5448#0" expanded="true" />
-            <element signature="e#5482#5697#0" expanded="true" />
-            <element signature="e#5696#5697#0" expanded="true" />
+            <element signature="method#addTile#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeTile#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addBonus#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeBonus#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addPlayer#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removePlayer#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addBomb#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeBomb#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addExplosion#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeExplosion#0;class#GameWindow#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1068,14 +1003,16 @@
             <element signature="e#1424#1432#0" expanded="true" />
             <element signature="e#1491#1497#0" expanded="true" />
             <element signature="e#1566#1577#0" expanded="true" />
-            <element signature="e#4009#4010#0" expanded="true" />
-            <element signature="e#4039#4040#0" expanded="true" />
-            <element signature="e#4081#4082#0" expanded="true" />
-            <element signature="e#4115#4116#0" expanded="true" />
-            <element signature="e#5183#5448#0" expanded="true" />
-            <element signature="e#5447#5448#0" expanded="true" />
-            <element signature="e#5482#5697#0" expanded="true" />
-            <element signature="e#5696#5697#0" expanded="true" />
+            <element signature="method#addTile#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeTile#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addBonus#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeBonus#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addPlayer#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removePlayer#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addBomb#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeBomb#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addExplosion#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeExplosion#0;class#GameWindow#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1114,14 +1051,16 @@
             <element signature="e#1424#1432#0" expanded="true" />
             <element signature="e#1491#1497#0" expanded="true" />
             <element signature="e#1566#1577#0" expanded="true" />
-            <element signature="e#4009#4010#0" expanded="true" />
-            <element signature="e#4039#4040#0" expanded="true" />
-            <element signature="e#4081#4082#0" expanded="true" />
-            <element signature="e#4115#4116#0" expanded="true" />
-            <element signature="e#5183#5448#0" expanded="true" />
-            <element signature="e#5447#5448#0" expanded="true" />
-            <element signature="e#5482#5697#0" expanded="true" />
-            <element signature="e#5696#5697#0" expanded="true" />
+            <element signature="method#addTile#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeTile#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addBonus#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeBonus#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addPlayer#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removePlayer#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addBomb#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeBomb#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addExplosion#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeExplosion#0;class#GameWindow#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1192,58 +1131,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_40/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="27903" max-vertical-offset="57477">
-          <caret line="1769" column="0" selection-start-line="1769" selection-start-column="0" selection-end-line="1769" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
           <caret line="12" column="48" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/Tile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="39" max-vertical-offset="680">
-          <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#790#791#0" expanded="true" />
-            <element signature="e#868#869#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/BackgroundTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-          <caret line="17" column="48" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#289#290#0" expanded="true" />
-            <element signature="e#330#331#0" expanded="true" />
-            <element signature="e#379#380#0" expanded="true" />
-            <element signature="e#435#436#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Bomb.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
-          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#281#282#0" expanded="true" />
-            <element signature="e#322#323#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1277,97 +1170,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="158" max-vertical-offset="935">
-          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/ExplodableTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="663">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="33" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#371#372#0" expanded="true" />
-            <element signature="e#416#417#0" expanded="true" />
-            <element signature="e#830#831#0" expanded="true" />
-            <element signature="e#898#899#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/SolidTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="32" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#801#802#0" expanded="true" />
-            <element signature="e#869#870#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderText.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderCounter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
-          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
-          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
-          <caret line="14" column="39" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
-            <element signature="e#453#454#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderTimer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <element signature="e#458#459#0" expanded="true" />
-            <element signature="e#533#534#0" expanded="true" />
-            <element signature="e#596#597#0" expanded="true" />
-            <element signature="e#659#660#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/Bonus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
           <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_40/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="27886" max-vertical-offset="57477">
+          <caret line="1768" column="0" selection-start-line="1768" selection-start-column="0" selection-end-line="1768" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_40/javafx-src.zip!/javafx/scene/image/Image.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="15946" max-vertical-offset="18530">
+          <caret line="1085" column="47" selection-start-line="1085" selection-start-column="47" selection-end-line="1085" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/ExplodableTile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#397#398#0" expanded="true" />
+            <element signature="e#453#454#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1382,22 +1218,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/FieldObject.java">
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Bomb.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="379" max-vertical-offset="1088">
-          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="158" max-vertical-offset="765">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1896#1897#0" expanded="true" />
-            <element signature="e#1924#1925#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameValue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
+          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="175" max-vertical-offset="935">
+          <caret line="35" column="22" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameLogic/GameWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="3502">
-          <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2096" max-vertical-offset="2737">
+          <caret line="193" column="5" selection-start-line="193" selection-start-column="5" selection-end-line="193" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#943#952#0" expanded="true" />
@@ -1408,30 +1260,108 @@
             <element signature="e#1424#1432#0" expanded="true" />
             <element signature="e#1491#1497#0" expanded="true" />
             <element signature="e#1566#1577#0" expanded="true" />
-            <element signature="e#4009#4010#0" expanded="true" />
-            <element signature="e#4039#4040#0" expanded="true" />
-            <element signature="e#4081#4082#0" expanded="true" />
-            <element signature="e#4115#4116#0" expanded="true" />
-            <element signature="e#5183#5448#0" expanded="true" />
-            <element signature="e#5447#5448#0" expanded="true" />
-            <element signature="e#5482#5697#0" expanded="true" />
-            <element signature="e#5696#5697#0" expanded="true" />
+            <element signature="method#addTile#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeTile#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addBonus#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeBonus#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addPlayer#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removePlayer#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addBomb#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeBomb#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#addExplosion#0;class#GameWindow#0" expanded="false" />
+            <element signature="method#removeExplosion#0;class#GameWindow#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameValue.java">
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/BackgroundTile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
-          <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#379#380#0" expanded="true" />
+            <element signature="e#435#436#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/PortalTile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5" max-vertical-offset="612">
+          <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#364#365#0" expanded="true" />
+            <element signature="e#409#410#0" expanded="true" />
+            <element signature="e#455#456#0" expanded="true" />
+            <element signature="e#507#508#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderTimer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/Config.java">
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderText.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1093" max-vertical-offset="1802">
-          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderCounter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="e#248#249#0" expanded="true" />
+            <element signature="e#281#282#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+          <folding>
+            <element signature="e#372#373#0" expanded="true" />
+            <element signature="e#399#400#0" expanded="true" />
+            <element signature="e#462#463#0" expanded="true" />
+            <element signature="e#508#509#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/Tile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="39" max-vertical-offset="646">
+          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/FieldObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1088">
+          <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1440,45 +1370,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameLogic/SpriteManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="1309">
-          <caret line="38" column="26" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="290" max-vertical-offset="1292">
+          <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2112#2113#0" expanded="true" />
-            <element signature="e#2149#2150#0" expanded="true" />
-            <element signature="e#2191#2192#0" expanded="true" />
-            <element signature="e#2223#2224#0" expanded="true" />
-            <element signature="e#2270#2271#0" expanded="true" />
-            <element signature="e#2307#2308#0" expanded="true" />
-            <element signature="e#2360#2361#0" expanded="true" />
-            <element signature="e#2421#2422#0" expanded="true" />
-            <element signature="e#2473#2474#0" expanded="true" />
-            <element signature="e#2533#2534#0" expanded="true" />
-            <element signature="e#2586#2587#0" expanded="true" />
-            <element signature="e#2651#2652#0" expanded="true" />
-            <element signature="e#2703#2704#0" expanded="true" />
-            <element signature="e#2767#2768#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Player.java">
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/SolidTile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1041" max-vertical-offset="2669">
-          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4189#4190#0" expanded="true" />
-            <element signature="e#4225#4226#0" expanded="true" />
+            <element signature="e#288#289#0" expanded="true" />
+            <element signature="e#329#330#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/config.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6079078" vertical-offset="124" max-vertical-offset="731">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/Config.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1157" max-vertical-offset="2023">
+          <caret line="77" column="43" selection-start-line="77" selection-start-column="43" selection-end-line="77" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2232" max-vertical-offset="3247">
+          <caret line="182" column="23" selection-start-line="182" selection-start-column="23" selection-end-line="182" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#682#689#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/ImpassableTile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6359143" vertical-offset="56" max-vertical-offset="680">
+          <caret line="28" column="15" selection-start-line="28" selection-start-column="15" selection-end-line="28" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

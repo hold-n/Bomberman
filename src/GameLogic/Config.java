@@ -47,8 +47,8 @@ public final class Config {
             Integer.valueOf(properties.getProperty("tiles.vertical"));
     public static final int TILE_GRAPHIC_SIZE =
             Integer.valueOf(properties.getProperty("tile.graphic.size"));
-    public static final int TILE_LOGICAL_SIZE =
-            Integer.valueOf(properties.getProperty("tile.logical.size"));
+    public static final double TILE_LOGICAL_SIZE =
+            Double.valueOf(properties.getProperty("tile.logical.size"));
     public static final double GLRATIO =
             (double)TILE_GRAPHIC_SIZE / (double)TILE_LOGICAL_SIZE;
 
@@ -56,9 +56,9 @@ public final class Config {
             TILE_GRAPHIC_SIZE * TILES_VERT;
     public static final int FIELD_WIDTH =
             TILE_GRAPHIC_SIZE * TILES_HOR;
-    public static final int LOGICAL_HEIGHT =
+    public static final double LOGICAL_HEIGHT =
             TILES_VERT * TILE_LOGICAL_SIZE;
-    public static final int LOGICAL_WIDTH =
+    public static final double LOGICAL_WIDTH =
             TILES_HOR * TILE_LOGICAL_SIZE;
 
     public static final String BACKGROUND_TILE_URL =
@@ -67,13 +67,22 @@ public final class Config {
             properties.getProperty("tile.solid");
     public static final String EXPLODABLE_TILE_URL =
             properties.getProperty("tile.explodable");
+    public static final String PORTAL_TILE_URL =
+            properties.getProperty("tile.portal");
 
-    public static final int PLAYER_HEIGHT =
-            Integer.valueOf(properties.getProperty("player.height"));
-    public static final int PLAYER_WIDTH =
-            Integer.valueOf(properties.getProperty("player.width"));
+    public static final double BOMB_SIZE =
+            Double.valueOf(properties.getProperty("bomb.size"));
+    public static final double PLAYER_HEIGHT =
+            Double.valueOf(properties.getProperty("player.height"));
+    public static final double PLAYER_WIDTH =
+            Double.valueOf(properties.getProperty("player.width"));
     public static final double PLAYER_VELOCITY =
             Double.valueOf(properties.getProperty("player.velocity"));
+    public static final double MAX_OVERLAP =
+            Double.valueOf(properties.getProperty("max.overlap"));
+
+    public static final String HEADER_IMAGE =
+            properties.getProperty("header.image");
 
     public static final int PLAYER_FRAMES_NUM =
             Integer.valueOf(properties.getProperty("player.frames.num"));
@@ -93,8 +102,12 @@ public final class Config {
     public static final  String PLAYER_SIDE_END =
             properties.getProperty("player.side.end");
 
-    public static final String HEADER_IMAGE =
-            properties.getProperty("header.image");
+    public static final  String BOMB_START =
+            properties.getProperty("bomb.start");
+    public static final  String BOMB_END =
+            properties.getProperty("bomb.end");
+    public static final int BOMB_FRAMES =
+            Integer.valueOf(properties.getProperty("bomb.frames.num"));
 
     public static final long WALK_DURATION =
             Long.valueOf(properties.getProperty("walk.animation.duration"));

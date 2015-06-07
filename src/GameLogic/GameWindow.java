@@ -83,44 +83,44 @@ public class GameWindow {
             obj.draw(headerContext);
     }
 
-    public void removeTile(Tile tile) {
-        objects.remove(tile);
-        map.add(tile);
-    }
     public void addTile(Tile tile) {
         objects.add(tile);
         map.add(tile);
     }
-    public void removeBonus(Bonus bonus) {
-        objects.remove(bonus);
-        bonuses.add(bonus);
+    public void removeTile(Tile tile) {
+        objects.remove(tile);
+        map.add(tile);
     }
     public void addBonus(Bonus bonus) {
         objects.add(bonus);
         bonuses.add(bonus);
     }
-    public void removePlayer(Player player) {
-        objects.remove(player);
-        players.add(player);
+    public void removeBonus(Bonus bonus) {
+        objects.remove(bonus);
+        bonuses.add(bonus);
     }
     public void addPlayer(Player player) {
         objects.add(player);
         players.add(player);
     }
-    public void removeBomb(Bomb bomb) {
-        objects.remove(bomb);
-        bombs.add(bomb);
+    public void removePlayer(Player player) {
+        objects.remove(player);
+        players.add(player);
     }
     public void addBomb(Bomb bomb) {
         objects.add(bomb);
         bombs.add(bomb);
     }
-    public void removeExplosion(Explosion explosion) {
-        objects.remove(explosion);
-        explosions.add(explosion);
+    public void removeBomb(Bomb bomb) {
+        objects.remove(bomb);
+        bombs.add(bomb);
     }
     public void addExplosion(Explosion explosion) {
         objects.add(explosion);
+        explosions.add(explosion);
+    }
+    public void removeExplosion(Explosion explosion) {
+        objects.remove(explosion);
         explosions.add(explosion);
     }
     public Iterable<FieldObject> getObjects() {
@@ -128,6 +128,9 @@ public class GameWindow {
     }
     public Iterable<KeyCode> getCodes() {
         return buttonCodes;
+    }
+    public Scene getScene() {
+        return scene;
     }
 
     public GameWindow(Game thisGame) {
@@ -159,7 +162,6 @@ public class GameWindow {
     private void loadHeaderObjects() {
         headerObjects.add(new HeaderImage());
         // TODO: set proper font
-        headerObjects.add(new HeaderTimer(System.nanoTime(), 10, 10));
     }
 
     private void setHandlers() {
@@ -184,19 +186,12 @@ public class GameWindow {
         for (int i = 0; i < TILES_VERT; i++)
             for (int j = 0; j < TILES_HOR; j++) {
                 Tile tile = new BackgroundTile(this, j*TILE_LOGICAL_SIZE, i*TILE_LOGICAL_SIZE);
-                objects.add(tile);
-                map.add(tile);
+                addTile(tile);
             }
         // TODO: load a proper map
         Tile tile = new SolidTile(this, TILE_LOGICAL_SIZE, TILE_LOGICAL_SIZE);
-        objects.add(tile);
-        map.add(tile);
+        addTile(tile);
     }
-
-    public Scene getScene() {
-        return scene;
-    }
-
 
     public void run() {
         game.getStage().show();

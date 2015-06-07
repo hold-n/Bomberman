@@ -1,5 +1,8 @@
 package GameLogic.GameObjects;
 
+import GameLogic.GameObjects.Bonuses.Bonus;
+import GameLogic.GameObjects.Tiles.SolidTile;
+import GameLogic.GameObjects.Tiles.Tile;
 import GameLogic.GameWindow;
 import GameLogic.SpriteManager;
 import javafx.geometry.Rectangle2D;
@@ -19,14 +22,20 @@ public class Player extends FieldObject {
     private int maxBombCount = 1;
     private int currentBombCount = 0;
     private int explosionLength = 2;
+    private ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
 
     private boolean walking = false;
     private long walkStartTime;
+
     private long lastTime;
     private Image currentSprite = SpriteManager.getPlayerFront(0);
 
     private final double SPEED_CONST = (double)PLAYER_VELOCITY/1000000000L;
+    private final double CRITICAL_X = LOGICAL_WIDTH - PLAYER_WIDTH;
+    private final double CRITICAL_Y = LOGICAL_HEIGHT - PLAYER_WIDTH;
+    private final double HALF_GRAPHIC_HEIGHT = PLAYER_HEIGHT * GLRATIO / 2;
 
+    // TODO: Make a collection of collections for more players
     private static final ArrayList<KeyCode> moveControls = new ArrayList<KeyCode>() { {
         add(KeyCode.UP);
         add(KeyCode.DOWN);
@@ -36,11 +45,12 @@ public class Player extends FieldObject {
 
     public Player(GameWindow window, double xpos, double ypos) {
         super(window, xpos, ypos);
-        sizeY.setValue(PLAYER_HEIGHT);
+        sizeY.setValue(PLAYER_WIDTH);
         sizeX.setValue(PLAYER_WIDTH);
+        objectCollection = window.getObjects();
     }
 
-    public void alterBombCount(int delta) {
+    public void alterMaxBombCount(int delta) {
         if (maxBombCount + delta > 1)
             maxBombCount = maxBombCount + delta;
         else
@@ -55,15 +65,20 @@ public class Player extends FieldObject {
     }
 
     @Override
-    public Rectangle2D getBoundary() {
-        return new Rectangle2D(x.getLogical(), y.getLogical(), PLAYER_WIDTH, PLAYER_WIDTH);
-    }
-
-    @Override
     public void update(long now) {
         double delta = (double)(now - lastTime)*SPEED_CONST;
-        setX(getX() + getvelocityX()*delta);
-        setY(getY() + getvelocityY()*delta);
+        setX(getX() + getVelocityX()*delta);
+        setY(getY() + getVelocityY()*delta);
+
+        for (KeyCode code : gameWindow.getCodes()) {
+            if (code == KeyCode.SPACE) {
+                if (currentBombCount < maxBombCount) {
+                    currentBombCount++;
+                    PutBomb();
+                }
+                break;
+            }
+        }
 
         KeyCode movingCode = null;
         for (KeyCode code : gameWindow.getCodes()) {
@@ -109,15 +124,31 @@ public class Player extends FieldObject {
                 currentSprite = SpriteManager.getPlayerLeft((int) ((lastTime - walkStartTime) / WALK_DURATION));
             if (movingCode == KeyCode.RIGHT)
                 currentSprite = SpriteManager.getPlayerRight((int) ((lastTime - walkStartTime)/WALK_DURATION));
-
-            // TODO: alter the current sprite
         }
     }
 
     @Override
     public void checkCollisions() {
-        // TODO: not to forget about borders
-        // TODO: players checks evetything around him
+        CheckBorders();
+        for (FieldObject obj : objectCollection) {
+            if (collides(obj)) {
+                if (obj instanceof SolidTile) {
+                    ((Tile) obj).effect(this);
+                }
+            }
+            // TODO: players checks evetything around him
+        }
+    }
+
+    private void CheckBorders() {
+        if (getX() < 0 && getVelocityX() < 0)
+            setVelocityX(0);
+        if (getX() > CRITICAL_X && getVelocityX() > 0)
+            setVelocityX(0);
+        if (getY() < 0 && getVelocityY() < 0)
+            setVelocityY(0);
+        if (getY() > CRITICAL_Y && getVelocityY() > 0)
+            setVelocityY(0);
     }
 
     @Override
@@ -125,9 +156,14 @@ public class Player extends FieldObject {
         if (!(other instanceof Explosion))
             return getBoundary().intersects(other.getBoundary());
         else {
-            // TODO: explosion handling. or maybe make up smth to
+            // TODO: explosion handling. or maybe make up smth
             return false;
         }
+    }
+
+    @Override
+    public Rectangle2D getBoundary() {
+        return new Rectangle2D(x.getLogical(), y.getLogical(), PLAYER_WIDTH, PLAYER_WIDTH);
     }
 
     @Override
@@ -137,11 +173,11 @@ public class Player extends FieldObject {
 
     @Override
     public void draw(GraphicsContext context) {
-        context.drawImage(currentSprite, getX(), getY() - sizeY.getGraphic()/2);
+        context.drawImage(currentSprite, x.getGraphic(), y.getGraphic() - HALF_GRAPHIC_HEIGHT);
     }
 
     public void PutBomb() {
-
+        // TODO: put in a current cell, not just below
     }
 
     public void Die() {

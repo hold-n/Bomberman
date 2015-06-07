@@ -12,9 +12,8 @@ public class HeaderTimer extends HeaderObject {
     private long y;
 
     public HeaderTimer(long start, int xpos, int ypos) {
+        super(xpos, ypos);
         startTime = start;
-        x = xpos;
-        y = ypos;
     }
     @Override
     public void update(long now) {
