@@ -1,11 +1,18 @@
 package GameLogic;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+
 import static GameLogic.Config.*;
 
 /**
  * Created by Max on 07.06.2015.
  */
+
 public class SpriteManager {
     private static final Image backgroundTile =
             new Image(BACKGROUND_TILE_URL, TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
@@ -20,6 +27,16 @@ public class SpriteManager {
     private static final Image[] playerSideRight = new Image[PLAYER_FRAMES_NUM];
     private static final Image[] playerSideLeft = new Image[PLAYER_FRAMES_NUM];
     private static final Image[] bomb = new Image[BOMB_FRAMES];
+
+    public static BufferedImage getFlippedImage(BufferedImage bufferedImage, int angle) {
+        AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+        tx.translate(-bufferedImage.getWidth(null), 0);;
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        BufferedImage newImage =
+                new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(), bufferedImage.getType());
+        op.filter(bufferedImage, newImage);
+        return newImage;
+    }
 
     static {
         GameValue playerHeight = new GameValue(PLAYER_HEIGHT);
@@ -39,9 +56,10 @@ public class SpriteManager {
             String url = PLAYER_SIDE_START + (new Integer(i)).toString() + PLAYER_SIDE_END;
             playerSideRight[i] =
                     new Image(url, playerWidth.getGraphic(), playerHeight.getGraphic(), true, true);
-            // TODO: flip left sprites
-            playerSideLeft[i] =
-                    new Image(url, playerWidth.getGraphic(), playerHeight.getGraphic(), true, true);
+
+            BufferedImage buffImg= SwingFXUtils.fromFXImage(playerSideRight[i], null);
+            buffImg = getFlippedImage(buffImg, 2);
+            playerSideLeft[i] = SwingFXUtils.toFXImage(buffImg, null);
         }
         for (int i = 0; i < BOMB_FRAMES; i++) {
             String url = BOMB_START + (new Integer(i)).toString() + BOMB_END;

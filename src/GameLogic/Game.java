@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-import static GameLogic.Config.TITLE;
+import static GameLogic.Config.*;
 
 /**
  * Created by Max on 04.06.2015.
@@ -43,8 +43,18 @@ public class Game {
         stage.show();
     }
 
+    public void about() {
+        // TODO
+    }
+
     public void launchGameLoop() {
         gameWindow = new GameWindow(this);
+        stage.setScene(gameWindow.getScene());
+        gameWindow.run();
+    }
+
+    public void load() {
+        gameWindow = GameWindow.load(this);
         stage.setScene(gameWindow.getScene());
         gameWindow.run();
     }

@@ -20,6 +20,11 @@ public class GameValue {
         graphicValue = (int)(value * GLRATIO);
     }
 
+    public void add(double value) {
+        logicalValue += value;
+        graphicValue = (int)(logicalValue * GLRATIO);
+    }
+
     public double getLogical() {
         return logicalValue;
     }

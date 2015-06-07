@@ -1,7 +1,6 @@
 package GameLogic.GameObjects;
 
 import GameLogic.GameObjects.Bonuses.Bonus;
-import GameLogic.GameObjects.Tiles.SolidTile;
 import GameLogic.GameObjects.Tiles.Tile;
 import GameLogic.GameWindow;
 import GameLogic.SpriteManager;
@@ -21,33 +20,62 @@ import static GameLogic.Config.*;
 public class Player extends FieldObject {
     private int maxBombCount = 1;
     private int currentBombCount = 0;
-    private int explosionLength = 2;
+    private double explosionLength = 2 * TILE_LOGICAL_SIZE;
+    private double velocityValue = PLAYER_VELOCITY;
     private ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
+    private ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 
     private boolean walking = false;
+    private boolean dead = false;
     private long walkStartTime;
 
     private long lastTime;
     private Image currentSprite = SpriteManager.getPlayerFront(0);
 
-    private final double SPEED_CONST = (double)PLAYER_VELOCITY/1000000000L;
-    private final double CRITICAL_X = LOGICAL_WIDTH - PLAYER_WIDTH;
-    private final double CRITICAL_Y = LOGICAL_HEIGHT - PLAYER_WIDTH;
-    private final double HALF_GRAPHIC_HEIGHT = PLAYER_HEIGHT * GLRATIO / 2;
+    private static final double SPEED_CONST = (double) PLAYER_VELOCITY / 1000000000L;
+    private static final double CRITICAL_X = LOGICAL_WIDTH - PLAYER_WIDTH;
+    private static final double CRITICAL_Y = LOGICAL_HEIGHT - PLAYER_WIDTH;
+    private static final double HALF_GRAPHIC_HEIGHT = PLAYER_HEIGHT * GLRATIO / 2;
 
     // TODO: Make a collection of collections for more players
-    private static final ArrayList<KeyCode> moveControls = new ArrayList<KeyCode>() { {
-        add(KeyCode.UP);
-        add(KeyCode.DOWN);
-        add(KeyCode.LEFT);
-        add(KeyCode.RIGHT);
-    }};
+    private static final ArrayList<KeyCode> moveControls = new ArrayList<KeyCode>() {
+        {
+            add(KeyCode.UP);
+            add(KeyCode.DOWN);
+            add(KeyCode.LEFT);
+            add(KeyCode.RIGHT);
+        }
+    };
+
+    // TODO: add getters
+    public void removeBomb(Bomb bomb) {
+        bombs.remove(bomb);
+        currentBombCount--;
+    }
+
+    public void restoreVelocityX(boolean positive) {
+        velocityX.setValue(positive ? velocityValue : -velocityValue);
+    }
+    public void restoreVelocityY(boolean positive) {
+        velocityY.setValue(positive ? velocityValue : -velocityValue);
+    }
+    public void increaseVelocityX(double value) {
+        velocityX.add(value);
+    }
+    public void increaseVelocityX() {
+        velocityX.add(PLAYER_VELOCITY_DELTA);
+    }
+    public void increaseVelocityY(double value) {
+        velocityY.add(value);
+    }
+    public void increaseVelocityY() {
+        velocityY.add(PLAYER_VELOCITY_DELTA);
+    }
 
     public Player(GameWindow window, double xpos, double ypos) {
         super(window, xpos, ypos);
         sizeY.setValue(PLAYER_WIDTH);
         sizeX.setValue(PLAYER_WIDTH);
-        objectCollection = window.getObjects();
     }
 
     public void alterMaxBombCount(int delta) {
@@ -66,16 +94,13 @@ public class Player extends FieldObject {
 
     @Override
     public void update(long now) {
-        double delta = (double)(now - lastTime)*SPEED_CONST;
-        setX(getX() + getVelocityX()*delta);
-        setY(getY() + getVelocityY()*delta);
-
+        double delta = (double) (now - lastTime) * SPEED_CONST;
+        setX(getX() + getVelocityX() * delta);
+        setY(getY() + getVelocityY() * delta);
+        // TODO: alter control handling to allow multiple players
         for (KeyCode code : gameWindow.getCodes()) {
             if (code == KeyCode.SPACE) {
-                if (currentBombCount < maxBombCount) {
-                    currentBombCount++;
-                    PutBomb();
-                }
+                tryPutBomb();
                 break;
             }
         }
@@ -84,19 +109,19 @@ public class Player extends FieldObject {
         for (KeyCode code : gameWindow.getCodes()) {
             if (moveControls.contains(code)) {
                 if (code == KeyCode.DOWN) {
-                    setVelocityY(PLAYER_VELOCITY);
+                    restoreVelocityY(true);
                     setVelocityX(0);
                 }
                 if (code == KeyCode.UP) {
-                    setVelocityY(-PLAYER_VELOCITY);
+                    restoreVelocityY(false);
                     setVelocityX(0);
                 }
                 if (code == KeyCode.LEFT) {
-                    setVelocityX(-PLAYER_VELOCITY);
+                    restoreVelocityX(false);
                     setVelocityY(0);
                 }
                 if (code == KeyCode.RIGHT) {
-                    setVelocityX(PLAYER_VELOCITY);
+                    restoreVelocityX(true);
                     setVelocityY(0);
                 }
                 movingCode = code;
@@ -105,39 +130,35 @@ public class Player extends FieldObject {
         }
 
         lastTime = System.nanoTime();
-
         if (movingCode == null) {
             velocityY.setValue(0);
             velocityX.setValue(0);
             walking = false;
-        }
-        else {
+        } else {
             if (!walking) {
                 walkStartTime = System.nanoTime();
                 walking = true;
             }
             if (movingCode == KeyCode.DOWN)
-                currentSprite = SpriteManager.getPlayerFront((int)((lastTime - walkStartTime)/WALK_DURATION));
+                currentSprite = SpriteManager.getPlayerFront((int) ((lastTime - walkStartTime) / WALK_DURATION));
             if (movingCode == KeyCode.UP)
                 currentSprite = SpriteManager.getPlayerBack((int) ((lastTime - walkStartTime) / WALK_DURATION));
             if (movingCode == KeyCode.LEFT)
                 currentSprite = SpriteManager.getPlayerLeft((int) ((lastTime - walkStartTime) / WALK_DURATION));
             if (movingCode == KeyCode.RIGHT)
-                currentSprite = SpriteManager.getPlayerRight((int) ((lastTime - walkStartTime)/WALK_DURATION));
+                currentSprite = SpriteManager.getPlayerRight((int) ((lastTime - walkStartTime) / WALK_DURATION));
         }
     }
 
     @Override
     public void checkCollisions() {
         CheckBorders();
-        for (FieldObject obj : objectCollection) {
-            if (collides(obj)) {
-                if (obj instanceof SolidTile) {
-                    ((Tile) obj).effect(this);
-                }
+        for (Tile tile : gameWindow.getMap()) {
+            if (collides(tile)) {
+                tile.effect(this);
             }
-            // TODO: players checks evetything around him
         }
+        // TODO; check for other objects
     }
 
     private void CheckBorders() {
@@ -176,12 +197,26 @@ public class Player extends FieldObject {
         context.drawImage(currentSprite, x.getGraphic(), y.getGraphic() - HALF_GRAPHIC_HEIGHT);
     }
 
-    public void PutBomb() {
-        // TODO: put in a current cell, not just below
+    public boolean tryPutBomb() {
+        if (currentBombCount < maxBombCount) {
+            currentBombCount++;
+            Bomb bomb = new Bomb(gameWindow, this, getX(), getY());
+            applyBonuses(bomb);
+            gameWindow.addObject(bomb);
+            bombs.add(bomb);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void applyBonuses(Bomb bomb) {
+        // TODO
     }
 
     public void Die() {
         // TODO: add some animation
-        gameWindow.removePlayer(this);
+        gameWindow.removeObject(this);
     }
 }

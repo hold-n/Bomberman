@@ -19,8 +19,6 @@ public abstract class FieldObject {
     protected GameValue velocityY = new GameValue(0);
 
     protected GameWindow gameWindow;
-    // Particular field just for convenience
-    protected Iterable<FieldObject> objectCollection;
 
     public double getX() { return x.getLogical(); }
     public double getY() { return y.getLogical(); }
@@ -31,6 +29,8 @@ public abstract class FieldObject {
 
     public void setX(double value) { x.setValue(value); }
     public void setY(double value) { y.setValue(value); }
+    public void shiftX(double value) { x.add(value); }
+    public void shiftY(double value) { y.add(value); }
     public void setSizeX(double value) { sizeX.setValue(value); }
     public void setSizeY(double value) { sizeY.setValue(value); }
     public void setVelocityX(double value) { velocityX.setValue(value); }
@@ -38,7 +38,6 @@ public abstract class FieldObject {
 
     public FieldObject(GameWindow window, double xpos, double ypos) {
         gameWindow = window;
-        objectCollection = gameWindow.getObjects();
         x.setValue(xpos);
         y.setValue(ypos);
     }
