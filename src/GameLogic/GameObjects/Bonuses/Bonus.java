@@ -11,7 +11,10 @@ import GameLogic.GameWindow;
 public abstract class Bonus extends FieldObject {
     public Bonus(GameWindow window, double xpos, double ypos) {
         super(window, xpos, ypos);
+        // Set size
     }
 
     public void apply(Player player) {}
+    public void discarg(Player player) {}
+    public abstract boolean isTemporary();
 }

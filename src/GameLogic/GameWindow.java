@@ -1,18 +1,22 @@
 package GameLogic;
 
-import GameLogic.GameObjects.Bomb;
+import GameLogic.GameObjects.*;
 import GameLogic.GameObjects.Bonuses.Bonus;
-import GameLogic.GameObjects.Explosion;
-import GameLogic.GameObjects.FieldObject;
-import GameLogic.GameObjects.Player;
+import GameLogic.GameObjects.HeaderObjects.HeaderImage;
+import GameLogic.GameObjects.HeaderObjects.HeaderObject;
+import GameLogic.GameObjects.HeaderObjects.HeaderTimer;
 import GameLogic.GameObjects.Tiles.BackgroundTile;
 import GameLogic.GameObjects.Tiles.SolidTile;
 import GameLogic.GameObjects.Tiles.Tile;
 import javafx.animation.AnimationTimer;
-import javafx.scene.Group;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
+
 import java.util.ArrayList;
 import static GameLogic.Config.*;
 
@@ -21,44 +25,13 @@ import static GameLogic.Config.*;
 */
 
 public class GameWindow {
-//    private void drawObjects() {
-//        for (Tile tile : map) {
-//            tile.draw(context);
-//        }
-//    }
-//
-//    public GameWindow(Game thisGame) {
-//        game = thisGame;
-//        game.getStage().hide();
-//
-//        Group root = new Group();
-//        scene = new Scene(root);
-//        game.getStage().setScene(scene);
-//
-//        Canvas headerCanvas = new Canvas(FIELD_WIDTH, HEADER_HEIGHT);
-//        headerContext = headerCanvas.getGraphicsContext2D();
-//        root.getChildren().add(headerCanvas);
-//
-//        Canvas fieldCanvas = new Canvas(FIELD_WIDTH, FIELD_HEIGHT);
-//        context = fieldCanvas.getGraphicsContext2D();
-//        root.getChildren().add(fieldCanvas);
-//
-//        loadMap();
-//        // TODO: players, creeps
-//    }
-//
-//    private void loadMap() {
-//        for (int i = 0; i < TILES_VERT; i ++)
-//            for (int j = 0; j < TILES_HOR; j++) {
-//                Tile tile = new BackgroundTile(j* TILE_GRAPHIC_SIZE, i* TILE_GRAPHIC_SIZE);
-//                map.add(tile);
-//            }
-//    }
 
     private final Game game;
     private final Scene scene;
 
-    // Contrains all the objects on the field
+    private final ArrayList<KeyCode> buttonCodes = new ArrayList<KeyCode>();
+    // Contain all the objects on the field and the header
+    private final ArrayList<HeaderObject> headerObjects = new ArrayList<HeaderObject>();
     private final ArrayList<FieldObject> objects = new ArrayList<FieldObject>();
     // Separate containers for specific objects
     private final ArrayList<Tile> map = new ArrayList<Tile>();
@@ -83,48 +56,10 @@ public class GameWindow {
         }
     };
 
-    public Iterable<FieldObject> getObjects() {
-        return objects;
-    }
-
-    public GameWindow(Game thisGame) {
-        game = thisGame;
-        game.getStage().hide();
-
-        Group root = new Group();
-        scene = new Scene(root);
-        game.getStage().setScene(scene);
-
-        Canvas headerCanvas = new Canvas(FIELD_WIDTH, HEADER_HEIGHT);
-        headerContext = headerCanvas.getGraphicsContext2D();
-        root.getChildren().add(headerCanvas);
-
-        Canvas fieldCanvas = new Canvas(FIELD_WIDTH, FIELD_HEIGHT);
-        fieldContext = fieldCanvas.getGraphicsContext2D();
-        root.getChildren().add(fieldCanvas);
-
-        loadObjects();
-    }
-
-    private void loadObjects() {
-        loadMap();
-    }
-
-    private void loadMap() {
-        for (int i = 0; i < TILES_VERT; i++)
-            for (int j = 0; j < TILES_HOR; j++) {
-                Tile tile = new BackgroundTile(this, j*TILE_LOGICAL_SIZE, i*TILE_LOGICAL_SIZE);
-                objects.add(tile);
-                map.add(tile);
-            }
-//        Tile tile = new SolidTile(this, TILE_LOGICAL_SIZE, TILE_LOGICAL_SIZE);
-//        objects.add(tile);
-//        map.add(tile);
-
-    }
-
     private void updateObjects(long now) {
         for (FieldObject obj : objects)
+            obj.update(now);
+        for (HeaderObject obj : headerObjects)
             obj.update(now);
     }
 
@@ -144,6 +79,118 @@ public class GameWindow {
             player.draw(fieldContext);
         for (Explosion explosion : explosions)
             explosion.draw(fieldContext);
+        for (HeaderObject obj : headerObjects)
+            obj.draw(headerContext);
+    }
+
+    public void removeTile(Tile tile) {
+        objects.remove(tile);
+        map.add(tile);
+    }
+    public void addTile(Tile tile) {
+        objects.add(tile);
+        map.add(tile);
+    }
+    public void removeBonus(Bonus bonus) {
+        objects.remove(bonus);
+        bonuses.add(bonus);
+    }
+    public void addBonus(Bonus bonus) {
+        objects.add(bonus);
+        bonuses.add(bonus);
+    }
+    public void removePlayer(Player player) {
+        objects.remove(player);
+        players.add(player);
+    }
+    public void addPlayer(Player player) {
+        objects.add(player);
+        players.add(player);
+    }
+    public void removeBomb(Bomb bomb) {
+        objects.remove(bomb);
+        bombs.add(bomb);
+    }
+    public void addBomb(Bomb bomb) {
+        objects.add(bomb);
+        bombs.add(bomb);
+    }
+    public void removeExplosion(Explosion explosion) {
+        objects.remove(explosion);
+        explosions.add(explosion);
+    }
+    public void addExplosion(Explosion explosion) {
+        objects.add(explosion);
+        explosions.add(explosion);
+    }
+    public Iterable<FieldObject> getObjects() {
+        return objects;
+    }
+    public Iterable<KeyCode> getCodes() {
+        return buttonCodes;
+    }
+
+    public GameWindow(Game thisGame) {
+        game = thisGame;
+        game.getStage().hide();
+
+        VBox root = new VBox();
+        scene = new Scene(root, FIELD_WIDTH - 10, HEADER_HEIGHT + FIELD_HEIGHT - 10);
+        game.getStage().setScene(scene);
+
+        Canvas headerCanvas = new Canvas(FIELD_WIDTH, HEADER_HEIGHT);
+        headerContext = headerCanvas.getGraphicsContext2D();
+        root.getChildren().add(headerCanvas);
+
+        Canvas fieldCanvas = new Canvas(FIELD_WIDTH, FIELD_HEIGHT);
+        fieldContext = fieldCanvas.getGraphicsContext2D();
+        root.getChildren().add(fieldCanvas);
+
+        loadFieldObjects();
+        loadHeaderObjects();
+        setHandlers();
+    }
+
+    private void loadFieldObjects() {
+        loadMap();
+        addPlayer(new Player(this, 200, 200));
+    }
+
+    private void loadHeaderObjects() {
+        headerObjects.add(new HeaderImage());
+        // TODO: set proper font
+        headerObjects.add(new HeaderTimer(System.nanoTime(), 10, 10));
+    }
+
+    private void setHandlers() {
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                KeyCode code = event.getCode();
+                if (!buttonCodes.contains(code))
+                    buttonCodes.add(code);
+            }
+        });
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                KeyCode code = event.getCode();
+                buttonCodes.remove(code);
+            }
+        });
+    }
+
+    private void loadMap() {
+        for (int i = 0; i < TILES_VERT; i++)
+            for (int j = 0; j < TILES_HOR; j++) {
+                Tile tile = new BackgroundTile(this, j*TILE_LOGICAL_SIZE, i*TILE_LOGICAL_SIZE);
+                objects.add(tile);
+                map.add(tile);
+            }
+        // TODO: load a proper map
+        Tile tile = new SolidTile(this, TILE_LOGICAL_SIZE, TILE_LOGICAL_SIZE);
+        objects.add(tile);
+        map.add(tile);
     }
 
     public Scene getScene() {
@@ -157,4 +204,3 @@ public class GameWindow {
         mainTimer.start();
     }
 }
-

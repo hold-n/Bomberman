@@ -9,17 +9,15 @@ import static GameLogic.Config.*;
 public class GameValue {
     protected double logicalValue;
     protected int graphicValue;
-    protected static final double glRatio =
-            (double)TILE_GRAPHIC_SIZE / (double)TILE_LOGICAL_SIZE;
 
     public GameValue(double value) {
         logicalValue = value;
-        graphicValue = (int)(value * glRatio);
+        graphicValue = (int)(value * GLRATIO);
     }
 
     public void setValue(double value) {
         logicalValue = value;
-        graphicValue = (int)(value * glRatio);
+        graphicValue = (int)(value * GLRATIO);
     }
 
     public double getLogical() {

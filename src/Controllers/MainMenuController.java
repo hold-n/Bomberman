@@ -29,8 +29,5 @@ public class MainMenuController {
     }
 
     @FXML
-    private Double windowWidth() { return (double) MENU_WIDTH; }
-
-    @FXML
     private Double windowHeight() { return (double) MENU_HEIGHT; }
 }

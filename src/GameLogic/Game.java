@@ -26,6 +26,7 @@ public class Game {
     public Game(Stage primaryStage) {
         stage = primaryStage;
         stage.setTitle(TITLE);
+        // TODO: allow resizing and track window size
         stage.setResizable(false);
 
         MainMenuController.bindTo(this);

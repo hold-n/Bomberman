@@ -46,9 +46,11 @@ public final class Config {
     public static final int TILES_VERT =
             Integer.valueOf(properties.getProperty("tiles.vertical"));
     public static final int TILE_GRAPHIC_SIZE =
-            Integer.valueOf(properties.getProperty("tile.size"));
+            Integer.valueOf(properties.getProperty("tile.graphic.size"));
     public static final int TILE_LOGICAL_SIZE =
             Integer.valueOf(properties.getProperty("tile.logical.size"));
+    public static final double GLRATIO =
+            (double)TILE_GRAPHIC_SIZE / (double)TILE_LOGICAL_SIZE;
 
     public static final int FIELD_HEIGHT =
             TILE_GRAPHIC_SIZE * TILES_VERT;
@@ -60,7 +62,40 @@ public final class Config {
             TILES_HOR * TILE_LOGICAL_SIZE;
 
     public static final String BACKGROUND_TILE_URL =
-            properties.getProperty("background.tile");
+            properties.getProperty("tile.background");
     public static final String SOLID_TILE_URL =
-            properties.getProperty("solid.tile");
+            properties.getProperty("tile.solid");
+    public static final String EXPLODABLE_TILE_URL =
+            properties.getProperty("tile.explodable");
+
+    public static final int PLAYER_HEIGHT =
+            Integer.valueOf(properties.getProperty("player.height"));
+    public static final int PLAYER_WIDTH =
+            Integer.valueOf(properties.getProperty("player.width"));
+    public static final double PLAYER_VELOCITY =
+            Double.valueOf(properties.getProperty("player.velocity"));
+
+    public static final int PLAYER_FRAMES_NUM =
+            Integer.valueOf(properties.getProperty("player.frames.num"));
+
+    public static final String PLAYER_BACK_START =
+            properties.getProperty("player.back.start");
+    public static final  String PLAYER_BACK_END =
+            properties.getProperty("player.back.end");
+
+    public static final String PLAYER_FRONT_START =
+            properties.getProperty("player.front.start");
+    public static final  String PLAYER_FRONT_END =
+            properties.getProperty("player.front.end");
+
+    public static final String PLAYER_SIDE_START =
+            properties.getProperty("player.side.start");
+    public static final  String PLAYER_SIDE_END =
+            properties.getProperty("player.side.end");
+
+    public static final String HEADER_IMAGE =
+            properties.getProperty("header.image");
+
+    public static final long WALK_DURATION =
+            Long.valueOf(properties.getProperty("walk.animation.duration"));
 }

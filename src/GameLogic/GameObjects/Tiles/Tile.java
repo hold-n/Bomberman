@@ -27,7 +27,7 @@ public abstract class Tile extends FieldObject {
 
     @Override
     public void draw(GraphicsContext context) {
-        context.drawImage(sprite, x.getGraphic(), y.getGraphic());
+        context.drawImage(getSprite(), x.getGraphic(), y.getGraphic());
     }
 
     public void effect(Player player) {}

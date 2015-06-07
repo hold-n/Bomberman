@@ -7,16 +7,17 @@ import GameLogic.SpriteManager;
 import javafx.scene.image.Image;
 
 /**
- * Created by Max on 06.06.2015.
+ * Created by Max on 07.06.2015.
  */
-public class SolidTile extends Tile {
-    public SolidTile(GameWindow window, int xpos, int ypos) {
-        super(window, xpos, ypos);
+
+public class ExplodableTile extends Tile{
+    public ExplodableTile(GameWindow thisWindow, double xpos, double ypos) {
+        super(thisWindow, xpos, ypos);
     }
 
     @Override
     protected Image getSprite() {
-        return SpriteManager.getSolidTile();
+        return SpriteManager.getExplodableTile();
     }
 
     @Override

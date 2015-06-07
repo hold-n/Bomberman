@@ -1,0 +1,71 @@
+package GameLogic;
+
+import javafx.scene.image.Image;
+import static GameLogic.Config.*;
+
+/**
+ * Created by Max on 07.06.2015.
+ */
+public class SpriteManager {
+    private static final Image backgroundTile =
+            new Image(BACKGROUND_TILE_URL, TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
+    private static final Image solidTile =
+            new Image(SOLID_TILE_URL, TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
+    private static final Image explodableTile =
+            new Image(EXPLODABLE_TILE_URL, TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
+    private static final Image[] playerFront = new Image[PLAYER_FRAMES_NUM];
+    private static final Image[] playerBack = new Image[PLAYER_FRAMES_NUM];
+    private static final Image[] playerSideRight = new Image[PLAYER_FRAMES_NUM];
+    private static final Image[] playerSideLeft = new Image[PLAYER_FRAMES_NUM];
+
+    static {
+        GameValue playerHeight = new GameValue(PLAYER_HEIGHT);
+        GameValue playerWidth = new GameValue(PLAYER_WIDTH);
+        for (int i = 0; i < PLAYER_FRAMES_NUM; i++) {
+            String url = PLAYER_FRONT_START + (new Integer(i)).toString() + PLAYER_FRONT_END;
+            playerFront[i] =
+                    new Image(url, playerWidth.getGraphic(), playerHeight.getGraphic(), true, true);
+        }
+        for (int i = 0; i < PLAYER_FRAMES_NUM; i++) {
+            String url = PLAYER_BACK_START + (new Integer(i)).toString() + PLAYER_BACK_END;
+            playerBack[i] =
+                    new Image(url, playerWidth.getGraphic(), playerHeight.getGraphic(), true, true);
+        }
+        for (int i = 0; i < PLAYER_FRAMES_NUM; i++) {
+            String url = PLAYER_SIDE_START + (new Integer(i)).toString() + PLAYER_SIDE_END;
+            playerSideRight[i] =
+                    new Image(url, playerWidth.getGraphic(), playerHeight.getGraphic(), true, true);
+            // TODO: flip left sprites
+            playerSideLeft[i] =
+                    new Image(url, playerWidth.getGraphic(), playerHeight.getGraphic(), true, true);
+        }
+    }
+
+    public static Image getBackgroundTile() {
+        return backgroundTile;
+    }
+
+    public static Image getSolidTile() {
+        return solidTile;
+    }
+
+    public static Image getExplodableTile() {
+        return explodableTile;
+    }
+
+    public static Image getPlayerFront(int frame) {
+        return playerFront[frame % PLAYER_FRAMES_NUM];
+    }
+
+    public static Image getPlayerBack(int frame) {
+        return playerBack[frame % PLAYER_FRAMES_NUM];
+    }
+
+    public static Image getPlayerRight(int frame) {
+        return playerSideRight[frame % PLAYER_FRAMES_NUM];
+    }
+
+    public static Image getPlayerLeft(int frame) {
+        return playerSideLeft[frame % PLAYER_FRAMES_NUM];
+    }
+}
