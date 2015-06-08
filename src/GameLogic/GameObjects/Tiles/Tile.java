@@ -27,16 +27,6 @@ public abstract class Tile extends FieldObject {
     }
 
     @Override
-    public boolean collides(FieldObject other) {
-        if (getBoundary() != null) {
-            if (other instanceof Explosion)
-                return other.collides(this);
-            return getBoundary().intersects(other.getBoundary());
-        }
-        return false;
-    }
-
-    @Override
     public void draw(GraphicsContext context) {
         context.drawImage(getSprite(), x.getGraphic(), y.getGraphic());
     }

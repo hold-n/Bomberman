@@ -22,6 +22,21 @@ public class SpriteManager {
             new Image(EXPLODABLE_TILE_URL, TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
     private static final Image portalTile =
             new Image(PORTAL_TILE_URL, TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
+    private static final Image bonusBomb =
+            new Image(BONUS_BOMB, (new GameValue(BONUS_SIZE).getGraphic()),
+                    (new GameValue(BONUS_SIZE).getGraphic()), true, true);
+    private static final Image bonuseExplosion =
+            new Image(BONUS_EXPLOSION, (new GameValue(BONUS_SIZE).getGraphic()),
+                    (new GameValue(BONUS_SIZE).getGraphic()), true, true);
+    private static final Image bonusSpeed =
+            new Image(BONUS_SPEED, (new GameValue(BONUS_SIZE).getGraphic()),
+                    (new GameValue(BONUS_SIZE).getGraphic()), true, true);
+    private static final Image bonusKick =
+            new Image(BONUS_KICK, (new GameValue(BONUS_SIZE).getGraphic()),
+                    (new GameValue(BONUS_SIZE).getGraphic()), true, true);
+    private static final Image bonusDebuff =
+            new Image(BONUS_DEBUFF, (new GameValue(BONUS_SIZE).getGraphic()),
+                    (new GameValue(BONUS_SIZE).getGraphic()), true, true);
     private static final Image[] playerFront = new Image[PLAYER_FRAMES_NUM];
     private static final Image[] playerBack = new Image[PLAYER_FRAMES_NUM];
     private static final Image[] playerSideRight = new Image[PLAYER_FRAMES_NUM];
@@ -79,39 +94,45 @@ public class SpriteManager {
     public static Image getBackgroundTile() {
         return backgroundTile;
     }
-
     public static Image getSolidTile() {
         return solidTile;
     }
-
     public static Image getExplodableTile() {
         return explodableTile;
     }
-
     public static Image getPortalTile() {
         return portalTile;
     }
-
+    public static Image getBonusBomb() {
+        return bonusBomb;
+    }
+    public static Image getBonuseExplosion() {
+        return bonuseExplosion;
+    }
+    public static Image getBonusSpeed() {
+        return bonusSpeed;
+    }
+    public static Image getBonusKick() {
+        return bonusKick;
+    }
+    public static Image getBonusDebuff() {
+        return bonusDebuff;
+    }
     public static Image getBomb(int frame) {
         return bomb[frame % BOMB_FRAMES];
     }
-
     public static Image getExplosion(int frame) {
         return explosion[frame % EXPLOSION_FRAMES];
     }
-
     public static Image getPlayerFront(int frame) {
         return playerFront[frame % PLAYER_FRAMES_NUM];
     }
-
     public static Image getPlayerBack(int frame) {
         return playerBack[frame % PLAYER_FRAMES_NUM];
     }
-
     public static Image getPlayerRight(int frame) {
         return playerSideRight[frame % PLAYER_FRAMES_NUM];
     }
-
     public static Image getPlayerLeft(int frame) {
         return playerSideLeft[frame % PLAYER_FRAMES_NUM];
     }

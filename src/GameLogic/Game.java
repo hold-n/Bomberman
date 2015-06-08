@@ -2,8 +2,10 @@ package GameLogic;
 
 import Controllers.MainMenuController;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -41,6 +43,13 @@ public class Game {
         Scene scene = new Scene(mainMenu);
         stage.setScene(scene);
         stage.show();
+        centerStage(stage);
+    }
+
+    public static void centerStage(Stage stageToCenter) {
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stageToCenter.setX((primScreenBounds.getWidth() - stageToCenter.getWidth()) / 2);
+        stageToCenter.setY((primScreenBounds.getHeight() - stageToCenter.getHeight()) / 2);
     }
 
     public void about() {
@@ -54,8 +63,14 @@ public class Game {
     }
 
     public void load() {
-        gameWindow = GameWindow.load(this);
-        stage.setScene(gameWindow.getScene());
-        gameWindow.run();
+        gameWindow = GameWindow.load(this, DEFAULT_SAVE);
+        if (gameWindow != null) {
+            stage.setScene(gameWindow.getScene());
+            gameWindow.run();
+        }
+    }
+
+    public void exit() {
+        System.exit(0);
     }
 }

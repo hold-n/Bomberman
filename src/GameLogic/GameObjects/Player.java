@@ -1,7 +1,7 @@
 package GameLogic.GameObjects;
 
+import GameLogic.AnimatedSprite;
 import GameLogic.GameObjects.Bonuses.Bonus;
-import GameLogic.GameObjects.Tiles.ImpassableTile;
 import GameLogic.GameObjects.Tiles.Tile;
 import GameLogic.GameWindow;
 import GameLogic.SpriteManager;
@@ -9,7 +9,6 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-
 import java.util.ArrayList;
 
 import static GameLogic.Config.*;
@@ -19,25 +18,47 @@ import static GameLogic.Config.*;
  */
 
 public class Player extends FieldObject {
-    private int maxBombCount = 2;
-    private int currentBombCount = 0;
-    private int explosionLength = 2;
+    PlayerType type;
+
+    private int maxBombCount = INITIAL_BOMB_COUNT;
+    private int tempMaxBombCount = INITIAL_BOMB_COUNT;
+    private boolean useTempMaxBombCount = false;
+
+    private long bombLifeTime = BOMB_LIFE_TIME;
+    private long tempBombLifeTime = BOMB_LIFE_TIME;
+    private boolean useTempBombLifeTime = false;
+
+    private int explosionLength = INITIAL_EXPLOSION_LENGTH;
+    private int tempExplosionLength = INITIAL_EXPLOSION_LENGTH;
+    private boolean useTempExplosionLength = false;
+
     private double velocityValue = PLAYER_VELOCITY;
-    private ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
-    private ArrayList<Bomb> bombs = new ArrayList<Bomb>();
+    private double tempVelocityValue = PLAYER_VELOCITY;
+    private boolean useTempVelocityValue = false;
+
+    // TODO: remove this field
+    private int currentBombCount = 0;
+
+    private final ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
+    private final ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 
     private boolean walking = false;
-    private boolean dead = false;
     private long walkStartTime;
+    private boolean isDead = false;
+    private long deathTime;
+    private boolean canKick = false;
 
     private long lastTime;
+    AnimatedSprite frontSprite = new AnimatedSprite(SpriteManager::getPlayerFront, WALK_DURATION);
+    AnimatedSprite backSprite = new AnimatedSprite(SpriteManager::getPlayerBack, WALK_DURATION);
+    AnimatedSprite leftSprite = new AnimatedSprite(SpriteManager::getPlayerLeft, WALK_DURATION);
+    AnimatedSprite rightSprite = new AnimatedSprite(SpriteManager::getPlayerRight, WALK_DURATION);
     private Image currentSprite = SpriteManager.getPlayerFront(0);
 
     private static final double SPEED_CONST = PLAYER_VELOCITY / 1000000000L;
     private static final double CRITICAL_X = LOGICAL_WIDTH - PLAYER_WIDTH;
     private static final double CRITICAL_Y = LOGICAL_HEIGHT - PLAYER_WIDTH;
     private static final double HALF_GRAPHIC_HEIGHT = PLAYER_HEIGHT * GLRATIO / 2;
-    // TODO: maybe keep track of available directions to go?
 
     // Controls: up, down, left, right
     private static final ArrayList<KeyCode> moveControls1 = new ArrayList<KeyCode>() {{
@@ -55,86 +76,99 @@ public class Player extends FieldObject {
     }};
     private static final KeyCode plantKey2 = KeyCode.SHIFT;
 
-    // TODO: add getters
-    public void removeBomb(Bomb bomb) {
-        bombs.remove(bomb);
-        currentBombCount--;
-    }
-
     public int getMaxBombCount() {
-        return maxBombCount;
+        return useTempMaxBombCount ? tempMaxBombCount : maxBombCount;
     }
     public void setMaxBombCount(int value) {
         if (value >= 0)
             maxBombCount = value;
     }
-    public void increaseMaxBombCoune() {
+    public void setTempMaxBombCount(int value) {
+        if (value >= 0)
+            tempMaxBombCount = value;
+    }
+    public void setUseTempMaxBombCount(boolean value) {
+        useTempMaxBombCount = value;
+    }
+    public void increaseMaxBombCount() {
         maxBombCount++;
     }
-    public void decreaseMaxBombCoune() {
+    public void decreaseMaxBombCount() {
         if (maxBombCount > 0)
             maxBombCount--;
     }
+
+    public long getBombLifeTime() {
+        return useTempBombLifeTime ? tempBombLifeTime : bombLifeTime;
+    }
+    public void setBombLifeTime(long value) {
+        if (value > 0)
+            bombLifeTime = 0;
+    }
+    public void setTempBombLifeTime(long value) {
+        if (value > 0)
+            tempBombLifeTime = value;
+    }
+    public void setUseTempBombLifeTime(boolean value) {
+        useTempBombLifeTime = value;
+    }
+
     public int getExplosionLength() {
-        return explosionLength;
+        return useTempExplosionLength ? tempExplosionLength : explosionLength;
     }
     public void setExplosionLength(int value) {
         if (value >= 0)
             explosionLength = value;
     }
+    public void setTempExplosionLength(int value) {
+        if (value >= 0)
+            tempExplosionLength = value;
+    }
+    public void setUseTempExplosionLength(boolean value) {
+        useTempExplosionLength = value;}
     public void increaseExplosionLength() {
         explosionLength++;
     }
     public void decreaseExplosionLength() {
-        if (explosionLength > 2)
+        if (explosionLength > 1)
             explosionLength--;
     }
 
+    public double getVelocityValue() {
+        return velocityValue;
+    }
+    public void setVelocityValue(double value) {
+        velocityValue = value;
+    }
+    public void setTempVelocityValue(double value) {
+        tempVelocityValue = value;
+    }
+    public void setUseTempVelocityValue(boolean value) {
+        useTempVelocityValue = value;
+    }
+    public void increaseVelocity() {
+        velocityValue += PLAYER_VELOCITY_DELTA;
+    }
+    public void decreaseVelocity() {
+        velocityValue -= PLAYER_VELOCITY_DELTA;
+    }
 
-    public void restoreVelocityX(boolean positive) {
-        velocityX.setValue(positive ? velocityValue : -velocityValue);
-    }
-    public void restoreVelocityY(boolean positive) {
-        velocityY.setValue(positive ? velocityValue : -velocityValue);
-    }
-    public void increaseVelocityX(double value) {
-        velocityX.add(value);
-    }
-    public void increaseVelocityX() {
-        velocityX.add(PLAYER_VELOCITY_DELTA);
-    }
-    public void increaseVelocityY(double value) {
-        velocityY.add(value);
-    }
-    public void increaseVelocityY() {
-        velocityY.add(PLAYER_VELOCITY_DELTA);
+    public void setKick(boolean value) {
+        canKick = value;
     }
 
-    public Player(GameWindow window, double xpos, double ypos) {
+    public Player(GameWindow window, PlayerType playerType, double xpos, double ypos) {
         super(window, xpos, ypos);
         sizeY.setValue(PLAYER_WIDTH);
         sizeX.setValue(PLAYER_WIDTH);
-    }
-
-    public void alterMaxBombCount(int delta) {
-        if (maxBombCount + delta > 1)
-            maxBombCount = maxBombCount + delta;
-        else
-            maxBombCount = 1;
-    }
-
-    public void alterExplosionLength(int delta) {
-        if (explosionLength + delta > 1)
-            explosionLength = explosionLength + delta;
-        else
-            explosionLength = 1;
+        type = playerType;
     }
 
     @Override
     public void update(long now) {
-        double delta = (double) (now - lastTime) * SPEED_CONST;
-        setX(getX() + getVelocityX() * delta);
-        setY(getY() + getVelocityY() * delta);
+        Move(now);
+        // TODO: manage input on another level
+        // TODO: manage temporary bonuses
         // TODO: alter control handling to allow multiple players
         for (KeyCode code : gameWindow.getCodes()) {
             if (code == plantKey1) {
@@ -188,6 +222,21 @@ public class Player extends FieldObject {
         }
     }
 
+
+
+    private void restoreVelocityX(boolean positive) {
+        velocityX.setValue(positive ? velocityValue : -velocityValue);
+    }
+    private void restoreVelocityY(boolean positive) {
+        velocityY.setValue(positive ? velocityValue : -velocityValue);
+    }
+
+    private void Move(long now) {
+        double delta = (double) (now - lastTime) * SPEED_CONST;
+        setX(getX() + getVelocityX() * delta);
+        setY(getY() + getVelocityY() * delta);
+    }
+
     @Override
     public void checkCollisions() {
         CheckBorders();
@@ -200,19 +249,28 @@ public class Player extends FieldObject {
             if (collides(bonus)) {
                 bonus.apply(this);
                 bonuses.add(bonus);
+                bonus.remove();
             }
         }
         for (Bomb bomb : gameWindow.getBombs()) {
             if (collides(bomb)) {
-                // TODO: Kicking bombs bonus implementation
-                tryStop(bomb);
+                if (canKick) {
+                    kickBomb(bomb);
+                }
+                else {
+                    tryStop(bomb);
+                }
             }
         }
         for (Explosion explosion : gameWindow.getExplosions()) {
             if (collides(explosion)) {
-                Die();
+                explode();
             }
         }
+    }
+
+    private void kickBomb(Bomb bomb) {
+
     }
 
     private void CheckBorders() {
@@ -226,15 +284,8 @@ public class Player extends FieldObject {
             setVelocityY(0);
     }
 
-    @Override
-    public boolean collides(FieldObject other) {
-        if (other instanceof  Explosion)
-            return other.collides(this);
-        return getBoundary().intersects(other.getBoundary());
-    }
-
     public void tryStop(FieldObject obj) {
-        // TODO: fix object evasion
+        // TODO: fix object evasion, just try to stop
         double deltaX = getX() - obj.getX();
         double deltaY = getY() - obj.getY();
         double overlapX = deltaX > 0 ? obj.getSizeX() - deltaX : getSizeX() + deltaX;
@@ -244,7 +295,8 @@ public class Player extends FieldObject {
         if (overlapY < MAX_OVERLAP && overlapX > MAX_OVERLAP) {
             if (getVelocityY() * deltaY < 0) {
                 if (overlapX < STRAFE_RADIUS) {
-                    shiftX(Math.signum(deltaX)*STRAFE_STEP);
+                    if (!anythingStops())
+                        shiftX(Math.signum(deltaX)*STRAFE_STEP);
                 }
                 setVelocityY(0);
             }
@@ -257,6 +309,10 @@ public class Player extends FieldObject {
                 setVelocityX(0);
             }
         }
+    }
+
+    protected boolean anythingStops() {
+        return false;
     }
 
     @Override
@@ -302,6 +358,12 @@ public class Player extends FieldObject {
         }
     }
 
+
+    public void removeBomb(Bomb bomb) {
+        bombs.remove(bomb);
+        currentBombCount--;
+    }
+
     public void applyBonuses(Bomb bomb) {
         // TODO
     }
@@ -312,7 +374,14 @@ public class Player extends FieldObject {
     }
 
     public void Die() {
-        // TODO: add some animation
+        // TODO: add some animation, perhaps a dead player class
         gameWindow.removeObject(this);
     }
+
+    public void teleport(double x, double y) {
+        // TODO: add teleportation animation
+        setX(x);
+        setY(y);
+    }
+
 }

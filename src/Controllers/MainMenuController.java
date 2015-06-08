@@ -25,7 +25,7 @@ public class MainMenuController {
 
     @FXML
     private void exitGame(ActionEvent event) {
-        System.exit(0);
+        game.exit();
     }
 
     @FXML

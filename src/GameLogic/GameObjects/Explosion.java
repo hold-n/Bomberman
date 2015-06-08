@@ -14,7 +14,6 @@ import static GameLogic.Config.*;
  * Created by Max on 06.06.2015.
  */
 public class Explosion extends FieldObject {
-    private long explosionStart;
     private int explosionUnits;
     private Image currentSprite;
     private Bomb bomb;
@@ -23,7 +22,7 @@ public class Explosion extends FieldObject {
 
     public Explosion(GameWindow window, Bomb thisBomb, int units, double xpos, double ypos) {
         super(window, xpos, ypos);
-        explosionStart = System.nanoTime();
+        creationTime = System.nanoTime();
         bomb = thisBomb;
         explosionUnits = units;
         calculateUnits(units);
@@ -87,10 +86,10 @@ public class Explosion extends FieldObject {
 
     @Override
     public void update(long now) {
-        if (now - explosionStart > EXPLOSION_DURATION)
+        if (now - creationTime > EXPLOSION_DURATION)
             end();
         currentSprite = SpriteManager.
-                getExplosion((int) ((now - explosionStart) / EXPLOSION_ANIMATION_DURATION));
+                getExplosion((int) ((now - creationTime) / EXPLOSION_ANIMATION_DURATION));
     }
 
     @Override

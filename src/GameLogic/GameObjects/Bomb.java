@@ -13,15 +13,17 @@ import static GameLogic.Config.*;
  */
 
 public class Bomb extends FieldObject{
-    private Player player;
-    private long plantingTime;
-    private long lifeTime = BOMB_LIFE_TIME;
+    private final Player player;
+    private final int length;
+    private final long lifeTime;
     private Image currentSprite = SpriteManager.getBomb(0);
 
     public Bomb(GameWindow window, Player thisPlayer, double xpos, double ypos) {
         super(window, xpos, ypos);
-        plantingTime = System.nanoTime();
+        creationTime = System.nanoTime();
         player = thisPlayer;
+        length = player.getExplosionLength();
+        lifeTime = player.getBombLifeTime();
         sizeX.setValue(BOMB_SIZE);
         sizeY.setValue(BOMB_SIZE);
     }
@@ -33,21 +35,14 @@ public class Bomb extends FieldObject{
 
     @Override
     public void update(long now) {
-        if (now - plantingTime > BOMB_LIFE_TIME)
+        if (now - creationTime > BOMB_LIFE_TIME)
             explode();
-        currentSprite = SpriteManager.getBomb((int)((now - plantingTime) / BOMB_ANIMATION_DURATION));
+        currentSprite = SpriteManager.getBomb((int)((now - creationTime) / BOMB_ANIMATION_DURATION));
     }
 
     @Override
     public void checkCollisions() {
-        // TODO: stop on obstacles, explode on intersecting explosions
-    }
-
-    @Override
-    public boolean collides(FieldObject other) {
-        if (other instanceof Explosion)
-            return other.collides(this);
-        return getBoundary().intersects(other.getBoundary());
+        // TODO: stop on obstacles
     }
 
     public Rectangle2D getBoundary() {

@@ -1,7 +1,7 @@
 .button {
   -fx-background-color: transparent;
   -fx-font-weight: 800;
-  -fx-font-size: 20px;
+  -fx-font-size: 25px;
   -fx-text-fill: WHITE;
 }
 
@@ -11,15 +11,12 @@
 
 .label{
   -fx-font-weight: 800;
-  -fx-font-size: 18px;
+  -fx-font-size: 25px;
   -fx-text-fill: WHITE;
 }
 
 .container {
     -fx-background-color: black;
     -fx-background-image: url("../Resources/Images/title_background.jpg");
-    -fx-background-repeat: stretch;
-    -fx-background-size: 900 506;
-    -fx-background-position: center center;
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }

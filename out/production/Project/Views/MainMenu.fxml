@@ -4,23 +4,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import java.net.URL?>
 
-
-<?import javafx.geometry.Insets?>
 <AnchorPane styleClass="container" centerShape="true" fx:controller="Controllers.MainMenuController"
-            xmlns:fx="http://javafx.com/fxml" prefWidth="250" prefHeight="320">
-    <!--<padding>-->
-        <!--<Insets top="25" right="25" bottom="25" left="25"/>-->
-    <!--</padding>-->
-    <!--<children>-->
+            xmlns:fx="http://javafx.com/fxml" prefWidth="320" prefHeight="380">
+    <children>
         <Button onAction="#runGame" text="Start" prefHeight="50" prefWidth="150" AnchorPane.rightAnchor="40"
-                AnchorPane.leftAnchor="40" AnchorPane.topAnchor="30"/>
+                AnchorPane.leftAnchor="40" AnchorPane.topAnchor="40"/>
         <Button onAction="#load" text="Load" prefHeight="50" prefWidth="150" AnchorPane.rightAnchor="40"
-                AnchorPane.leftAnchor="40"  AnchorPane.topAnchor="100"/>
+                AnchorPane.leftAnchor="40"  AnchorPane.topAnchor="130"/>
         <Button onAction="#about" text="About" prefHeight="50" prefWidth="150" AnchorPane.rightAnchor="40"
-        AnchorPane.leftAnchor="40" AnchorPane.topAnchor="170"/>
+        AnchorPane.leftAnchor="40" AnchorPane.topAnchor="210"/>
         <Button onAction="#exitGame" text="Exit" prefHeight="50" prefWidth="150" AnchorPane.rightAnchor="40"
-                AnchorPane.leftAnchor="40" AnchorPane.topAnchor="240"/>
-    <!--</children>-->
+                AnchorPane.leftAnchor="40" AnchorPane.topAnchor="290" AnchorPane.bottomAnchor="40"/>
+    </children>
     <stylesheets>
         <URL value="@MainStyles.css" />
     </stylesheets>

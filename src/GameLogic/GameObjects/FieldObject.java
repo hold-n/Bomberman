@@ -11,14 +11,15 @@ import javafx.scene.image.Image;
  */
 
 public abstract class FieldObject {
-    protected GameValue x = new GameValue(0);
-    protected GameValue y = new GameValue(0);
-    protected GameValue sizeX = new GameValue(0);
-    protected GameValue sizeY = new GameValue(0);
-    protected GameValue velocityX = new GameValue(0);
-    protected GameValue velocityY = new GameValue(0);
+    protected GameValue x = new GameValue();
+    protected GameValue y = new GameValue();
+    protected GameValue sizeX = new GameValue();
+    protected GameValue sizeY = new GameValue();
+    protected GameValue velocityX = new GameValue();
+    protected GameValue velocityY = new GameValue();
 
     protected GameWindow gameWindow;
+    protected long creationTime;
 
     public double getX() { return x.getLogical(); }
     public double getY() { return y.getLogical(); }
@@ -40,18 +41,59 @@ public abstract class FieldObject {
         gameWindow = window;
         x.setValue(xpos);
         y.setValue(ypos);
+        creationTime = System.nanoTime();
     }
 
+    /**
+     * Returns the border of the object for collision checks or null,
+     * if it's impossible to interact with the object
+     *
+     * @return The border of the object
+     */
     public Rectangle2D getBoundary() {
         return null;
     }
+
+    /**
+     * Whether the object collides with the other object.
+     * Should be called as to determine whether to call collision handlers
+     * @param other Object to check for collision
+     * @return Whether the object is touching another object
+     */
     public boolean collides(FieldObject other) {
-        return false;
+        if (other instanceof Explosion)
+            return other.collides(this);
+        if (other.getBoundary() == null || getBoundary() == null)
+            return false;
+        return getBoundary().intersects(other.getBoundary());
     }
+
+    /**
+     * Returns the current sprite of the object.
+     * @return The current sprite
+     */
     protected Image getSprite() { return null; }
+
+    /**
+     * Called on every iteration of the game loop so the object can update its time-dependant parameters.
+     * @param now Current time in nanoseconds
+     */
     public void update(long now) {}
-    // only active objects check for collisions
+
+    /**
+     * Called on every iteration of the game loop so the object can check any other objects for collisions.
+     * For better performance, only active objects override this method.
+     */
     public void checkCollisions() {}
+
+    /**
+     * Called on every iteration of the game loop so the object can draw itself.
+     * @param context Context to perform drawing on
+     */
     public abstract void draw(GraphicsContext context);
+
+    /**
+     * Method called by explosion objects so as to try to destroy objects it touches on creation
+     */
     public void explode() {}
 }

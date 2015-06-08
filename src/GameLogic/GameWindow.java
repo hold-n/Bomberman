@@ -1,16 +1,13 @@
 package GameLogic;
 
-import GameLogic.GameObjects.Bomb;
+import GameLogic.GameObjects.*;
 import GameLogic.GameObjects.Bonuses.Bonus;
-import GameLogic.GameObjects.Explosion;
-import GameLogic.GameObjects.FieldObject;
 import GameLogic.GameObjects.HeaderObjects.HeaderImage;
 import GameLogic.GameObjects.HeaderObjects.HeaderObject;
-import GameLogic.GameObjects.Player;
 import GameLogic.GameObjects.Tiles.BackgroundTile;
 import GameLogic.GameObjects.Tiles.Tile;
 import GameLogic.MapLoaders.MapLoader;
-import GameLogic.MapLoaders.SimpleMapLoader;
+import GameLogic.MapLoaders.TestMapLoader;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -34,14 +31,21 @@ public class GameWindow {
 
     private final Game game;
     private final Scene scene;
-    private MapLoader loader = new SimpleMapLoader();
+    private final GraphicsContext headerContext;
+    private final GraphicsContext fieldContext;
+
+    private MapLoader loader = new TestMapLoader();
+
+    private final KeyCode exitKey = KeyCode.F10;
 
     private final ArrayList<KeyCode> buttonCodes = new ArrayList<KeyCode>();
+
     // Contain all the objects on the field and the header
     private final ArrayList<HeaderObject> headerObjects = new ArrayList<HeaderObject>();
     private final ArrayList<FieldObject> toAddContainer = new ArrayList<FieldObject>();
     private final ArrayList<FieldObject> toRemoveContainver = new ArrayList<FieldObject>();
     private final ArrayList<FieldObject> objects = new ArrayList<FieldObject>();
+
     // Separate containers for specific objects
     private final ArrayList<Tile> map = new ArrayList<Tile>();
     private final ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
@@ -49,26 +53,28 @@ public class GameWindow {
     private final ArrayList<Bomb> bombs = new ArrayList<Bomb>();
     private final ArrayList<Explosion> explosions = new ArrayList<Explosion>();
 
-    private final GraphicsContext headerContext;
-    private final GraphicsContext fieldContext;
-
     private long timerStartTime;
 
     AnimationTimer mainTimer = new AnimationTimer() {
         @Override
         public void handle(long now) {
-            for (FieldObject obj : toAddContainer)
-                addFromTemp(obj);
-            toAddContainer.clear();
-            for (FieldObject obj : toRemoveContainver)
-                removeFromTemp(obj);
-            toRemoveContainver.clear();
+            if (!buttonCodes.contains(exitKey)) {
+                for (FieldObject obj : toAddContainer)
+                    addFromTemp(obj);
+                toAddContainer.clear();
+                for (FieldObject obj : toRemoveContainver)
+                    removeFromTemp(obj);
+                toRemoveContainver.clear();
 
-            fieldContext.clearRect(0, 0, FIELD_WIDTH, FIELD_HEIGHT);
-            headerContext.clearRect(0, 0, FIELD_WIDTH, HEADER_HEIGHT);
-            updateObjects(now);
-            handleCollisions();
-            drawObjects();
+                fieldContext.clearRect(0, 0, FIELD_WIDTH, FIELD_HEIGHT);
+                headerContext.clearRect(0, 0, FIELD_WIDTH, HEADER_HEIGHT);
+                updateObjects(now);
+                handleCollisions();
+                drawObjects();
+            }
+            else {
+                exit();
+            }
         }
     };
 
@@ -116,21 +122,24 @@ public class GameWindow {
     protected void removeFromTemp(FieldObject obj) {
         objects.remove(obj);
         if (obj instanceof Tile)
-            map.remove((Tile) obj);
+            map.remove(obj);
         if (obj instanceof Player)
-            players.remove((Player) obj);
+            players.remove(obj);
         if (obj instanceof Bonus)
-            bonuses.remove((Bonus) obj);
+            bonuses.remove(obj);
         if (obj instanceof Explosion)
-            explosions.remove((Explosion) obj);
+            explosions.remove(obj);
         if (obj instanceof Bomb)
-            bombs.remove((Bomb) obj);
+            bombs.remove(obj);
+    }
+
+    public Scene getScene() {
+        return scene;
     }
 
     public void addObject(FieldObject obj) {
         toAddContainer.add(obj);
     }
-
     public void removeObject(FieldObject obj) {
         toRemoveContainver.add(obj);
     }
@@ -138,9 +147,7 @@ public class GameWindow {
     public Iterable<KeyCode> getCodes() {
         return buttonCodes;
     }
-    public Scene getScene() {
-        return scene;
-    }
+
     public Iterable<FieldObject> getObjects() {
         return objects;
     }
@@ -173,6 +180,7 @@ public class GameWindow {
         game.getStage().hide();
 
         VBox root = new VBox();
+        // -10 to remove weird length and width excess
         scene = new Scene(root, FIELD_WIDTH - 10, HEADER_HEIGHT + FIELD_HEIGHT - 10);
         game.getStage().setScene(scene);
 
@@ -190,15 +198,25 @@ public class GameWindow {
     }
 
     private void loadFieldObjects() {
-        loadMap();
-        addObject(new Player(this, 200, 200));
+        loadBackground();
+        // TODO: load players and creeps according to the map
+        addObject(new Player(this, PlayerType.PLAYER1, 200, 200));
+    }
+
+    private void loadBackground() {
+        for (int i = 0; i < TILES_VERT; i++)
+            for (int j = 0; j < TILES_HOR; j++) {
+                Tile tile = new BackgroundTile(this, j*TILE_LOGICAL_SIZE, i*TILE_LOGICAL_SIZE);
+                addObject(tile);
+            }
+        loader.loadMap(this);
     }
 
     private void loadHeaderObjects() {
         headerObjects.add(new HeaderImage());
-        Font font = new Font("Verdana", 16);
+        Font font = new Font("Verdana", 20);
         headerContext.setFont(font);
-        // TODO: add save, exit buttons, timer and score
+        // TODO: add save and exit labels, timer
     }
 
     private void setHandlers() {
@@ -219,24 +237,21 @@ public class GameWindow {
         });
     }
 
-    private void loadMap() {
-        for (int i = 0; i < TILES_VERT; i++)
-            for (int j = 0; j < TILES_HOR; j++) {
-                Tile tile = new BackgroundTile(this, j*TILE_LOGICAL_SIZE, i*TILE_LOGICAL_SIZE);
-                addObject(tile);
-            }
-        loader.loadMap(this);
-    }
-
     public void run() {
         game.getStage().show();
+        Game.centerStage(game.getStage());
         timerStartTime = System.nanoTime();
         mainTimer.start();
     }
 
-    public void exit() throws IOException {
+    public void exit() {
         mainTimer.stop();
-        game.runMainMenu();
+        try {
+            game.runMainMenu();
+        }
+        catch (IOException e) {
+            game.exit();
+        }
         // TODO: maybe return a score or something
     }
 
@@ -244,7 +259,7 @@ public class GameWindow {
         // TODO
     }
 
-    public static GameWindow load(Game game) {
+    public static GameWindow load(Game game, String savePath) {
         // TODO
         return null;
     }

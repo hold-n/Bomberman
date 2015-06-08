@@ -45,10 +45,14 @@ public final class Config {
 
     public static final double TILE_LOGICAL_SIZE =
             Double.valueOf(properties.getProperty("tile.logical.size"));
+    public static final double PORTAL_INNER_SIZE =
+            Double.valueOf(properties.getProperty("portal.inner.size"));
     public static final double BONUS_SIZE =
             Double.valueOf(properties.getProperty("bonus.size"));
     public static final double BOMB_SIZE =
             Double.valueOf(properties.getProperty("bomb.size"));
+    public static final double BOMB_SPEED =
+            Double.valueOf(properties.getProperty("bomb.speed"));
     public static  final double BOMB_SHIFT =
             Double.valueOf(properties.getProperty("bomb.shift"));
     public static final double EXPLOSION_UNIT_SIZE =
@@ -73,6 +77,13 @@ public final class Config {
     public static final int TILES_VERT =
             Integer.valueOf(properties.getProperty("tiles.vertical"));
 
+    public static final double BONUS_CHANCE =
+            Double.valueOf(properties.getProperty("bonus.chance"));
+    public static final int INITIAL_BOMB_COUNT =
+            Integer.valueOf(properties.getProperty("initial.bomb.count"));
+    public static final int INITIAL_EXPLOSION_LENGTH =
+            Integer.valueOf(properties.getProperty("initial.explosion.length"));
+
     public static final long WALK_DURATION =
             Long.valueOf(properties.getProperty("walk.animation.duration"));
     public static final long BOMB_ANIMATION_DURATION =
@@ -94,6 +105,17 @@ public final class Config {
             properties.getProperty("tile.explodable");
     public static final String PORTAL_TILE_URL =
             properties.getProperty("tile.portal");
+
+    public static final String BONUS_BOMB =
+            properties.getProperty("bonus.bomb");
+    public static final String BONUS_EXPLOSION =
+            properties.getProperty("bonus.explosion");
+    public static final String BONUS_SPEED =
+            properties.getProperty("bonus.speed");
+    public static final String BONUS_KICK =
+            properties.getProperty("bonus.kick");
+    public static final String BONUS_DEBUFF =
+            properties.getProperty("bonus.debuff");
 
     public static final int PLAYER_FRAMES_NUM =
             Integer.valueOf(properties.getProperty("player.frames.num"));
