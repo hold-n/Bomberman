@@ -29,13 +29,12 @@ public class MainMenuController {
     }
 
     @FXML
-    private Double windowHeight() { return (double) MENU_HEIGHT; }
-
-    public void about(ActionEvent actionEvent) {
+    private void about(ActionEvent actionEvent) {
         game.about();
     }
 
-    public void load(ActionEvent actionEvent) {
+    @FXML
+    private void load(ActionEvent actionEvent) {
         game.load();
     }
 }

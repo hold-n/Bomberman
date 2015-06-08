@@ -27,6 +27,7 @@ public class SpriteManager {
     private static final Image[] playerSideRight = new Image[PLAYER_FRAMES_NUM];
     private static final Image[] playerSideLeft = new Image[PLAYER_FRAMES_NUM];
     private static final Image[] bomb = new Image[BOMB_FRAMES];
+    private static final Image[] explosion = new Image[EXPLOSION_FRAMES];
 
     public static BufferedImage getFlippedImage(BufferedImage bufferedImage, int angle) {
         AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
@@ -42,6 +43,7 @@ public class SpriteManager {
         GameValue playerHeight = new GameValue(PLAYER_HEIGHT);
         GameValue playerWidth = new GameValue(PLAYER_WIDTH);
         GameValue bombSize = new GameValue(BOMB_SIZE);
+        GameValue explosionSize = new GameValue(EXPLOSION_UNIT_SIZE);
         for (int i = 0; i < PLAYER_FRAMES_NUM; i++) {
             String url = PLAYER_FRONT_START + (new Integer(i)).toString() + PLAYER_FRONT_END;
             playerFront[i] =
@@ -66,6 +68,12 @@ public class SpriteManager {
             bomb[i] =
                     new Image(url, bombSize.getGraphic(), bombSize.getGraphic(), true, true);
         }
+
+        for (int i = 0; i < EXPLOSION_FRAMES; i++) {
+            String url = EXPLOSION_START + (new Integer(i)).toString() + EXPLOSION_END;
+            explosion[i] =
+                    new Image(url, explosionSize.getGraphic(), explosionSize.getGraphic(), true, true);
+        }
     }
 
     public static Image getBackgroundTile() {
@@ -86,6 +94,10 @@ public class SpriteManager {
 
     public static Image getBomb(int frame) {
         return bomb[frame % BOMB_FRAMES];
+    }
+
+    public static Image getExplosion(int frame) {
+        return explosion[frame % EXPLOSION_FRAMES];
     }
 
     public static Image getPlayerFront(int frame) {

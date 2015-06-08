@@ -45,8 +45,12 @@ public final class Config {
 
     public static final double TILE_LOGICAL_SIZE =
             Double.valueOf(properties.getProperty("tile.logical.size"));
+    public static final double BONUS_SIZE =
+            Double.valueOf(properties.getProperty("bonus.size"));
     public static final double BOMB_SIZE =
             Double.valueOf(properties.getProperty("bomb.size"));
+    public static  final double BOMB_SHIFT =
+            Double.valueOf(properties.getProperty("bomb.shift"));
     public static final double EXPLOSION_UNIT_SIZE =
             Double.valueOf(properties.getProperty("explosion.unit.size"));
     public static final double PLAYER_HEIGHT =
@@ -73,6 +77,10 @@ public final class Config {
             Long.valueOf(properties.getProperty("walk.animation.duration"));
     public static final long BOMB_ANIMATION_DURATION =
             Long.valueOf(properties.getProperty("bomb.animation.duration"));
+    public static final long EXPLOSION_ANIMATION_DURATION =
+            Long.valueOf(properties.getProperty("explosion.animation.duration"));
+    public static final long EXPLOSION_DURATION =
+            Long.valueOf(properties.getProperty("explosion.duration"));
     public static final long BOMB_LIFE_TIME =
             Long.valueOf(properties.getProperty("bomb.life.time"));
 
@@ -108,6 +116,13 @@ public final class Config {
             properties.getProperty("bomb.start");
     public static final  String BOMB_END =
             properties.getProperty("bomb.end");
+
+    public static final int EXPLOSION_FRAMES =
+            Integer.valueOf(properties.getProperty("explosion.frames.num"));
+    public static final  String EXPLOSION_START =
+            properties.getProperty("explosion.start");
+    public static final  String EXPLOSION_END =
+            properties.getProperty("explosion.end");
 
     public static final String DEFAULT_SAVE =
             properties.getProperty("default.save.path");

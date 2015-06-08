@@ -1,9 +1,9 @@
 package GameLogic.GameObjects.Tiles;
 
-import GameLogic.GameObjects.FieldObject;
 import GameLogic.GameObjects.Player;
 import GameLogic.GameWindow;
 import GameLogic.SpriteManager;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 
 /**
@@ -23,10 +23,5 @@ public class PortalTile extends Tile {
     @Override
     public void effect(Player player) {
         // TODO
-    }
-
-    @Override
-    public boolean collides(FieldObject other) {
-        return getBoundary().intersects(other.getBoundary());
     }
 }

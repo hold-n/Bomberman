@@ -42,19 +42,16 @@ public abstract class FieldObject {
         y.setValue(ypos);
     }
 
-    // TODO: make up smth for explosions
     public Rectangle2D getBoundary() {
-        return new Rectangle2D(x.getLogical(), y.getLogical(),
-                sizeX.getLogical(), sizeY.getLogical());
+        return null;
     }
-
     public boolean collides(FieldObject other) {
         return false;
     }
-
     protected Image getSprite() { return null; }
     public void update(long now) {}
     // only active objects check for collisions
     public void checkCollisions() {}
     public abstract void draw(GraphicsContext context);
+    public void explode() {}
 }

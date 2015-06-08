@@ -1,5 +1,7 @@
 package GameLogic.GameObjects.Tiles;
 
+import GameLogic.GameObjects.Explosion;
+import GameLogic.GameObjects.FieldObject;
 import GameLogic.GameWindow;
 import GameLogic.SpriteManager;
 import javafx.scene.image.Image;
@@ -19,7 +21,7 @@ public class ExplodableTile extends ImpassableTile {
     }
 
     @Override
-    public void checkCollisions() {
-        // TODO: make it explode
+    public void explode() {
+        gameWindow.removeObject(this);
     }
 }

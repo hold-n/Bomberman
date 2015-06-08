@@ -8,9 +8,9 @@ import GameLogic.GameObjects.HeaderObjects.HeaderImage;
 import GameLogic.GameObjects.HeaderObjects.HeaderObject;
 import GameLogic.GameObjects.Player;
 import GameLogic.GameObjects.Tiles.BackgroundTile;
-import GameLogic.GameObjects.Tiles.ExplodableTile;
-import GameLogic.GameObjects.Tiles.SolidTile;
 import GameLogic.GameObjects.Tiles.Tile;
+import GameLogic.MapLoaders.MapLoader;
+import GameLogic.MapLoaders.SimpleMapLoader;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -19,6 +19,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class GameWindow {
 
     private final Game game;
     private final Scene scene;
+    private MapLoader loader = new SimpleMapLoader();
 
     private final ArrayList<KeyCode> buttonCodes = new ArrayList<KeyCode>();
     // Contain all the objects on the field and the header
@@ -142,6 +144,9 @@ public class GameWindow {
     public Iterable<FieldObject> getObjects() {
         return objects;
     }
+    public boolean toBeDeleted(FieldObject object) {
+        return toRemoveContainver.contains(object);
+    }
     public Iterable<Tile> getMap() {
         return map;
     }
@@ -156,6 +161,11 @@ public class GameWindow {
     }
     public Iterable<Explosion> getExplosions() {
         return explosions;
+    }
+
+    public GameWindow(Game thisGame, MapLoader thisLoader) {
+        this(thisGame);
+        loader = thisLoader;
     }
 
     public GameWindow(Game thisGame) {
@@ -186,8 +196,9 @@ public class GameWindow {
 
     private void loadHeaderObjects() {
         headerObjects.add(new HeaderImage());
-        // TODO: set proper font
-        // TODO: add save, exit buttons
+        Font font = new Font("Verdana", 16);
+        headerContext.setFont(font);
+        // TODO: add save, exit buttons, timer and score
     }
 
     private void setHandlers() {
@@ -214,15 +225,7 @@ public class GameWindow {
                 Tile tile = new BackgroundTile(this, j*TILE_LOGICAL_SIZE, i*TILE_LOGICAL_SIZE);
                 addObject(tile);
             }
-        // TODO: load a proper map
-        Tile tile = new SolidTile(this, TILE_LOGICAL_SIZE, TILE_LOGICAL_SIZE);
-        addObject(tile);
-        tile = new ExplodableTile(this, 2*TILE_LOGICAL_SIZE, TILE_LOGICAL_SIZE);
-        addObject(tile);
-        tile = new SolidTile(this, 2*TILE_LOGICAL_SIZE, 3*TILE_LOGICAL_SIZE);
-        addObject(tile);
-        tile = new ExplodableTile(this, 1*TILE_LOGICAL_SIZE, 3*TILE_LOGICAL_SIZE);
-        addObject(tile);
+        loader.loadMap(this);
     }
 
     public void run() {
@@ -234,6 +237,7 @@ public class GameWindow {
     public void exit() throws IOException {
         mainTimer.stop();
         game.runMainMenu();
+        // TODO: maybe return a score or something
     }
 
     public void save() {

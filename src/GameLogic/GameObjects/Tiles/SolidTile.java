@@ -4,6 +4,8 @@ import GameLogic.GameWindow;
 import GameLogic.SpriteManager;
 import javafx.scene.image.Image;
 
+import java.awt.geom.Rectangle2D;
+
 /**
  * Created by Max on 06.06.2015.
  */

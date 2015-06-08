@@ -1,6 +1,7 @@
 package GameLogic.GameObjects;
 
 import GameLogic.GameObjects.Bonuses.Bonus;
+import GameLogic.GameObjects.Tiles.ImpassableTile;
 import GameLogic.GameObjects.Tiles.Tile;
 import GameLogic.GameWindow;
 import GameLogic.SpriteManager;
@@ -18,9 +19,9 @@ import static GameLogic.Config.*;
  */
 
 public class Player extends FieldObject {
-    private int maxBombCount = 1;
+    private int maxBombCount = 2;
     private int currentBombCount = 0;
-    private double explosionLength = 2 * TILE_LOGICAL_SIZE;
+    private int explosionLength = 2;
     private double velocityValue = PLAYER_VELOCITY;
     private ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
     private ArrayList<Bomb> bombs = new ArrayList<Bomb>();
@@ -32,26 +33,63 @@ public class Player extends FieldObject {
     private long lastTime;
     private Image currentSprite = SpriteManager.getPlayerFront(0);
 
-    private static final double SPEED_CONST = (double) PLAYER_VELOCITY / 1000000000L;
+    private static final double SPEED_CONST = PLAYER_VELOCITY / 1000000000L;
     private static final double CRITICAL_X = LOGICAL_WIDTH - PLAYER_WIDTH;
     private static final double CRITICAL_Y = LOGICAL_HEIGHT - PLAYER_WIDTH;
     private static final double HALF_GRAPHIC_HEIGHT = PLAYER_HEIGHT * GLRATIO / 2;
+    // TODO: maybe keep track of available directions to go?
 
-    // TODO: Make a collection of collections for more players
-    private static final ArrayList<KeyCode> moveControls = new ArrayList<KeyCode>() {
-        {
+    // Controls: up, down, left, right
+    private static final ArrayList<KeyCode> moveControls1 = new ArrayList<KeyCode>() {{
             add(KeyCode.UP);
             add(KeyCode.DOWN);
             add(KeyCode.LEFT);
             add(KeyCode.RIGHT);
-        }
-    };
+    }};
+    private static final KeyCode plantKey1 = KeyCode.SPACE;
+    private static final ArrayList<KeyCode> getMoveControls2 = new ArrayList<KeyCode>() {{
+        add(KeyCode.W);
+        add(KeyCode.S);
+        add(KeyCode.A);
+        add(KeyCode.D);
+    }};
+    private static final KeyCode plantKey2 = KeyCode.SHIFT;
 
     // TODO: add getters
     public void removeBomb(Bomb bomb) {
         bombs.remove(bomb);
         currentBombCount--;
     }
+
+    public int getMaxBombCount() {
+        return maxBombCount;
+    }
+    public void setMaxBombCount(int value) {
+        if (value >= 0)
+            maxBombCount = value;
+    }
+    public void increaseMaxBombCoune() {
+        maxBombCount++;
+    }
+    public void decreaseMaxBombCoune() {
+        if (maxBombCount > 0)
+            maxBombCount--;
+    }
+    public int getExplosionLength() {
+        return explosionLength;
+    }
+    public void setExplosionLength(int value) {
+        if (value >= 0)
+            explosionLength = value;
+    }
+    public void increaseExplosionLength() {
+        explosionLength++;
+    }
+    public void decreaseExplosionLength() {
+        if (explosionLength > 2)
+            explosionLength--;
+    }
+
 
     public void restoreVelocityX(boolean positive) {
         velocityX.setValue(positive ? velocityValue : -velocityValue);
@@ -99,7 +137,7 @@ public class Player extends FieldObject {
         setY(getY() + getVelocityY() * delta);
         // TODO: alter control handling to allow multiple players
         for (KeyCode code : gameWindow.getCodes()) {
-            if (code == KeyCode.SPACE) {
+            if (code == plantKey1) {
                 tryPutBomb();
                 break;
             }
@@ -107,7 +145,7 @@ public class Player extends FieldObject {
 
         KeyCode movingCode = null;
         for (KeyCode code : gameWindow.getCodes()) {
-            if (moveControls.contains(code)) {
+            if (moveControls1.contains(code)) {
                 if (code == KeyCode.DOWN) {
                     restoreVelocityY(true);
                     setVelocityX(0);
@@ -158,7 +196,23 @@ public class Player extends FieldObject {
                 tile.effect(this);
             }
         }
-        // TODO; check for other objects
+        for (Bonus bonus : gameWindow.getBonuses()) {
+            if (collides(bonus)) {
+                bonus.apply(this);
+                bonuses.add(bonus);
+            }
+        }
+        for (Bomb bomb : gameWindow.getBombs()) {
+            if (collides(bomb)) {
+                // TODO: Kicking bombs bonus implementation
+                tryStop(bomb);
+            }
+        }
+        for (Explosion explosion : gameWindow.getExplosions()) {
+            if (collides(explosion)) {
+                Die();
+            }
+        }
     }
 
     private void CheckBorders() {
@@ -174,11 +228,34 @@ public class Player extends FieldObject {
 
     @Override
     public boolean collides(FieldObject other) {
-        if (!(other instanceof Explosion))
-            return getBoundary().intersects(other.getBoundary());
-        else {
-            // TODO: explosion handling. or maybe make up smth
-            return false;
+        if (other instanceof  Explosion)
+            return other.collides(this);
+        return getBoundary().intersects(other.getBoundary());
+    }
+
+    public void tryStop(FieldObject obj) {
+        // TODO: fix object evasion
+        double deltaX = getX() - obj.getX();
+        double deltaY = getY() - obj.getY();
+        double overlapX = deltaX > 0 ? obj.getSizeX() - deltaX : getSizeX() + deltaX;
+        double overlapY = deltaY > 0 ? obj.getSizeY() - deltaY : getSizeY() + deltaY;
+
+        // no check for overlap > 0, assuming method called on collision
+        if (overlapY < MAX_OVERLAP && overlapX > MAX_OVERLAP) {
+            if (getVelocityY() * deltaY < 0) {
+                if (overlapX < STRAFE_RADIUS) {
+                    shiftX(Math.signum(deltaX)*STRAFE_STEP);
+                }
+                setVelocityY(0);
+            }
+        }
+        if (overlapX < MAX_OVERLAP && overlapY > MAX_OVERLAP) {
+            if (getVelocityX() * deltaX < 0) {
+                if (overlapY < STRAFE_RADIUS) {
+                    shiftY(Math.signum(deltaY)*STRAFE_STEP);
+                }
+                setVelocityX(0);
+            }
         }
     }
 
@@ -199,12 +276,26 @@ public class Player extends FieldObject {
 
     public boolean tryPutBomb() {
         if (currentBombCount < maxBombCount) {
-            currentBombCount++;
-            Bomb bomb = new Bomb(gameWindow, this, getX(), getY());
-            applyBonuses(bomb);
-            gameWindow.addObject(bomb);
-            bombs.add(bomb);
-            return true;
+            boolean willTouchBomb = false;
+            for (Bomb bomb : gameWindow.getBombs()) {
+                double deltaX = getX() - bomb.getX();
+                double deltaY = getY() + BOMB_SHIFT - bomb.getY();
+                double overlapX = deltaX > 0 ? bomb.getSizeX() - deltaX : BOMB_SIZE + deltaX;
+                double overlapY = deltaY > 0 ? bomb.getSizeY() - deltaY : BOMB_SIZE + deltaY;
+                if (overlapX > MAX_OVERLAP && overlapY > MAX_OVERLAP) {
+                    willTouchBomb = true;
+                    break;
+                }
+            }
+            if (!willTouchBomb) {
+                currentBombCount++;
+                Bomb bomb = new Bomb(gameWindow, this, getX(), getY() + BOMB_SHIFT);
+                applyBonuses(bomb);
+                gameWindow.addObject(bomb);
+                bombs.add(bomb);
+                return true;
+            }
+            return false;
         }
         else {
             return false;
@@ -213,6 +304,11 @@ public class Player extends FieldObject {
 
     public void applyBonuses(Bomb bomb) {
         // TODO
+    }
+
+    @Override
+    public void explode() {
+        Die();
     }
 
     public void Die() {

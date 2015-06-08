@@ -1,5 +1,6 @@
 package GameLogic.GameObjects.Tiles;
 
+import GameLogic.GameObjects.Explosion;
 import GameLogic.GameObjects.FieldObject;
 import GameLogic.GameObjects.Player;
 import GameLogic.GameWindow;
@@ -23,6 +24,16 @@ public abstract class Tile extends FieldObject {
     public Rectangle2D getBoundary() {
         return new Rectangle2D(x.getLogical(), y.getLogical(),
                 TILE_LOGICAL_SIZE, TILE_LOGICAL_SIZE);
+    }
+
+    @Override
+    public boolean collides(FieldObject other) {
+        if (getBoundary() != null) {
+            if (other instanceof Explosion)
+                return other.collides(this);
+            return getBoundary().intersects(other.getBoundary());
+        }
+        return false;
     }
 
     @Override
