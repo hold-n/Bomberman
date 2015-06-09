@@ -2,8 +2,7 @@ package GameLogic;
 
 import GameLogic.GameObjects.Direction;
 import GameLogic.GameObjects.FieldObject;
-import GameLogic.GameObjects.MoveableObject;
-import GameLogic.GameObjects.Player;
+import GameLogic.GameObjects.MovableObject;
 
 import static GameLogic.Config.*;
 
@@ -11,22 +10,22 @@ import static GameLogic.Config.*;
  * Created by Max on 09.06.2015.
  */
 
-class TempObject extends MoveableObject {
+class TempObject extends MovableObject {
 
     public TempObject(GameWindow window, double xpos, double ypos) {
-        super(window, xpos, 0, 0, ypos);
+        super(window, 1, 0, xpos, ypos);
     }
 }
 
 // OMG! this entire class could have not existed, if I guessed you could stop objects somewhat before obstacles!
-public class MovementChecker {
+public class CollisionHandler {
 
     /**
      * Checks whether a moving object should interact with borders of the screen.
      * @param obj The moving object.
      * @return Direction of the border relative to the object or NONE, if object should not interact with borders
      */
-    public static Direction collidesWithBorders(MoveableObject obj) {
+    public static Direction collidesWithBorders(MovableObject obj) {
         if (obj.getBoundary() == null)
             return Direction.NONE;
         if (obj.getX() < 0 && obj.getVelocityX() < 0)
@@ -47,7 +46,7 @@ public class MovementChecker {
      * @param toCheck Object to check for interaction
      * @return The direction of the object to check relative to the moving one or NONE, if there should be no interactions
      */
-    public static Direction collidesOnMovement(MoveableObject moving, FieldObject toCheck) {
+    public static Direction collidesOnMovement(MovableObject moving, FieldObject toCheck) {
         if (moving.getBoundary() == null || toCheck.getBoundary() == null)
             return Direction.NONE;
         double deltaX = moving.getX() - toCheck.getX();
@@ -104,27 +103,19 @@ public class MovementChecker {
      * @param direction The direction in which the object wants to move.
      * @return Whether the object can move in the requested direction.
      */
-    public static boolean canMove(MoveableObject object, Direction direction) {
-        // TODO: fix
+    public static boolean canMove(MovableObject object, Direction direction) {
+        // TODO?
         boolean result = true;
-        Direction walkDirection;
-        if (!object.isMoving()) {
-            walkDirection = Direction.NONE;
-        }
-        else {
-            walkDirection = object.getDirection();
-        }
-
         TempObject temp = new TempObject(object.getGameWindow(), object.getX(), object.getY());
         temp.setSizeX(object.getSizeX());
         temp.setSizeY(object.getSizeY());
-        if (walkDirection == Direction.RIGHT)
+        if (direction == Direction.RIGHT)
             temp.moveByX(true, 0);
-        if (walkDirection == Direction.LEFT)
+        if (direction == Direction.LEFT)
             temp.moveByX(false, 0);
-        if (walkDirection == Direction.UP)
+        if (direction == Direction.UP)
             temp.moveByY(false, 0);
-        if (walkDirection == Direction.DOWN)
+        if (direction == Direction.DOWN)
             temp.moveByY(true, 0);
 
         for (FieldObject fieldObject : object.getGameWindow().getObjects()) {
@@ -154,8 +145,8 @@ public class MovementChecker {
      * @param toCheck An object to check for collision with.
      * @return Whether the object has been stopped
      */
-    public static boolean tryStop(MoveableObject moving, FieldObject toCheck, boolean strafe) {
-        Direction direction = MovementChecker.collidesOnMovement(moving, toCheck);
+    public static boolean tryStop(MovableObject moving, FieldObject toCheck, boolean strafe) {
+        Direction direction = CollisionHandler.collidesOnMovement(moving, toCheck);
         if ( moving.isMoving() && (direction != Direction.NONE) ) {
             moving.stop();
             if (!strafe)

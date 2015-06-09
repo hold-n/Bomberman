@@ -1,11 +1,10 @@
 package GameLogic.GameObjects.Tiles;
 
 import GameLogic.GameObjects.FieldObject;
-import GameLogic.GameObjects.MoveableObject;
+import GameLogic.GameObjects.MovableObject;
 import GameLogic.GameObjects.Player;
 import GameLogic.GameWindow;
-import GameLogic.MovementChecker;
-import javafx.geometry.Rectangle2D;
+import GameLogic.CollisionHandler;
 
 /**
  * Created by Max on 07.06.2015.
@@ -18,11 +17,11 @@ public abstract class ImpassableTile extends Tile {
 
     @Override
     public void effect(FieldObject obj) {
-        if (obj instanceof MoveableObject) {
+        if (obj instanceof MovableObject) {
             if (obj instanceof Player)
-                MovementChecker.tryStop((Player)obj, this, true);
+                CollisionHandler.tryStop((Player) obj, this, true);
             else
-                MovementChecker.tryStop((MoveableObject)obj, this, false);
+                CollisionHandler.tryStop((MovableObject) obj, this, false);
         }
     }
 }

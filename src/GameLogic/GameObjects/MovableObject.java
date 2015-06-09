@@ -2,22 +2,24 @@ package GameLogic.GameObjects;
 
 import GameLogic.GameValue;
 import GameLogic.GameWindow;
-import GameLogic.MovementChecker;
+import GameLogic.CollisionHandler;
 
 /**
  * Created by Max on 09.06.2015.
  */
-public class MoveableObject extends FieldObject {
+public class MovableObject extends FieldObject {
     protected double velocityValue;
     protected double velocityValueDelta;
 
     protected GameValue velocityX = new GameValue();
     protected GameValue velocityY = new GameValue();
     protected boolean moving = false;
+    protected boolean teleported = false;
+    protected long lastTeleport;
 
     protected Direction direction = Direction.NONE;
 
-    protected long lastTime;
+    private long lastTime;
 
     public double getVelocityX() { return velocityX.getLogical(); }
     public double getVelocityY() { return velocityY.getLogical(); }
@@ -40,7 +42,7 @@ public class MoveableObject extends FieldObject {
 
     public Direction getDirection() { return direction; }
 
-    public MoveableObject(GameWindow window, double velocity, double velocityDelta, double xpos, double ypos) {
+    public MovableObject(GameWindow window, double velocity, double velocityDelta, double xpos, double ypos) {
         super(window, xpos, ypos);
         lastTime = System.nanoTime();
         velocityValue = velocity;
@@ -51,20 +53,23 @@ public class MoveableObject extends FieldObject {
     public boolean isMoving() {
         return moving;
     }
+    public boolean isTeleported() {
+        return teleported;
+    }
 
     /**
-     * Moves the object according to its current speed.
-     * Requires the object to update lastTime to keep the time of the previous update() call.
-     * @param now
+     * Moves the object according to its current speed and previous move() call time.
+     * @param now Current time
      */
     protected void move(long now) {
         double delta = (double) (now - lastTime) / 1000000000L;
         shiftX(getVelocityX() * delta);
         shiftY(getVelocityY() * delta);
+        lastTime = now;
     }
 
     protected void checkBorders() {
-        Direction direction = MovementChecker.collidesWithBorders(this);
+        Direction direction = CollisionHandler.collidesWithBorders(this);
         if (direction == Direction.DOWN || direction == Direction.UP)
             setVelocityY(0);
         if (direction == Direction.LEFT || direction == Direction.RIGHT)
@@ -115,5 +120,12 @@ public class MoveableObject extends FieldObject {
         moving = false;
         setVelocityX(0);
         setVelocityY(0);
+    }
+
+    public void teleport(double x, double y) {
+        lastTeleport = System.nanoTime();
+        teleported = true;
+        setX(x);
+        setY(y);
     }
 }

@@ -4,7 +4,7 @@ import GameLogic.AnimatedSprite;
 import GameLogic.GameObjects.Bonuses.Bonus;
 import GameLogic.GameObjects.Bonuses.TemporaryBonus;
 import GameLogic.GameWindow;
-import GameLogic.MovementChecker;
+import GameLogic.CollisionHandler;
 import GameLogic.SpriteManager;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -18,7 +18,7 @@ import static GameLogic.Config.*;
  * Created by Max on 05.06.2015.
  */
 
-public class Player extends MoveableObject {
+public class Player extends MovableObject {
     PlayerType type;
 
     private int currentBombCount = 0;
@@ -46,12 +46,11 @@ public class Player extends MoveableObject {
     private boolean canKick = false;
     private boolean bombSpawn = false;
 
-    // TODO: make different sprites for different players
-    AnimatedSprite frontSprite = new AnimatedSprite(SpriteManager::getPlayerFront, WALK_DURATION);
-    AnimatedSprite backSprite = new AnimatedSprite(SpriteManager::getPlayerBack, WALK_DURATION);
-    AnimatedSprite leftSprite = new AnimatedSprite(SpriteManager::getPlayerLeft, WALK_DURATION);
-    AnimatedSprite rightSprite = new AnimatedSprite(SpriteManager::getPlayerRight, WALK_DURATION);
-    private Image currentSprite = SpriteManager.getPlayerFront(0);
+    AnimatedSprite frontSprite;
+    AnimatedSprite backSprite;
+    AnimatedSprite leftSprite;
+    AnimatedSprite rightSprite;
+    private Image currentSprite;
 
     private static final double HALF_GRAPHIC_HEIGHT = PLAYER_HEIGHT * GLRATIO / 2;
 
@@ -141,6 +140,12 @@ public class Player extends MoveableObject {
 
     public Player(GameWindow window, PlayerType playerType, double xpos, double ypos) {
         super(window, PLAYER_VELOCITY, PLAYER_VELOCITY_DELTA, xpos, ypos);
+        boolean inversed = playerType == PlayerType.PLAYER2;
+        currentSprite = SpriteManager.getPlayerFront(0, inversed);
+        frontSprite = new AnimatedSprite(x -> SpriteManager.getPlayerFront(x, inversed), WALK_DURATION);
+        backSprite = new AnimatedSprite(x -> SpriteManager.getPlayerBack(x, inversed), WALK_DURATION);
+        leftSprite = new AnimatedSprite(x -> SpriteManager.getPlayerLeft(x, inversed), WALK_DURATION);
+        rightSprite = new AnimatedSprite(x -> SpriteManager.getPlayerRight(x, inversed), WALK_DURATION);
         sizeY.setValue(PLAYER_WIDTH);
         sizeX.setValue(PLAYER_WIDTH);
         type = playerType;
@@ -150,10 +155,10 @@ public class Player extends MoveableObject {
     public void update(long now) {
         move(now);
         considerBonuses(now);
+        if (now - lastTeleport > TELEPORT_LAG)
+            teleported = false;
 
-        for (Bonus bonus : bonusesToRemove) {
-            bonuses.remove(bonus);
-        }
+        bonusesToRemove.forEach(bonuses::remove);
         bonusesToRemove.clear();
 
         if (bombSpawn)
@@ -175,7 +180,6 @@ public class Player extends MoveableObject {
                     break;
             }
         }
-        lastTime = now;
     }
 
     @Override
@@ -213,11 +217,11 @@ public class Player extends MoveableObject {
         checkBorders();
         for (Bomb bomb : gameWindow.getBombs()) {
             if (collides(bomb)) {
-                if (canKick && isMoving() && MovementChecker.orientation(this, bomb) == direction) {
-                    if (!MovementChecker.collidesStatic(this, bomb))
+                if (canKick && isMoving() && CollisionHandler.orientation(this, bomb) == direction) {
+                    if (!CollisionHandler.collidesStatic(this, bomb))
                         bomb.kick(direction);
                 }
-                MovementChecker.tryStop(bomb, this, false);
+                CollisionHandler.tryStop(bomb, this, false);
             }
         }
         for (Bonus bonus : gameWindow.getBonuses()) {
@@ -232,7 +236,7 @@ public class Player extends MoveableObject {
     public boolean putBomb() {
         if (currentBombCount < getMaxBombCount()) {
             Bomb bomb = new Bomb(gameWindow, this, getX(), getY() + BOMB_SHIFT);
-            if (!MovementChecker.willCollideAny(bomb, gameWindow.getBombs())) {
+            if (!CollisionHandler.willCollideAny(bomb, gameWindow.getBombs())) {
                 currentBombCount++;
                 gameWindow.addObject(bomb);
                 bombs.add(bomb);
@@ -273,12 +277,15 @@ public class Player extends MoveableObject {
 
     @Override
     public void explode() {
+        gameWindow.playerDied(type);
         Die();
     }
 
     @Override
     public void teleport(double x, double y) {
         // TODO: add teleportation animation and delay
+        lastTeleport = System.nanoTime();
+        teleported = true;
         setX(x);
         setY(y);
     }

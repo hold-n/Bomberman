@@ -36,9 +36,10 @@ public class GameWindow {
     private final GraphicsContext headerContext;
     private final GraphicsContext fieldContext;
 
-    private MapLoader loader = new TestMapLoader();
+    private MapLoader loader;
 
     private final KeyCode exitKey = KeyCode.F10;
+    private final KeyCode saveKey = KeyCode.F2;
 
     private final ArrayList<KeyCode> buttonCodes = new ArrayList<KeyCode>();
 
@@ -77,11 +78,11 @@ public class GameWindow {
         @Override
         public void handle(long now) {
             if (!buttonCodes.contains(exitKey)) {
-                for (FieldObject obj : toAddContainer)
-                    addFromTemp(obj);
+                if (buttonCodes.contains(saveKey))
+                    save();
+                toAddContainer.forEach(GameWindow.this::addFromTemp);
                 toAddContainer.clear();
-                for (FieldObject obj : toRemoveContainver)
-                    removeFromTemp(obj);
+                toRemoveContainver.forEach(GameWindow.this::removeFromTemp);
                 toRemoveContainver.clear();
 
                 fieldContext.clearRect(0, 0, FIELD_WIDTH, FIELD_HEIGHT);
@@ -159,8 +160,7 @@ public class GameWindow {
     }
 
     private void handleCollisions() {
-        for (FieldObject obj : objects)
-            obj.checkCollisions();
+        objects.forEach(GameLogic.GameObjects.FieldObject::checkCollisions);
     }
 
     private void drawObjects() {
@@ -236,11 +236,8 @@ public class GameWindow {
     }
 
     public GameWindow(Game thisGame, MapLoader thisLoader) {
-        this(thisGame);
         loader = thisLoader;
-    }
 
-    public GameWindow(Game thisGame) {
         game = thisGame;
         game.getStage().hide();
 
@@ -262,11 +259,13 @@ public class GameWindow {
         setHandlers();
     }
 
+    public GameWindow(Game thisGame) {
+        this(thisGame, new TestMapLoader());
+    }
+
     private void loadFieldObjects() {
         loadBackground();
-        // TODO: load players and creeps according to the map
-        addObject(new Player(this, PlayerType.PLAYER1, 200, 200));
-        addObject(new Player(this, PlayerType.PLAYER2, 300, 200));
+        loader.loadMap(this);
     }
 
     private void loadBackground() {
@@ -275,7 +274,6 @@ public class GameWindow {
                 Tile tile = new BackgroundTile(this, j*TILE_LOGICAL_SIZE, i*TILE_LOGICAL_SIZE);
                 addObject(tile);
             }
-        loader.loadMap(this);
     }
 
     private void loadHeaderObjects() {
@@ -284,7 +282,7 @@ public class GameWindow {
         headerContext.setFont(font);
         headerContext.setStroke(Color.WHITE);
         headerObjects.add(new HeaderTimer(40, (int)(HEADER_HEIGHT * 0.77)));
-        // TODO: add save and exit labels, timer
+        // TODO: add save and exit labels, save notification
     }
 
     private void setHandlers() {
@@ -321,6 +319,10 @@ public class GameWindow {
             game.exit();
         }
         // TODO: maybe return a score or something
+    }
+
+    public void playerDied(PlayerType type) {
+        // TODO
     }
 
     public void save() {

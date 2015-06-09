@@ -15,6 +15,8 @@ import static GameLogic.Config.BONUS_SIZE;
  */
 
 public abstract class Bonus extends FieldObject {
+    private static Random random = new Random();
+
     public Bonus(GameWindow window, double xpos, double ypos) {
         super(window, xpos, ypos);
         setSizeX(BONUS_SIZE);
@@ -42,7 +44,6 @@ public abstract class Bonus extends FieldObject {
     }
 
     public static Bonus getRandomBonus(GameWindow window, double x, double y) {
-        Random random = new Random(System.nanoTime());
         switch (random.nextInt(7)) {
             case 1:
                 return new BombBonus(window, x, y);

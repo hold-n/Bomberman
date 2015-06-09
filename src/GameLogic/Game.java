@@ -1,10 +1,12 @@
 package GameLogic;
 
 import Controllers.MainMenuController;
+import GameLogic.MapLoaders.FileLoader;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -35,6 +37,7 @@ public class Game {
     }
 
     public void run() throws IOException {
+        getStage().getIcons().add(new Image(FAVICON, 32, 32, false, true));
         runMainMenu();
     }
 
@@ -57,7 +60,7 @@ public class Game {
     }
 
     public void launchGameLoop() {
-        gameWindow = new GameWindow(this);
+        gameWindow = new GameWindow(this, new FileLoader());
         stage.setScene(gameWindow.getScene());
         gameWindow.run();
     }

@@ -3,12 +3,10 @@ package GameLogic.GameObjects;
 import GameLogic.AnimatedSprite;
 import GameLogic.GameObjects.Bonuses.Bonus;
 import GameLogic.GameWindow;
-import GameLogic.MovementChecker;
+import GameLogic.CollisionHandler;
 import GameLogic.SpriteManager;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
-
-import java.sql.SQLSyntaxErrorException;
 
 import static GameLogic.Config.*;
 
@@ -16,7 +14,7 @@ import static GameLogic.Config.*;
  * Created by Max on 05.06.2015.
  */
 
-public class Bomb extends MoveableObject {
+public class Bomb extends MovableObject {
     private final Player player;
     private final int length;
     private final long lifeTime;
@@ -45,7 +43,8 @@ public class Bomb extends MoveableObject {
     @Override
     public void update(long now) {
         move(now);
-        lastTime = now;
+        if (now - lastTeleport > TELEPORT_LAG)
+            teleported = false;
         if (now - creationTime > lifeTime)
             explode();
         currentSprite = sprite.getSprite(now);
@@ -56,7 +55,10 @@ public class Bomb extends MoveableObject {
         checkBorders();
         for (Player player : gameWindow.getPlayers())
             if (collides(player))
-                MovementChecker.tryStop(player, this, true);
+                CollisionHandler.tryStop(player, this, true);
+        for (Bomb bomb : gameWindow.getBombs())
+            if (collides(bomb))
+                CollisionHandler.tryStop(bomb, this, false);
         for (Bonus bonus : gameWindow.getBonuses())
             if (collides(bonus))
                 bonus.removeFromField();

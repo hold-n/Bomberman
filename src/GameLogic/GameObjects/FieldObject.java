@@ -2,7 +2,6 @@ package GameLogic.GameObjects;
 
 import GameLogic.GameValue;
 import GameLogic.GameWindow;
-import GameLogic.MovementChecker;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -103,9 +102,4 @@ public abstract class FieldObject {
      * Method called by explosion objects so as to try to destroy objects it touches on creation
      */
     public void explode() {}
-
-    public void teleport(double x, double y) {
-        setX(x);
-        setY(y);
-    }
 }

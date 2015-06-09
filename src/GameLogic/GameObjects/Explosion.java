@@ -73,11 +73,13 @@ public class Explosion extends FieldObject {
     }
 
     private boolean stops(double x, double y, FieldObject obj) {
-        if (obj.getBoundary() != null)
-        if (MovementChecker.collidesStatic(new ExplosionUnit(gameWindow, x, y), obj, EXPLOSION_OVERLAP)) {
-            obj.explode();
-            return (!(obj instanceof Player));
-        }
+        if (obj.getBoundary() != null) {
+            if (!gameWindow.toBeDeleted(obj))
+                if (CollisionHandler.collidesStatic(new ExplosionUnit(gameWindow, x, y), obj, EXPLOSION_OVERLAP)) {
+                    obj.explode();
+                    return (!(obj instanceof Player));
+                }
+            }
         return false;
     }
 
@@ -115,7 +117,7 @@ public class Explosion extends FieldObject {
             return false;
         for (int i = 0; i < unitsXs.size(); i++) {
             ExplosionUnit unit = new ExplosionUnit(gameWindow, unitsXs.get(i).getLogical(), unitsYs.get(i).getLogical());
-            return MovementChecker.collidesStatic(unit, other);
+            return CollisionHandler.collidesStatic(unit, other);
         }
         return false;
     }

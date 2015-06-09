@@ -98,7 +98,13 @@ public final class Config {
             Long.valueOf(properties.getProperty("bomb.life.time"));
     public static final long TEMP_EFFECT_DURATION =
             Long.valueOf(properties.getProperty("temp.effect.duration"));
+    public static final long TELEPORT_LAG =
+            Long.valueOf(properties.getProperty("teleport.lag"));
 
+    public static final String MAP1 =
+            properties.getProperty("map1");
+    public static final String FAVICON =
+            properties.getProperty("favicon");
     public static final String HEADER_IMAGE =
             properties.getProperty("header.image");
     public static final String BACKGROUND_TILE_URL =
