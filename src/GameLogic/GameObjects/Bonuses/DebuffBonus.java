@@ -37,6 +37,10 @@ public class DebuffBonus extends TemporaryBonus {
                     break;
                 case DECREASE_SPEED:
                     player.setUseTempVelocityValue(false);
+                    break;
+                case FAST_EXPLOSION:
+                    player.setUseTempBombLifeTime(false);
+                    break;
             }
         }
     }
@@ -58,9 +62,13 @@ public class DebuffBonus extends TemporaryBonus {
             case 2:
                 effect = TemporaryEffect.BOMB_SPAWN;
                 player.setBombSpawn(true);
+            case 3:
+                effect = TemporaryEffect.FAST_EXPLOSION;
+                player.setUseTempBombLifeTime(true);
+                player.setTempBombLifeTime((int)(BOMB_LIFE_TIME * 0.4));
             default:
                 effect = TemporaryEffect.DECREASE_SPEED;
-                player.setTempVelocityValue(PLAYER_VELOCITY - PLAYER_VELOCITY_DELTA);
+                player.setTempVelocityValue(PLAYER_VELOCITY - 2*PLAYER_VELOCITY_DELTA);
                 player.setUseTempVelocityValue(true);
         }
     }

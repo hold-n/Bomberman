@@ -1,6 +1,7 @@
 package GameLogic.GameObjects.Tiles;
 
 import GameLogic.GameObjects.FieldObject;
+import GameLogic.GameObjects.MoveableObject;
 import GameLogic.GameObjects.Player;
 import GameLogic.GameWindow;
 import GameLogic.MovementChecker;
@@ -17,10 +18,11 @@ public abstract class ImpassableTile extends Tile {
 
     @Override
     public void effect(FieldObject obj) {
-        // TODO: add creep support
-        if (obj instanceof Player)
-            MovementChecker.tryStop(obj, this, true);
-        else
-            MovementChecker.tryStop(obj, this, false);
+        if (obj instanceof MoveableObject) {
+            if (obj instanceof Player)
+                MovementChecker.tryStop((Player)obj, this, true);
+            else
+                MovementChecker.tryStop((MoveableObject)obj, this, false);
+        }
     }
 }

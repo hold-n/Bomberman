@@ -115,13 +115,13 @@ public class GameWindow {
             for (KeyCode code : buttonCodes) {
                 if (moveControls1.contains(code)) {
                     if (code == moveControls1.get(0))
-                        player1.walkByY(false, now);
+                        player1.moveByY(false, now);
                     if (code == moveControls1.get(1))
-                        player1.walkByY(true, now);
+                        player1.moveByY(true, now);
                     if (code == moveControls1.get(2))
-                        player1.walkByX(false, now);
+                        player1.moveByX(false, now);
                     if (code == moveControls1.get(3))
-                        player1.walkByX(true, now);
+                        player1.moveByX(true, now);
                     walks = true;
                 }
             }
@@ -136,13 +136,13 @@ public class GameWindow {
             for (KeyCode code : buttonCodes) {
                 if (moveControls2.contains(code)) {
                     if (code == moveControls2.get(0))
-                        player2.walkByY(false, now);
+                        player2.moveByY(false, now);
                     if (code == moveControls2.get(1))
-                        player2.walkByY(true, now);
+                        player2.moveByY(true, now);
                     if (code == moveControls2.get(2))
-                        player2.walkByX(false, now);
+                        player2.moveByX(false, now);
                     if (code == moveControls2.get(3))
-                        player2.walkByX(true, now);
+                        player2.moveByX(true, now);
                     walks = true;
                 }
             }

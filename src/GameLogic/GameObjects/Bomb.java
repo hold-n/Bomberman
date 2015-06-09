@@ -8,13 +8,15 @@ import GameLogic.SpriteManager;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 
+import java.sql.SQLSyntaxErrorException;
+
 import static GameLogic.Config.*;
 
 /**
  * Created by Max on 05.06.2015.
  */
 
-public class Bomb extends FieldObject {
+public class Bomb extends MoveableObject {
     private final Player player;
     private final int length;
     private final long lifeTime;
@@ -22,9 +24,7 @@ public class Bomb extends FieldObject {
     private Image currentSprite = SpriteManager.getBomb(0);
 
     public Bomb(GameWindow window, Player thisPlayer, double xpos, double ypos) {
-        super(window, xpos, ypos);
-        creationTime = System.nanoTime();
-        lastTime = creationTime;
+        super(window, BOMB_VELOCITY, 0, xpos, ypos);
         player = thisPlayer;
         length = player.getExplosionLength();
         lifeTime = player.getBombLifeTime();
@@ -80,6 +80,19 @@ public class Bomb extends FieldObject {
     }
 
     public void kick(Direction direction) {
-        // TODO
+        long now = System.nanoTime();
+        switch (direction) {
+            case UP:
+                moveByY(false, now);
+                return;
+            case DOWN:
+                moveByY(true, now);
+                return;
+            case LEFT:
+                moveByX(false, now);
+                return;
+            case RIGHT:
+                moveByX(true, now);
+        }
     }
 }

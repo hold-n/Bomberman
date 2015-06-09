@@ -43,7 +43,7 @@ public abstract class Bonus extends FieldObject {
 
     public static Bonus getRandomBonus(GameWindow window, double x, double y) {
         Random random = new Random(System.nanoTime());
-        switch (random.nextInt(6)) {
+        switch (random.nextInt(7)) {
             case 1:
                 return new BombBonus(window, x, y);
             case 2:
@@ -51,10 +51,9 @@ public abstract class Bonus extends FieldObject {
             case 3:
                 return new KickBonus(window, x, y);
             case 4:
-                return new DebuffBonus(window, x, y);
-            case 5:
                 return new SpeedBonus(window, x, y);
+            default:
+                return new DebuffBonus(window, x, y);
         }
-        return null;
     }
 }

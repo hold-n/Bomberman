@@ -2,6 +2,7 @@ package GameLogic;
 
 import GameLogic.GameObjects.Direction;
 import GameLogic.GameObjects.FieldObject;
+import GameLogic.GameObjects.MoveableObject;
 import GameLogic.GameObjects.Player;
 
 import static GameLogic.Config.*;
@@ -10,10 +11,10 @@ import static GameLogic.Config.*;
  * Created by Max on 09.06.2015.
  */
 
-class TempObject extends FieldObject {
+class TempObject extends MoveableObject {
 
     public TempObject(GameWindow window, double xpos, double ypos) {
-        super(window, xpos, ypos);
+        super(window, xpos, 0, 0, ypos);
     }
 }
 
@@ -25,7 +26,7 @@ public class MovementChecker {
      * @param obj The moving object.
      * @return Direction of the border relative to the object or NONE, if object should not interact with borders
      */
-    public static Direction collidesWithBorders(FieldObject obj) {
+    public static Direction collidesWithBorders(MoveableObject obj) {
         if (obj.getBoundary() == null)
             return Direction.NONE;
         if (obj.getX() < 0 && obj.getVelocityX() < 0)
@@ -46,7 +47,7 @@ public class MovementChecker {
      * @param toCheck Object to check for interaction
      * @return The direction of the object to check relative to the moving one or NONE, if there should be no interactions
      */
-    public static Direction collidesOnMovement(FieldObject moving, FieldObject toCheck) {
+    public static Direction collidesOnMovement(MoveableObject moving, FieldObject toCheck) {
         if (moving.getBoundary() == null || toCheck.getBoundary() == null)
             return Direction.NONE;
         double deltaX = moving.getX() - toCheck.getX();
@@ -103,7 +104,8 @@ public class MovementChecker {
      * @param direction The direction in which the object wants to move.
      * @return Whether the object can move in the requested direction.
      */
-    public static boolean canMove(FieldObject object, Direction direction) {
+    public static boolean canMove(MoveableObject object, Direction direction) {
+        // TODO: fix
         boolean result = true;
         Direction walkDirection;
         if (!object.isMoving()) {
@@ -117,13 +119,13 @@ public class MovementChecker {
         temp.setSizeX(object.getSizeX());
         temp.setSizeY(object.getSizeY());
         if (walkDirection == Direction.RIGHT)
-            temp.setVelocityX(1);
+            temp.moveByX(true, 0);
         if (walkDirection == Direction.LEFT)
-            temp.setVelocityX(-1);
+            temp.moveByX(false, 0);
         if (walkDirection == Direction.UP)
-            temp.setVelocityY(-1);
+            temp.moveByY(false, 0);
         if (walkDirection == Direction.DOWN)
-            temp.setVelocityY(1);
+            temp.moveByY(true, 0);
 
         for (FieldObject fieldObject : object.getGameWindow().getObjects()) {
             if (fieldObject.collides(object)) {
@@ -152,9 +154,10 @@ public class MovementChecker {
      * @param toCheck An object to check for collision with.
      * @return Whether the object has been stopped
      */
-    public static boolean tryStop(FieldObject moving, FieldObject toCheck, boolean strafe) {
+    public static boolean tryStop(MoveableObject moving, FieldObject toCheck, boolean strafe) {
         Direction direction = MovementChecker.collidesOnMovement(moving, toCheck);
         if ( moving.isMoving() && (direction != Direction.NONE) ) {
+            moving.stop();
             if (!strafe)
                 return true;
 
@@ -162,7 +165,7 @@ public class MovementChecker {
             Direction strafeDirection;
             double strafeStep;
             if (direction == Direction.UP || direction == Direction.DOWN) {
-                moving.setVelocityY(0);
+
                 delta = moving.getX() - toCheck.getX();
                 overlap = delta > 0 ? toCheck.getSizeX() - delta : moving.getSizeX() + delta;
                 strafeDirection = delta > 0 ? Direction.RIGHT : Direction.LEFT;
@@ -173,7 +176,6 @@ public class MovementChecker {
                 return true;
             }
             if (direction == Direction.LEFT || direction == Direction.RIGHT) {
-                moving.setVelocityX(0);
                 delta = moving.getY() - toCheck.getY();
                 overlap = delta > 0 ? toCheck.getSizeY() - delta : moving.getSizeY() + delta;
                 strafeDirection = delta > 0 ? Direction.DOWN : Direction.UP;
@@ -185,5 +187,31 @@ public class MovementChecker {
             }
         }
         return false;
+    }
+
+    /**
+     * Finds the relative position of two objects. Only works properly is the two objects do not intersect much.
+     * @param a The first object.
+     * @param b The second object.
+     * @return Position of the first object relative to the second or none, if the two objects are not on the same line.
+     */
+    public static Direction orientation(FieldObject a, FieldObject b) {
+        double deltaX = a.getX() - b.getX();
+        double deltaY = a.getY() - b.getY();
+        double overlapX = deltaX > 0 ? b.getSizeX() - deltaX : a.getSizeX() + deltaX;
+        double overlapY = deltaY > 0 ? b.getSizeY() - deltaY : a.getSizeY() + deltaY;
+        if (overlapX < MAX_OVERLAP && overlapY < MAX_OVERLAP) {
+            return Direction.NONE;
+        }
+        else {
+            if (overlapX > MAX_OVERLAP) {
+                if (deltaY > 0)
+                    return Direction.UP;
+                return Direction.DOWN;
+            }
+            if (deltaX > 0)
+                return Direction.LEFT;
+            return Direction.DOWN.RIGHT;
+        }
     }
 }

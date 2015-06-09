@@ -9,7 +9,7 @@ import GameLogic.SpriteManager;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
+
 import java.util.ArrayList;
 
 import static GameLogic.Config.*;
@@ -18,7 +18,7 @@ import static GameLogic.Config.*;
  * Created by Max on 05.06.2015.
  */
 
-public class Player extends FieldObject {
+public class Player extends MoveableObject {
     PlayerType type;
 
     private int currentBombCount = 0;
@@ -34,15 +34,13 @@ public class Player extends FieldObject {
     private int tempExplosionLength = INITIAL_EXPLOSION_LENGTH;
     private boolean useTempExplosionLength = false;
 
-    private double velocityValue = PLAYER_VELOCITY;
     private double tempVelocityValue = PLAYER_VELOCITY;
     private boolean useTempVelocityValue = false;
 
     private final ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
-    private final ArrayList<Bonus> bonusesToDelete = new ArrayList<Bonus>();
+    private final ArrayList<Bonus> bonusesToRemove = new ArrayList<Bonus>();
     private final ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 
-    private boolean walking = false;
     private boolean isDead = false;
     private long deathTime;
     private boolean canKick = false;
@@ -122,23 +120,16 @@ public class Player extends FieldObject {
             explosionLength--;
     }
 
+    @Override
     public double getVelocityValue() {
-        return velocityValue;
+        return useTempVelocityValue ? tempVelocityValue : velocityValue;
     }
-    public void setVelocityValue(double value) {
-        velocityValue = value;
-    }
+
     public void setTempVelocityValue(double value) {
         tempVelocityValue = value;
     }
     public void setUseTempVelocityValue(boolean value) {
         useTempVelocityValue = value;
-    }
-    public void increaseVelocity() {
-        velocityValue += PLAYER_VELOCITY_DELTA;
-    }
-    public void decreaseVelocity() {
-        velocityValue -= PLAYER_VELOCITY_DELTA;
     }
 
     public void setKick(boolean value) {
@@ -149,12 +140,10 @@ public class Player extends FieldObject {
     }
 
     public Player(GameWindow window, PlayerType playerType, double xpos, double ypos) {
-        super(window, xpos, ypos);
+        super(window, PLAYER_VELOCITY, PLAYER_VELOCITY_DELTA, xpos, ypos);
         sizeY.setValue(PLAYER_WIDTH);
         sizeX.setValue(PLAYER_WIDTH);
         type = playerType;
-        lastTime = System.nanoTime();
-        direction = Direction.DOWN;
     }
 
     @Override
@@ -162,17 +151,15 @@ public class Player extends FieldObject {
         move(now);
         considerBonuses(now);
 
-        for (Bonus bonus : bonusesToDelete) {
+        for (Bonus bonus : bonusesToRemove) {
             bonuses.remove(bonus);
         }
-        bonusesToDelete.clear();
+        bonusesToRemove.clear();
 
-        // TODO: manage temporary bonuses
         if (bombSpawn)
             putBomb();
 
-        walking = isMoving();
-        if (walking) {
+        if (moving) {
             switch (direction) {
                 case UP:
                     currentSprite = backSprite.getSprite(now);
@@ -191,52 +178,34 @@ public class Player extends FieldObject {
         lastTime = now;
     }
 
+    @Override
+    public void startAnimation(long now) {
+        switch (direction) {
+            case UP:
+                backSprite.setStart(now);
+                return;
+            case DOWN:
+                frontSprite.setStart(now);
+                return;
+            case LEFT:
+                leftSprite.setStart(now);
+                return;
+            case RIGHT:
+                rightSprite.setStart(now);
+                return;
+        }
+    }
+
     private void considerBonuses(long now) {
         for (Bonus bonus : bonuses) {
             if (bonus instanceof TemporaryBonus) {
                 TemporaryBonus tempBonus = (TemporaryBonus)bonus;
                 if (now - tempBonus.getPickUpTime() > tempBonus.getDuration()) {
                     bonus.discard(this);
-                    bonusesToDelete.add(bonus);
+                    bonusesToRemove.add(bonus);
                 }
             }
         }
-    }
-
-
-    public void walkByX(boolean positive, long now) {
-        if (positive) {
-            if (!walking)
-                rightSprite.setStart(now);
-            direction = Direction.RIGHT;
-        }
-        else {
-            if (!walking)
-                leftSprite.setStart(now);
-            direction = Direction.LEFT;
-        }
-        setVelocityX(positive ? getVelocityValue() : -getVelocityValue());
-        setVelocityY(0);
-    }
-
-    public void walkByY(boolean positive, long now) {
-        if (positive) {
-            if (!walking)
-                frontSprite.setStart(now);
-            direction = Direction.DOWN;
-        }
-        else {
-            if (!walking)
-                backSprite.setStart(now);
-            direction = Direction.UP;
-        }
-        setVelocityY(positive ? getVelocityValue() : -getVelocityValue());
-        setVelocityX(0);
-    }
-
-    public void stop() {
-        setVelocityX(0);
-        setVelocityY(0);
     }
 
     @Override
@@ -244,13 +213,10 @@ public class Player extends FieldObject {
         checkBorders();
         for (Bomb bomb : gameWindow.getBombs()) {
             if (collides(bomb)) {
-//                if (canKick && bomb.isMoving()) {
-////                TODO: kicking in the right direction
-////                bomb.kick();
-//                }
-//                else {
-//                    MovementChecker.tryStop(bomb, this);
-//                }
+                if (canKick && isMoving() && MovementChecker.orientation(this, bomb) == direction) {
+                    if (!MovementChecker.collidesStatic(this, bomb))
+                        bomb.kick(direction);
+                }
                 MovementChecker.tryStop(bomb, this, false);
             }
         }

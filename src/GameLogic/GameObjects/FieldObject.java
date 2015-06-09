@@ -16,14 +16,9 @@ public abstract class FieldObject {
     protected GameValue y = new GameValue();
     protected GameValue sizeX = new GameValue();
     protected GameValue sizeY = new GameValue();
-    protected GameValue velocityX = new GameValue();
-    protected GameValue velocityY = new GameValue();
-
-    protected Direction direction = Direction.NONE;
 
     protected GameWindow gameWindow;
     protected long creationTime;
-    protected long lastTime;
 
     public GameWindow getGameWindow() {
         return gameWindow;
@@ -36,9 +31,6 @@ public abstract class FieldObject {
     public double getY() { return y.getLogical(); }
     public double getSizeX() { return sizeX.getLogical(); }
     public double getSizeY() { return sizeY.getLogical(); }
-    public double getVelocityX() { return velocityX.getLogical(); }
-    public double getVelocityY() { return velocityY.getLogical(); }
-    public Direction getDirection() { return direction; }
 
     public void setX(double value) { x.setValue(value); }
     public void setY(double value) { y.setValue(value); }
@@ -46,18 +38,13 @@ public abstract class FieldObject {
     public void shiftY(double value) { y.add(value); }
     public void setSizeX(double value) { sizeX.setValue(value); }
     public void setSizeY(double value) { sizeY.setValue(value); }
-    public void setVelocityX(double value) { velocityX.setValue(value); }
-    public void setVelocityY(double value) { velocityY.setValue(value); }
+
 
     public FieldObject(GameWindow window, double xpos, double ypos) {
         gameWindow = window;
         x.setValue(xpos);
         y.setValue(ypos);
         creationTime = System.nanoTime();
-    }
-
-    public boolean isMoving() {
-        return getVelocityX() != 0 || getVelocityY() != 0;
     }
 
     /**
@@ -96,30 +83,13 @@ public abstract class FieldObject {
      */
     public void update(long now) {}
 
-    /**
-     * Moves the object according to its current speed.
-     * Requires the object to update lastTime to keep the time of the previous update() call.
-     * @param now
-     */
-    protected void move(long now) {
-        double delta = (double) (now - lastTime) / 1000000000L;
-        shiftX(getVelocityX() * delta);
-        shiftY(getVelocityY() * delta);
-    }
+
 
     /**
      * Called on every iteration of the game loop so the object can check any other objects for collisions.
      * For better performance, only active objects override this method.
      */
     public void checkCollisions() {}
-
-    protected void checkBorders() {
-        Direction direction = MovementChecker.collidesWithBorders(this);
-        if (direction == Direction.DOWN || direction == Direction.UP)
-            setVelocityY(0);
-        if (direction == Direction.LEFT || direction == Direction.RIGHT)
-            setVelocityX(0);
-    }
 
     /**
      * Called on every iteration of the game loop so the object can draw itself.
