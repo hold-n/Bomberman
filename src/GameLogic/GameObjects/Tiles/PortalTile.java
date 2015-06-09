@@ -1,5 +1,6 @@
 package GameLogic.GameObjects.Tiles;
 
+import GameLogic.GameObjects.FieldObject;
 import GameLogic.GameObjects.Player;
 import GameLogic.GameValue;
 import GameLogic.GameWindow;
@@ -32,7 +33,7 @@ public class PortalTile extends Tile {
     }
 
     @Override
-    public void effect(Player player) {
-        player.teleport(destinaitonX, destinationY);
+    public void effect(FieldObject obj) {
+        obj.teleport(destinaitonX, destinationY);
     }
 }

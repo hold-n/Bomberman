@@ -3,6 +3,7 @@ package GameLogic.GameObjects.Tiles;
 import GameLogic.GameObjects.FieldObject;
 import GameLogic.GameObjects.Player;
 import GameLogic.GameWindow;
+import GameLogic.MovementChecker;
 import javafx.geometry.Rectangle2D;
 
 /**
@@ -15,7 +16,11 @@ public abstract class ImpassableTile extends Tile {
     }
 
     @Override
-    public void effect(Player player) {
-        player.tryStop(this);
+    public void effect(FieldObject obj) {
+        // TODO: add creep support
+        if (obj instanceof Player)
+            MovementChecker.tryStop(obj, this, true);
+        else
+            MovementChecker.tryStop(obj, this, false);
     }
 }

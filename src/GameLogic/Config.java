@@ -51,8 +51,8 @@ public final class Config {
             Double.valueOf(properties.getProperty("bonus.size"));
     public static final double BOMB_SIZE =
             Double.valueOf(properties.getProperty("bomb.size"));
-    public static final double BOMB_SPEED =
-            Double.valueOf(properties.getProperty("bomb.speed"));
+    public static final double BOMB_VELOCITY =
+            Double.valueOf(properties.getProperty("bomb.velocity"));
     public static  final double BOMB_SHIFT =
             Double.valueOf(properties.getProperty("bomb.shift"));
     public static final double EXPLOSION_UNIT_SIZE =
@@ -94,6 +94,8 @@ public final class Config {
             Long.valueOf(properties.getProperty("explosion.duration"));
     public static final long BOMB_LIFE_TIME =
             Long.valueOf(properties.getProperty("bomb.life.time"));
+    public static final long TEMP_EFFECT_DURATION =
+            Long.valueOf(properties.getProperty("temp.effect.duration"));
 
     public static final String HEADER_IMAGE =
             properties.getProperty("header.image");

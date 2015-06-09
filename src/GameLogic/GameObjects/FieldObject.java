@@ -2,6 +2,7 @@ package GameLogic.GameObjects;
 
 import GameLogic.GameValue;
 import GameLogic.GameWindow;
+import GameLogic.MovementChecker;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -20,6 +21,14 @@ public abstract class FieldObject {
 
     protected GameWindow gameWindow;
     protected long creationTime;
+    protected long lastTime;
+
+    public GameWindow getGameWindow() {
+        return gameWindow;
+    }
+    public long getCreationTime() {
+        return creationTime;
+    }
 
     public double getX() { return x.getLogical(); }
     public double getY() { return y.getLogical(); }
@@ -42,6 +51,10 @@ public abstract class FieldObject {
         x.setValue(xpos);
         y.setValue(ypos);
         creationTime = System.nanoTime();
+    }
+
+    public boolean isMoving() {
+        return getVelocityX() != 0 || getVelocityY() != 0;
     }
 
     /**
@@ -81,19 +94,45 @@ public abstract class FieldObject {
     public void update(long now) {}
 
     /**
+     * Moves the object according to its current speed.
+     * Requires the object to update lastTime to keep the time of the previous update() call.
+     * @param now
+     */
+    protected void move(long now) {
+        double delta = (double) (now - lastTime) / 1000000000L;
+        shiftX(getVelocityX() * delta);
+        shiftY(getVelocityY() * delta);
+    }
+
+    /**
      * Called on every iteration of the game loop so the object can check any other objects for collisions.
      * For better performance, only active objects override this method.
      */
     public void checkCollisions() {}
 
+    protected void checkBorders() {
+        Direction direction = MovementChecker.collidesWithBorders(this);
+        if (direction == Direction.DOWN || direction == Direction.UP)
+            setVelocityY(0);
+        if (direction == Direction.LEFT || direction == Direction.RIGHT)
+            setVelocityX(0);
+    }
+
     /**
      * Called on every iteration of the game loop so the object can draw itself.
      * @param context Context to perform drawing on
      */
-    public abstract void draw(GraphicsContext context);
+    public void draw(GraphicsContext context) {
+        context.drawImage(getSprite(), x.getGraphic(), y.getGraphic());
+    }
 
     /**
      * Method called by explosion objects so as to try to destroy objects it touches on creation
      */
     public void explode() {}
+
+    public void teleport(double x, double y) {
+        setX(x);
+        setY(y);
+    }
 }

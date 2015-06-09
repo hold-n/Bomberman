@@ -1,5 +1,6 @@
 package GameLogic.GameObjects.Tiles;
 
+import GameLogic.GameObjects.Bomb;
 import GameLogic.GameObjects.Explosion;
 import GameLogic.GameObjects.FieldObject;
 import GameLogic.GameObjects.Player;
@@ -27,9 +28,15 @@ public abstract class Tile extends FieldObject {
     }
 
     @Override
-    public void draw(GraphicsContext context) {
-        context.drawImage(getSprite(), x.getGraphic(), y.getGraphic());
+    public void checkCollisions() {
+        // TODO: add creep support
+        for (Player player : gameWindow.getPlayers())
+            if (collides(player))
+                effect(player);
+        for (Bomb bomb : gameWindow.getBombs())
+            if (collides(bomb))
+                effect(bomb);
     }
 
-    public void effect(Player player) {}
+    public void effect(FieldObject object) {}
 }

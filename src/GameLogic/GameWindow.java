@@ -55,6 +55,22 @@ public class GameWindow {
 
     private long timerStartTime;
 
+    // Controls: up, down, left, right
+    private static final ArrayList<KeyCode> moveControls1 = new ArrayList<KeyCode>() {{
+        add(KeyCode.UP);
+        add(KeyCode.DOWN);
+        add(KeyCode.LEFT);
+        add(KeyCode.RIGHT);
+    }};
+    private static final KeyCode plantKey1 = KeyCode.SPACE;
+    private static final ArrayList<KeyCode> moveControls2 = new ArrayList<KeyCode>() {{
+        add(KeyCode.W);
+        add(KeyCode.S);
+        add(KeyCode.A);
+        add(KeyCode.D);
+    }};
+    private static final KeyCode plantKey2 = KeyCode.SHIFT;
+
     AnimationTimer mainTimer = new AnimationTimer() {
         @Override
         public void handle(long now) {
@@ -68,8 +84,9 @@ public class GameWindow {
 
                 fieldContext.clearRect(0, 0, FIELD_WIDTH, FIELD_HEIGHT);
                 headerContext.clearRect(0, 0, FIELD_WIDTH, HEADER_HEIGHT);
-                updateObjects(now);
+                handleInput(now);
                 handleCollisions();
+                updateObjects(now);
                 drawObjects();
             }
             else {
@@ -77,6 +94,60 @@ public class GameWindow {
             }
         }
     };
+
+    private void handleInput(long now) {
+        Player player1 = null;
+        Player player2 = null;
+        for (Player player : getPlayers()) {
+            if (player.getType() == PlayerType.PLAYER1)
+                player1 = player;
+            if (player.getType() == PlayerType.PLAYER2)
+                player2 = player;
+        }
+
+        boolean walks;
+        if (player1 != null) {
+            if (buttonCodes.contains(plantKey1))
+                player1.putBomb();
+            walks = false;
+            for (KeyCode code : buttonCodes) {
+                if (moveControls1.contains(code)) {
+                    if (code == moveControls1.get(0))
+                        player1.walkByY(false, now);
+                    if (code == moveControls1.get(1))
+                        player1.walkByY(true, now);
+                    if (code == moveControls1.get(2))
+                        player1.walkByX(false, now);
+                    if (code == moveControls1.get(3))
+                        player1.walkByX(true, now);
+                    walks = true;
+                }
+            }
+            if (!walks)
+                player1.stop();
+        }
+
+        if (player2 != null) {
+            if (buttonCodes.contains(plantKey2))
+                player2.putBomb();
+            walks = false;
+            for (KeyCode code : buttonCodes) {
+                if (moveControls2.contains(code)) {
+                    if (code == moveControls2.get(0))
+                        player2.walkByY(false, now);
+                    if (code == moveControls2.get(1))
+                        player2.walkByY(true, now);
+                    if (code == moveControls2.get(2))
+                        player2.walkByX(false, now);
+                    if (code == moveControls2.get(3))
+                        player2.walkByX(true, now);
+                    walks = true;
+                }
+            }
+            if (!walks)
+                player2.stop();
+        }
+    }
 
     private void updateObjects(long now) {
         for (FieldObject obj : objects)
@@ -91,16 +162,8 @@ public class GameWindow {
     }
 
     private void drawObjects() {
-        for (Tile tile : map)
-            tile.draw(fieldContext);
-        for (Bonus bonus : bonuses)
-            bonus.draw(fieldContext);
-        for (Bomb bomb : bombs)
-            bomb.draw(fieldContext);
-        for (Player player : players)
-            player.draw(fieldContext);
-        for (Explosion explosion : explosions)
-            explosion.draw(fieldContext);
+        for (FieldObject obj : objects)
+            obj.draw(fieldContext);
         for (HeaderObject obj : headerObjects)
             obj.draw(headerContext);
     }

@@ -1,16 +1,13 @@
 package GameLogic.GameObjects.Bonuses;
 
-import GameLogic.GameObjects.Explosion;
 import GameLogic.GameObjects.FieldObject;
 import GameLogic.GameObjects.Player;
 import GameLogic.GameWindow;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.canvas.GraphicsContext;
 
-import java.util.GregorianCalendar;
 import java.util.Random;
 
-import static GameLogic.Config.*;
+import static GameLogic.Config.BONUS_SIZE;
 
 
 /**
@@ -29,8 +26,12 @@ public abstract class Bonus extends FieldObject {
         return new Rectangle2D(getX(), getY(), BONUS_SIZE, BONUS_SIZE);
     }
 
-    public void apply(Player player) {}
-    public void discard(Player player) {}
+    public void apply(Player player) {
+    }
+
+    public void discard(Player player) {
+    }
+
     public boolean isTemporary() {
         return false;
     }
@@ -59,10 +60,5 @@ public abstract class Bonus extends FieldObject {
                 return new SpeedBonus(window, x, y);
         }
         return null;
-    }
-
-    @Override
-    public void draw(GraphicsContext context) {
-        context.drawImage(getSprite(), x.getGraphic(), y.getGraphic());
     }
 }

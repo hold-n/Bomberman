@@ -93,6 +93,15 @@ public class Explosion extends FieldObject {
     }
 
     @Override
+    public void checkCollisions() {
+        for (FieldObject obj : gameWindow.getObjects()) {
+            if (!(obj instanceof Explosion) && collides(obj)) {
+                obj.explode();
+            }
+        }
+    }
+
+    @Override
     public Image getSprite() {
         return currentSprite;
     }
