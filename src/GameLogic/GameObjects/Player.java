@@ -2,6 +2,7 @@ package GameLogic.GameObjects;
 
 import GameLogic.AnimatedSprite;
 import GameLogic.GameObjects.Bonuses.Bonus;
+import GameLogic.GameObjects.Bonuses.TemporaryBonus;
 import GameLogic.GameWindow;
 import GameLogic.MovementChecker;
 import GameLogic.SpriteManager;
@@ -38,6 +39,7 @@ public class Player extends FieldObject {
     private boolean useTempVelocityValue = false;
 
     private final ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
+    private final ArrayList<Bonus> bonusesToDelete = new ArrayList<Bonus>();
     private final ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 
     private boolean walking = false;
@@ -46,7 +48,7 @@ public class Player extends FieldObject {
     private boolean canKick = false;
     private boolean bombSpawn = false;
 
-    Direction walkDirection = Direction.DOWN;
+    // TODO: make different sprites for different players
     AnimatedSprite frontSprite = new AnimatedSprite(SpriteManager::getPlayerFront, WALK_DURATION);
     AnimatedSprite backSprite = new AnimatedSprite(SpriteManager::getPlayerBack, WALK_DURATION);
     AnimatedSprite leftSprite = new AnimatedSprite(SpriteManager::getPlayerLeft, WALK_DURATION);
@@ -54,22 +56,6 @@ public class Player extends FieldObject {
     private Image currentSprite = SpriteManager.getPlayerFront(0);
 
     private static final double HALF_GRAPHIC_HEIGHT = PLAYER_HEIGHT * GLRATIO / 2;
-
-    // Controls: up, down, left, right
-    private static final ArrayList<KeyCode> moveControls1 = new ArrayList<KeyCode>() {{
-            add(KeyCode.UP);
-            add(KeyCode.DOWN);
-            add(KeyCode.LEFT);
-            add(KeyCode.RIGHT);
-    }};
-    private static final KeyCode plantKey1 = KeyCode.SPACE;
-    private static final ArrayList<KeyCode> getMoveControls2 = new ArrayList<KeyCode>() {{
-        add(KeyCode.W);
-        add(KeyCode.S);
-        add(KeyCode.A);
-        add(KeyCode.D);
-    }};
-    private static final KeyCode plantKey2 = KeyCode.SHIFT;
 
     public PlayerType getType() {
         return type;
@@ -162,38 +148,32 @@ public class Player extends FieldObject {
         bombSpawn = value;
     }
 
-    public Direction getWalkDirection() {
-        return walkDirection;
-    }
-    public void setWalkDirection(Direction direction) {
-        walkDirection = direction;
-    }
-
     public Player(GameWindow window, PlayerType playerType, double xpos, double ypos) {
         super(window, xpos, ypos);
         sizeY.setValue(PLAYER_WIDTH);
         sizeX.setValue(PLAYER_WIDTH);
         type = playerType;
         lastTime = System.nanoTime();
+        direction = Direction.DOWN;
     }
 
     @Override
     public void update(long now) {
         move(now);
+        considerBonuses(now);
+
+        for (Bonus bonus : bonusesToDelete) {
+            bonuses.remove(bonus);
+        }
+        bonusesToDelete.clear();
+
         // TODO: manage temporary bonuses
         if (bombSpawn)
             putBomb();
-        else {
-            for (KeyCode code : gameWindow.getCodes()) {
-                if (code == plantKey1) {
-                    putBomb();
-                    break;
-                }
-            }
-        }
+
         walking = isMoving();
         if (walking) {
-            switch (walkDirection) {
+            switch (direction) {
                 case UP:
                     currentSprite = backSprite.getSprite(now);
                     break;
@@ -211,16 +191,29 @@ public class Player extends FieldObject {
         lastTime = now;
     }
 
+    private void considerBonuses(long now) {
+        for (Bonus bonus : bonuses) {
+            if (bonus instanceof TemporaryBonus) {
+                TemporaryBonus tempBonus = (TemporaryBonus)bonus;
+                if (now - tempBonus.getPickUpTime() > tempBonus.getDuration()) {
+                    bonus.discard(this);
+                    bonusesToDelete.add(bonus);
+                }
+            }
+        }
+    }
+
+
     public void walkByX(boolean positive, long now) {
         if (positive) {
             if (!walking)
                 rightSprite.setStart(now);
-            walkDirection = Direction.RIGHT;
+            direction = Direction.RIGHT;
         }
         else {
             if (!walking)
                 leftSprite.setStart(now);
-            walkDirection = Direction.LEFT;
+            direction = Direction.LEFT;
         }
         setVelocityX(positive ? getVelocityValue() : -getVelocityValue());
         setVelocityY(0);
@@ -230,12 +223,12 @@ public class Player extends FieldObject {
         if (positive) {
             if (!walking)
                 frontSprite.setStart(now);
-            walkDirection = Direction.DOWN;
+            direction = Direction.DOWN;
         }
         else {
             if (!walking)
                 backSprite.setStart(now);
-            walkDirection = Direction.UP;
+            direction = Direction.UP;
         }
         setVelocityY(positive ? getVelocityValue() : -getVelocityValue());
         setVelocityX(0);
@@ -265,7 +258,7 @@ public class Player extends FieldObject {
             if (collides(bonus)) {
                 bonus.apply(this);
                 bonuses.add(bonus);
-                bonus.remove();
+                bonus.removeFromField();
             }
         }
     }

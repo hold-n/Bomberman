@@ -57,6 +57,8 @@ public final class Config {
             Double.valueOf(properties.getProperty("bomb.shift"));
     public static final double EXPLOSION_UNIT_SIZE =
             Double.valueOf(properties.getProperty("explosion.unit.size"));
+    public static final double EXPLOSION_OVERLAP =
+            Double.valueOf(properties.getProperty("explosion.overlap"));
     public static final double PLAYER_HEIGHT =
             Double.valueOf(properties.getProperty("player.height"));
     public static final double PLAYER_WIDTH =

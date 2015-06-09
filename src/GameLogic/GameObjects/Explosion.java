@@ -1,8 +1,7 @@
 package GameLogic.GameObjects;
 
-import GameLogic.GameValue;
-import GameLogic.GameWindow;
-import GameLogic.SpriteManager;
+import GameLogic.*;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -13,19 +12,21 @@ import static GameLogic.Config.*;
 /**
  * Created by Max on 06.06.2015.
  */
+
 public class Explosion extends FieldObject {
     private int explosionUnits;
-    private Image currentSprite;
+    AnimatedSprite sprite = new AnimatedSprite(SpriteManager::getExplosion, EXPLOSION_ANIMATION_DURATION);
+    private Image currentSprite = SpriteManager.getExplosion(0);
     private Bomb bomb;
-    private final ArrayList<GameValue> unitsXs = new ArrayList<GameValue>();
-    private final ArrayList<GameValue> unitsYs = new ArrayList<GameValue>();
+    private final ArrayList<GameValue> unitsXs = new ArrayList<>();
+    private final ArrayList<GameValue> unitsYs = new ArrayList<>();
 
-    public Explosion(GameWindow window, Bomb thisBomb, int units, double xpos, double ypos) {
+    public Explosion(GameWindow window, Bomb thisBomb, double xpos, double ypos) {
         super(window, xpos, ypos);
         creationTime = System.nanoTime();
         bomb = thisBomb;
-        explosionUnits = units;
-        calculateUnits(units);
+        explosionUnits = thisBomb.getLength();
+        calculateUnits(explosionUnits);
     }
 
     private void calculateUnits(int units) {
@@ -53,7 +54,7 @@ public class Explosion extends FieldObject {
         boolean result = true;
         for (FieldObject obj : gameWindow.getObjects()) {
             if (stops(x, y, obj)) {
-                result = false;
+                result = obj instanceof Player;
             }
         }
         if (result) {
@@ -63,23 +64,19 @@ public class Explosion extends FieldObject {
         return result;
     }
 
-    private boolean stops(double x, double y, FieldObject obj) {
-        if (flameTouches(x, y, obj)) {
-            obj.explode();
-            return (!(obj instanceof Player));
+    private class ExplosionUnit extends FieldObject {
+        public ExplosionUnit(GameWindow window, double xpos, double ypos) {
+            super(window, xpos, ypos);
+            setSizeX(EXPLOSION_UNIT_SIZE);
+            setSizeY(EXPLOSION_UNIT_SIZE);
         }
-        return false;
     }
 
-    protected boolean flameTouches(double x, double y, FieldObject obj) {
-        if (gameWindow.toBeDeleted(obj))
-            return false;
-        if (obj.getBoundary() != null) {
-            double deltaX = x - obj.getX();
-            double deltaY = y - obj.getY();
-            double overlapX = deltaX > 0 ? obj.getSizeX() - deltaX : EXPLOSION_UNIT_SIZE + deltaX;
-            double overlapY = deltaY > 0 ? obj.getSizeY() - deltaY : EXPLOSION_UNIT_SIZE + deltaY;
-            return overlapX > MAX_OVERLAP && overlapY > MAX_OVERLAP;
+    private boolean stops(double x, double y, FieldObject obj) {
+        if (obj.getBoundary() != null)
+        if (MovementChecker.collidesStatic(new ExplosionUnit(gameWindow, x, y), obj, EXPLOSION_OVERLAP)) {
+            obj.explode();
+            return (!(obj instanceof Player));
         }
         return false;
     }
@@ -88,8 +85,7 @@ public class Explosion extends FieldObject {
     public void update(long now) {
         if (now - creationTime > EXPLOSION_DURATION)
             end();
-        currentSprite = SpriteManager.
-                getExplosion((int) ((now - creationTime) / EXPLOSION_ANIMATION_DURATION));
+        currentSprite = sprite.getSprite(now);
     }
 
     @Override
@@ -106,12 +102,21 @@ public class Explosion extends FieldObject {
         return currentSprite;
     }
 
+    @Override
+    public Rectangle2D getBoundary() {
+        return new Rectangle2D(getX() - TILE_GRAPHIC_SIZE*explosionUnits, getY() - TILE_GRAPHIC_SIZE*explosionUnits,
+                TILE_GRAPHIC_SIZE*(2*explosionUnits + 1), TILE_GRAPHIC_SIZE*(2*explosionUnits + 1));
+    }
+
     // Requires other objects to call this method!
     @Override
     public boolean collides(FieldObject other) {
-        for (int i = 0; i < unitsXs.size(); i++)
-            if (flameTouches(unitsXs.get(i).getLogical(), unitsYs.get(i).getLogical(), other))
-                return true;
+        if (other.getBoundary() == null)
+            return false;
+        for (int i = 0; i < unitsXs.size(); i++) {
+            ExplosionUnit unit = new ExplosionUnit(gameWindow, unitsXs.get(i).getLogical(), unitsYs.get(i).getLogical());
+            return MovementChecker.collidesStatic(unit, other);
+        }
         return false;
     }
 

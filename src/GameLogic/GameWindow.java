@@ -4,6 +4,7 @@ import GameLogic.GameObjects.*;
 import GameLogic.GameObjects.Bonuses.Bonus;
 import GameLogic.GameObjects.HeaderObjects.HeaderImage;
 import GameLogic.GameObjects.HeaderObjects.HeaderObject;
+import GameLogic.GameObjects.HeaderObjects.HeaderTimer;
 import GameLogic.GameObjects.Tiles.BackgroundTile;
 import GameLogic.GameObjects.Tiles.Tile;
 import GameLogic.MapLoaders.MapLoader;
@@ -16,6 +17,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.io.IOException;
@@ -243,7 +245,7 @@ public class GameWindow {
         game.getStage().hide();
 
         VBox root = new VBox();
-        // -10 to remove weird length and width excess
+        // -10 to removeFromField weird length and width excess
         scene = new Scene(root, FIELD_WIDTH - 10, HEADER_HEIGHT + FIELD_HEIGHT - 10);
         game.getStage().setScene(scene);
 
@@ -264,6 +266,7 @@ public class GameWindow {
         loadBackground();
         // TODO: load players and creeps according to the map
         addObject(new Player(this, PlayerType.PLAYER1, 200, 200));
+        addObject(new Player(this, PlayerType.PLAYER2, 300, 200));
     }
 
     private void loadBackground() {
@@ -277,8 +280,10 @@ public class GameWindow {
 
     private void loadHeaderObjects() {
         headerObjects.add(new HeaderImage());
-        Font font = new Font("Verdana", 20);
+        Font font = new Font("Verdana", HEADER_HEIGHT * 0.7);
         headerContext.setFont(font);
+        headerContext.setStroke(Color.WHITE);
+        headerObjects.add(new HeaderTimer(40, (int)(HEADER_HEIGHT * 0.77)));
         // TODO: add save and exit labels, timer
     }
 

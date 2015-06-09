@@ -19,6 +19,8 @@ public abstract class FieldObject {
     protected GameValue velocityX = new GameValue();
     protected GameValue velocityY = new GameValue();
 
+    protected Direction direction = Direction.NONE;
+
     protected GameWindow gameWindow;
     protected long creationTime;
     protected long lastTime;
@@ -36,6 +38,7 @@ public abstract class FieldObject {
     public double getSizeY() { return sizeY.getLogical(); }
     public double getVelocityX() { return velocityX.getLogical(); }
     public double getVelocityY() { return velocityY.getLogical(); }
+    public Direction getDirection() { return direction; }
 
     public void setX(double value) { x.setValue(value); }
     public void setY(double value) { y.setValue(value); }

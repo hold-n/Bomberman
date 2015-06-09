@@ -24,18 +24,20 @@ public class DebuffBonus extends TemporaryBonus {
 
     @Override
     public void discard(Player player) {
-        switch (effect) {
-            case NO_BOMBS:
-                player.setUseTempMaxBombCount(false);
-                break;
-            case SHORT_EXPLOSION:
-                player.setUseTempExplosionLength(false);
-                break;
-            case BOMB_SPAWN:
-                player.setBombSpawn(false);
-                break;
-            case DECREASE_SPEED:
-                player.setUseTempVelocityValue(false);
+        if (effect != null) {
+            switch (effect) {
+                case NO_BOMBS:
+                    player.setUseTempMaxBombCount(false);
+                    break;
+                case SHORT_EXPLOSION:
+                    player.setUseTempExplosionLength(false);
+                    break;
+                case BOMB_SPAWN:
+                    player.setBombSpawn(false);
+                    break;
+                case DECREASE_SPEED:
+                    player.setUseTempVelocityValue(false);
+            }
         }
     }
 

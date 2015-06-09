@@ -9,6 +9,7 @@ import static GameLogic.Config.*;
 public class TemporaryBonus extends Bonus{
     protected TemporaryEffect effect;
     protected long duration = TEMP_EFFECT_DURATION;
+    protected long pickUpTime;
 
     public TemporaryBonus(GameWindow window, double xpos, double ypos) {
         super(window, xpos, ypos);
@@ -18,12 +19,18 @@ public class TemporaryBonus extends Bonus{
         return duration;
     }
 
+    @Override
+    public void removeFromField() {
+        gameWindow.removeObject(this);
+        pickUpTime = System.nanoTime();
+    }
+
     public TemporaryEffect getEffect() {
         return effect;
     }
 
-    @Override
-    public boolean isTemporary() {
-        return true;
+    public long getPickUpTime() {
+        return pickUpTime;
     }
+
 }

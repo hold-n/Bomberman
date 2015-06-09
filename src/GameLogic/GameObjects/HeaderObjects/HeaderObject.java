@@ -6,8 +6,8 @@ import javafx.scene.canvas.GraphicsContext;
  * Created by Max on 07.06.2015.
  */
 public abstract class HeaderObject {
-    private int x;
-    private int y;
+    protected int x;
+    protected int y;
 
     public HeaderObject(int xpos, int ypos) {
         x = xpos;

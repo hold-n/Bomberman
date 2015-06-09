@@ -32,6 +32,16 @@ public class Bomb extends FieldObject {
         sizeY.setValue(BOMB_SIZE);
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+    public int getLength() {
+        return length;
+    }
+    public long getLifeTime() {
+        return lifeTime;
+    }
+
     @Override
     public void update(long now) {
         move(now);
@@ -49,7 +59,7 @@ public class Bomb extends FieldObject {
                 MovementChecker.tryStop(player, this, true);
         for (Bonus bonus : gameWindow.getBonuses())
             if (collides(bonus))
-                bonus.remove();
+                bonus.removeFromField();
     }
 
     public Rectangle2D getBoundary() {
@@ -65,7 +75,7 @@ public class Bomb extends FieldObject {
     public void explode() {
         gameWindow.removeObject(this);
         player.removeBomb(this);
-        Explosion explosion = new Explosion(gameWindow, this, length, getX(), getY());
+        Explosion explosion = new Explosion(gameWindow, this, getX(), getY());
         gameWindow.addObject(explosion);
     }
 

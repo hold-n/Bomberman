@@ -1,6 +1,7 @@
 package GameLogic.MapLoaders;
 
 import GameLogic.GameObjects.Bonuses.Bonus;
+import GameLogic.GameObjects.Bonuses.DebuffBonus;
 import GameLogic.GameObjects.Bonuses.KickBonus;
 import GameLogic.GameObjects.Bonuses.SpeedBonus;
 import GameLogic.GameObjects.Tiles.ExplodableTile;
@@ -29,6 +30,8 @@ public class TestMapLoader implements MapLoader {
         Bonus bonus = new SpeedBonus(gameWindow, 4*TILE_LOGICAL_SIZE, 4*TILE_LOGICAL_SIZE);
         gameWindow.addObject(bonus);
         bonus = new KickBonus(gameWindow, 5*TILE_LOGICAL_SIZE, 4*TILE_LOGICAL_SIZE);
+        gameWindow.addObject(bonus);
+        bonus = new DebuffBonus(gameWindow, 10*TILE_LOGICAL_SIZE, 2*TILE_LOGICAL_SIZE);
         gameWindow.addObject(bonus);
         tile = new PortalTile(gameWindow, TILE_LOGICAL_SIZE, 6*TILE_LOGICAL_SIZE);
         gameWindow.addObject(tile);

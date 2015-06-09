@@ -32,16 +32,12 @@ public abstract class Bonus extends FieldObject {
     public void discard(Player player) {
     }
 
-    public boolean isTemporary() {
-        return false;
-    }
-
     @Override
     public void explode() {
-        remove();
+        removeFromField();
     }
 
-    public void remove() {
+    public void removeFromField() {
         gameWindow.removeObject(this);
     }
 

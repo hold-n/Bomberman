@@ -2,19 +2,32 @@ package GameLogic;
 
 import GameLogic.GameObjects.Direction;
 import GameLogic.GameObjects.FieldObject;
+import GameLogic.GameObjects.Player;
+
 import static GameLogic.Config.*;
 
 /**
  * Created by Max on 09.06.2015.
  */
 
+class TempObject extends FieldObject {
+
+    public TempObject(GameWindow window, double xpos, double ypos) {
+        super(window, xpos, ypos);
+    }
+}
+
+// OMG! this entire class could have not existed, if I guessed you could stop objects somewhat before obstacles!
 public class MovementChecker {
+
     /**
      * Checks whether a moving object should interact with borders of the screen.
      * @param obj The moving object.
      * @return Direction of the border relative to the object or NONE, if object should not interact with borders
      */
     public static Direction collidesWithBorders(FieldObject obj) {
+        if (obj.getBoundary() == null)
+            return Direction.NONE;
         if (obj.getX() < 0 && obj.getVelocityX() < 0)
             return Direction.LEFT;
         if (obj.getX() > LOGICAL_WIDTH - obj.getSizeX() && obj.getVelocityX() > 0)
@@ -34,6 +47,8 @@ public class MovementChecker {
      * @return The direction of the object to check relative to the moving one or NONE, if there should be no interactions
      */
     public static Direction collidesOnMovement(FieldObject moving, FieldObject toCheck) {
+        if (moving.getBoundary() == null || toCheck.getBoundary() == null)
+            return Direction.NONE;
         double deltaX = moving.getX() - toCheck.getX();
         double deltaY = moving.getY() - toCheck.getY();
         double overlapX = deltaX > 0 ? toCheck.getSizeX() - deltaX : moving.getSizeX() + deltaX;
@@ -52,8 +67,18 @@ public class MovementChecker {
             if (moving.getVelocityX() > 0 && deltaX < 0)
                 return Direction.RIGHT;
         }
-
         return Direction.NONE;
+    }
+
+    /**
+     * Checks whether two objects collide and should interact. Uses overlap > MAX_OVERLAP as collision sign
+     * Should be used on attempting to spawn objects and cases like that.
+     * @param a The first object.
+     * @param b The second object.
+     * @return Whether the objects should interact
+     */
+    public static boolean collidesStatic(FieldObject a, FieldObject b) {
+        return collidesStatic(a, b, MAX_OVERLAP);
     }
 
     /**
@@ -61,25 +86,51 @@ public class MovementChecker {
      * Should be used on attempting to spawn objects and cases like that.
      * @param a The first object.
      * @param b The second object.
+     * @param overlap Minimum overlap of boundaries to start collision.
      * @return Whether the objects should interact
      */
-    public static boolean collidesStatic(FieldObject a, FieldObject b) {
+    public static boolean collidesStatic(FieldObject a, FieldObject b, double overlap) {
         double deltaX = a.getX() - b.getX();
         double deltaY = a.getY() - b.getY();
         double overlapX = deltaX > 0 ? b.getSizeX() - deltaX : a.getSizeX() + deltaX;
         double overlapY = deltaY > 0 ? b.getSizeY() - deltaY : a.getSizeY() + deltaY;
-        return overlapX > MAX_OVERLAP && overlapY > MAX_OVERLAP;
+        return overlapX > overlap && overlapY > overlap;
     }
 
     /**
      * Checks whether an object can move in the given direction
-     * @param obj The object to check.
+     * @param object The object to check.
      * @param direction The direction in which the object wants to move.
      * @return Whether the object can move in the requested direction.
      */
-    public static boolean canMove(FieldObject obj, Direction direction) {
-        // TODO
-        return true;
+    public static boolean canMove(FieldObject object, Direction direction) {
+        boolean result = true;
+        Direction walkDirection;
+        if (!object.isMoving()) {
+            walkDirection = Direction.NONE;
+        }
+        else {
+            walkDirection = object.getDirection();
+        }
+
+        TempObject temp = new TempObject(object.getGameWindow(), object.getX(), object.getY());
+        temp.setSizeX(object.getSizeX());
+        temp.setSizeY(object.getSizeY());
+        if (walkDirection == Direction.RIGHT)
+            temp.setVelocityX(1);
+        if (walkDirection == Direction.LEFT)
+            temp.setVelocityX(-1);
+        if (walkDirection == Direction.UP)
+            temp.setVelocityY(-1);
+        if (walkDirection == Direction.DOWN)
+            temp.setVelocityY(1);
+
+        for (FieldObject fieldObject : object.getGameWindow().getObjects()) {
+            if (fieldObject.collides(object)) {
+                result &= collidesOnMovement(temp, fieldObject) != direction;
+            }
+        }
+        return result;
     }
 
     /**
@@ -104,8 +155,10 @@ public class MovementChecker {
     public static boolean tryStop(FieldObject moving, FieldObject toCheck, boolean strafe) {
         Direction direction = MovementChecker.collidesOnMovement(moving, toCheck);
         if ( moving.isMoving() && (direction != Direction.NONE) ) {
-            double overlap, delta;
+            if (!strafe)
+                return true;
 
+            double overlap, delta;
             Direction strafeDirection;
             double strafeStep;
             if (direction == Direction.UP || direction == Direction.DOWN) {
