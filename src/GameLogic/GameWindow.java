@@ -60,11 +60,13 @@ public class GameWindow implements Serializable {
 
     private transient long timerStartTime;
     private long lifeTime;
-    private boolean playerDied = false;
+    private PlayerType playerDied = null;
 
+    // TODO: A lameass decision, fix
     private double timerRatio = 0.03;
     private double saveMessageRatio = 0.63;
     private double exitMessageRatio = 0.82;
+    private int fontSize = 100;
 
     // Controls: up, down, left, right
     private static final ArrayList<KeyCode> moveControls1 = new ArrayList<KeyCode>() {{
@@ -163,6 +165,11 @@ public class GameWindow implements Serializable {
         fieldContext = fieldCanvas.getGraphicsContext2D();
         root.getChildren().add(fieldCanvas);
 
+        // TODO: move somewhere
+        fieldContext.setFont(new Font("Verdana", fontSize));
+        fieldContext.setStroke(Color.RED);
+        fieldContext.setFill(Color.RED);
+
         if (!deserialized) {
             loadFieldObjects();
             loadHeaderObjects();
@@ -185,7 +192,7 @@ public class GameWindow implements Serializable {
 
                     fieldContext.clearRect(0, 0, FIELD_WIDTH, FIELD_HEIGHT);
                     headerContext.clearRect(0, 0, FIELD_WIDTH, HEADER_HEIGHT);
-                    if (!playerDied) {
+                    if (playerDied == null) {
                         handleInput(now);
                     }
                     handleCollisions();
@@ -279,6 +286,12 @@ public class GameWindow implements Serializable {
             explosion.draw(fieldContext);
         for (HeaderObject obj : headerObjects)
             obj.draw(headerContext);
+        if (playerDied != null) {
+            int x = (int)(TILE_GRAPHIC_SIZE * TILES_HOR * 0.2);
+            int y = (TILE_GRAPHIC_SIZE * TILES_VERT)/2 + (int)fieldContext.getFont().getSize()/2;
+            Integer won = playerDied == PlayerType.PLAYER1 ? 2 : 1;
+            fieldContext.fillText("Player " + won.toString() + " won!", x, y);
+        }
     }
 
     protected void addFromTemp(FieldObject obj) {
@@ -331,7 +344,7 @@ public class GameWindow implements Serializable {
         headerObjects.add(new HeaderTimer(timerRatio));
         headerObjects.add(new HeaderLabel("F2 to save", saveMessageRatio));
         headerObjects.add(new HeaderLabel("F10 to exit", exitMessageRatio));
-        // TODO: add save and exit labels, save notification
+        // TODO: add save notification
     }
 
     private void setHandlers() {
@@ -372,7 +385,7 @@ public class GameWindow implements Serializable {
 
     public void playerDied(PlayerType type) {
         // TODO
-        playerDied = true;
+        playerDied = type;
     }
 
     private static final long serialVersionUID = 7526472295622776147L;
@@ -399,10 +412,8 @@ public class GameWindow implements Serializable {
             return result;
         }
         catch (IOException e) {
-            e.printStackTrace();
             return null;
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
             return null;
         }
     }

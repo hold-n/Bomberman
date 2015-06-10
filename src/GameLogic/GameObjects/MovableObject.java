@@ -3,7 +3,6 @@ package GameLogic.GameObjects;
 import GameLogic.GameValue;
 import GameLogic.GameWindow;
 import GameLogic.CollisionHandler;
-
 import java.io.IOException;
 
 import static GameLogic.Config.TELEPORT_LAG;

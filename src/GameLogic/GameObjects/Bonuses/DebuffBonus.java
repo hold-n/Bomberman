@@ -73,5 +73,6 @@ public class DebuffBonus extends TemporaryBonus {
                 player.setTempVelocityValue(PLAYER_VELOCITY - 2*PLAYER_VELOCITY_DELTA);
                 player.setUseTempVelocityValue(true);
         }
+        player.setFlickering(true);
     }
 }

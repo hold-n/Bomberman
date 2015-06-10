@@ -46,6 +46,10 @@ public class Player extends MovableObject {
     private long deathTime;
     private boolean canKick = false;
     private boolean bombSpawn = false;
+    private boolean spriteInversed;
+    private boolean flickering = false;
+    // TODO: make it serialize properly
+    private long lastFlicker;
 
     private transient AnimatedSprite frontSprite;
     private transient AnimatedSprite backSprite;
@@ -120,6 +124,13 @@ public class Player extends MovableObject {
             explosionLength--;
     }
 
+    public void setFlickering(boolean value) {
+        flickering = value;
+    }
+    public boolean getFlickering() {
+        return flickering;
+    }
+
     @Override
     public double getVelocityValue() {
         return useTempVelocityValue ? tempVelocityValue : velocityValue;
@@ -148,8 +159,12 @@ public class Player extends MovableObject {
     }
 
     private void initializeSprites() {
-        boolean inversed = type == PlayerType.PLAYER2;
-        currentSprite = SpriteManager.getPlayerFront(0, inversed);
+        setSprites(type != PlayerType.PLAYER1);
+        currentSprite = SpriteManager.getPlayerFront(0, type != PlayerType.PLAYER1);
+    }
+
+    private void setSprites(boolean inversed) {
+        spriteInversed = inversed;
         frontSprite = new AnimatedSprite(x -> SpriteManager.getPlayerFront(x, inversed), WALK_DURATION);
         backSprite = new AnimatedSprite(x -> SpriteManager.getPlayerBack(x, inversed), WALK_DURATION);
         leftSprite = new AnimatedSprite(x -> SpriteManager.getPlayerLeft(x, inversed), WALK_DURATION);
@@ -167,7 +182,8 @@ public class Player extends MovableObject {
         if (bombSpawn)
             putBomb();
 
-        if (moving) {
+        // TODO: make it not move on flickering
+        if (moving || flickering) {
             switch (direction) {
                 case UP:
                     currentSprite = backSprite.getSprite(now);
@@ -206,10 +222,16 @@ public class Player extends MovableObject {
     private void considerBonuses(long now) {
         for (Bonus bonus : bonuses) {
             if (bonus instanceof TemporaryBonus) {
+                if (now - lastFlicker > BONUS_FLICKER_TIME) {
+                    lastFlicker = now;
+                    setSprites(!spriteInversed);
+                }
                 TemporaryBonus tempBonus = (TemporaryBonus)bonus;
                 if (now - tempBonus.getPickUpTime() > tempBonus.getDuration()) {
                     bonus.discard(this);
                     bonusesToRemove.add(bonus);
+                    setSprites(type == PlayerType.PLAYER1);
+                    flickering = false;
                 }
             }
         }

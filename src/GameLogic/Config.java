@@ -100,6 +100,8 @@ public final class Config {
             Long.valueOf(properties.getProperty("temp.effect.duration"));
     public static final long TELEPORT_LAG =
             Long.valueOf(properties.getProperty("teleport.lag"));
+    public static final long BONUS_FLICKER_TIME =
+            Long.valueOf(properties.getProperty("bonus.flicker.time"));
 
     public static final String MAP1 =
             properties.getProperty("map1");
