@@ -23,6 +23,8 @@ public class FileLoader implements MapLoader {
             int portalCount = -1;
             char sign;
             int count;
+            Player player1 = null;
+            Player player2 = null;
             PortalTile[] portals = new PortalTile[TILES_HOR * TILES_VERT];
             for (int i = 0; i < TILES_VERT; i++) {
                 for (int j = 0; j < TILES_HOR; j++) {
@@ -47,11 +49,11 @@ public class FileLoader implements MapLoader {
                         case 'R':
                             count = Character.getNumericValue(reader.read());
                             if (count == 2)
-                                gameWindow.addObject(
-                                        new Player(gameWindow, PlayerType.PLAYER2, j * TILE_LOGICAL_SIZE, i * TILE_LOGICAL_SIZE));
+                                player2 =
+                                        new Player(gameWindow, PlayerType.PLAYER2, j * TILE_LOGICAL_SIZE, i * TILE_LOGICAL_SIZE);
                             else
-                                gameWindow.addObject(
-                                        new Player(gameWindow, PlayerType.PLAYER1, j * TILE_LOGICAL_SIZE, i * TILE_LOGICAL_SIZE));
+                                player1 =
+                                        new Player(gameWindow, PlayerType.PLAYER1, j * TILE_LOGICAL_SIZE, i * TILE_LOGICAL_SIZE);
                             break;
                     }
                 }
@@ -59,6 +61,10 @@ public class FileLoader implements MapLoader {
                 reader.read();
                 reader.read();
             }
+            if (player1 != null)
+                gameWindow.addObject(player1);
+            if (player2 != null)
+                gameWindow.addObject(player2);
             for (int i = 0; i < portalCount; i++)
                 portals[i].setDestination(portals[i + 1].getX(), portals[i + 1].getY());
             portals[portalCount].setDestination(portals[0].getX(), portals[0].getY());

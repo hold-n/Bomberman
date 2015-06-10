@@ -8,6 +8,8 @@ import GameLogic.SpriteManager;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 
+import java.io.IOException;
+
 import static GameLogic.Config.*;
 
 /**
@@ -17,17 +19,23 @@ import static GameLogic.Config.*;
 public class Bomb extends MovableObject {
     private final Player player;
     private final int length;
-    private final long lifeTime;
-    private AnimatedSprite sprite = new AnimatedSprite(SpriteManager::getBomb, BOMB_ANIMATION_DURATION);
-    private Image currentSprite = SpriteManager.getBomb(0);
+    private final long maxLifeTime;
+    private transient AnimatedSprite sprite;
+    private transient Image currentSprite;
 
     public Bomb(GameWindow window, Player thisPlayer, double xpos, double ypos) {
         super(window, BOMB_VELOCITY, 0, xpos, ypos);
         player = thisPlayer;
         length = player.getExplosionLength();
-        lifeTime = player.getBombLifeTime();
+        maxLifeTime = player.getBombLifeTime();
         sizeX.setValue(BOMB_SIZE);
         sizeY.setValue(BOMB_SIZE);
+        initialize();
+    }
+
+    private void initialize() {
+        currentSprite = SpriteManager.getBomb(0);
+        sprite = new AnimatedSprite(SpriteManager::getBomb, BOMB_ANIMATION_DURATION);
     }
 
     public Player getPlayer() {
@@ -36,17 +44,17 @@ public class Bomb extends MovableObject {
     public int getLength() {
         return length;
     }
-    public long getLifeTime() {
-        return lifeTime;
+    public long getMaxLifeTime() {
+        return maxLifeTime;
     }
 
     @Override
     public void update(long now) {
-        move(now);
-        if (now - lastTeleport > TELEPORT_LAG)
-            teleported = false;
-        if (now - creationTime > lifeTime)
+        super.update(now);
+        if (lifeTime > maxLifeTime)
             explode();
+        if (sprite == null)
+            System.out.println("No bomb sprite!");
         currentSprite = sprite.getSprite(now);
     }
 
@@ -96,5 +104,13 @@ public class Bomb extends MovableObject {
             case RIGHT:
                 moveByX(true, now);
         }
+    }
+
+    private void readObject(java.io.ObjectInputStream in)
+            throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        creationTime = System.nanoTime() - lifeTime;
+        lastUpdate = System.nanoTime() - 1000000000L/FPS;
+        initialize();
     }
 }

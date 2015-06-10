@@ -1,12 +1,14 @@
 package GameLogic;
 
+import java.io.Serializable;
+
 import static GameLogic.Config.*;
 
 /**
  * Created by Max on 06.06.2015.
  */
 
-public class GameValue {
+public class GameValue implements Serializable {
     protected double logicalValue;
     protected int graphicValue;
 

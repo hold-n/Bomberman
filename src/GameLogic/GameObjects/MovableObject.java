@@ -4,6 +4,10 @@ import GameLogic.GameValue;
 import GameLogic.GameWindow;
 import GameLogic.CollisionHandler;
 
+import java.io.IOException;
+
+import static GameLogic.Config.TELEPORT_LAG;
+
 /**
  * Created by Max on 09.06.2015.
  */
@@ -16,10 +20,10 @@ public class MovableObject extends FieldObject {
     protected boolean moving = false;
     protected boolean teleported = false;
     protected long lastTeleport;
+    protected long timeFromTeleport;
+    protected long lastUpdate;
 
     protected Direction direction = Direction.NONE;
-
-    private long lastTime;
 
     public double getVelocityX() { return velocityX.getLogical(); }
     public double getVelocityY() { return velocityY.getLogical(); }
@@ -44,7 +48,7 @@ public class MovableObject extends FieldObject {
 
     public MovableObject(GameWindow window, double velocity, double velocityDelta, double xpos, double ypos) {
         super(window, xpos, ypos);
-        lastTime = System.nanoTime();
+        lastUpdate = System.nanoTime();
         velocityValue = velocity;
         velocityValueDelta = velocityDelta;
         direction = Direction.DOWN;
@@ -57,15 +61,24 @@ public class MovableObject extends FieldObject {
         return teleported;
     }
 
+    @Override
+    public void update(long now) {
+        super.update(now);
+        move(now);
+        timeFromTeleport = now - lastTeleport;
+        if (timeFromTeleport > TELEPORT_LAG)
+            teleported = false;
+    }
+
     /**
      * Moves the object according to its current speed and previous move() call time.
      * @param now Current time
      */
-    protected void move(long now) {
-        double delta = (double) (now - lastTime) / 1000000000L;
+    private void move(long now) {
+        double delta = (double) (now - lastUpdate) / 1000000000L;
         shiftX(getVelocityX() * delta);
         shiftY(getVelocityY() * delta);
-        lastTime = now;
+        lastUpdate = now;
     }
 
     protected void checkBorders() {
@@ -127,5 +140,12 @@ public class MovableObject extends FieldObject {
         teleported = true;
         setX(x);
         setY(y);
+    }
+
+    private void readObject(java.io.ObjectInputStream in)
+            throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        creationTime = System.nanoTime() - lifeTime;
+        lastTeleport = System.nanoTime() - timeFromTeleport;
     }
 }

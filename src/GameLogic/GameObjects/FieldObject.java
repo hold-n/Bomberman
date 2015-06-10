@@ -6,24 +6,28 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import java.io.IOException;
+import java.io.Serializable;
+
 /**
  * Created by Max on 03.06.2015.
  */
 
-public abstract class FieldObject {
+public abstract class FieldObject implements Serializable {
     protected GameValue x = new GameValue();
     protected GameValue y = new GameValue();
     protected GameValue sizeX = new GameValue();
     protected GameValue sizeY = new GameValue();
 
     protected GameWindow gameWindow;
-    protected long creationTime;
+    protected transient long creationTime;
+    protected long lifeTime;
 
     public GameWindow getGameWindow() {
         return gameWindow;
     }
-    public long getCreationTime() {
-        return creationTime;
+    public long getLifeTime() {
+        return lifeTime;
     }
 
     public double getX() { return x.getLogical(); }
@@ -80,9 +84,9 @@ public abstract class FieldObject {
      * Called on every iteration of the game loop so the object can update its time-dependant parameters.
      * @param now Current time in nanoseconds
      */
-    public void update(long now) {}
-
-
+    public void update(long now) {
+        lifeTime = now - creationTime;
+    }
 
     /**
      * Called on every iteration of the game loop so the object can check any other objects for collisions.
@@ -102,4 +106,11 @@ public abstract class FieldObject {
      * Method called by explosion objects so as to try to destroy objects it touches on creation
      */
     public void explode() {}
+
+
+    private void readObject(java.io.ObjectInputStream in)
+            throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        creationTime = System.nanoTime() - lifeTime;
+    }
 }

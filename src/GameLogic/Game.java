@@ -2,6 +2,7 @@ package GameLogic;
 
 import Controllers.MainMenuController;
 import GameLogic.MapLoaders.FileLoader;
+import GameLogic.MapLoaders.MapLoader;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -9,7 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.IOException;
+import java.io.Serializable;
 
 import static GameLogic.Config.*;
 
@@ -17,27 +21,33 @@ import static GameLogic.Config.*;
  * Created by Max on 04.06.2015.
  */
 
-public class Game {
+public class Game implements Serializable {
 
-    Stage stage;
-    Parent mainMenu;
-    GameWindow gameWindow;
+    private StageStyle style;
+    private transient Stage stage;
+    private transient Parent mainMenu;
+    private GameWindow gameWindow;
 
     public Stage getStage() {
         return stage;
     }
 
     public Game(Stage primaryStage) {
+        style = primaryStage.getStyle();
         stage = primaryStage;
-        stage.setTitle(TITLE);
-        // TODO: allow resizing and track window size
-        stage.setResizable(false);
 
+        initialize();
+    }
+
+    public void initialize() {
+        // TODO: allow resizing and track window size
+        stage.setTitle(TITLE);
+        stage.setResizable(false);
         MainMenuController.bindTo(this);
+        getStage().getIcons().add(new Image(FAVICON, 32, 32, false, true));
     }
 
     public void run() throws IOException {
-        getStage().getIcons().add(new Image(FAVICON, 32, 32, false, true));
         runMainMenu();
     }
 
@@ -65,15 +75,29 @@ public class Game {
         gameWindow.run();
     }
 
+    public void reload(MapLoader loader) {
+        gameWindow = new GameWindow(this, loader);
+        stage.setScene(gameWindow.getScene());
+        gameWindow.run();
+    }
+
     public void load() {
-        gameWindow = GameWindow.load(this, DEFAULT_SAVE);
+        gameWindow = GameWindow.load(DEFAULT_SAVE);
+
         if (gameWindow != null) {
-            stage.setScene(gameWindow.getScene());
+            gameWindow.setGame(this);
+            gameWindow.initializeWindow(true);
             gameWindow.run();
         }
     }
 
     public void exit() {
         System.exit(0);
+    }
+
+    private void readObject(java.io.ObjectInputStream in)
+            throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        stage = new Stage(style);
     }
 }

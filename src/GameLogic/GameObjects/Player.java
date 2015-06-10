@@ -10,6 +10,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static GameLogic.Config.*;
@@ -46,11 +47,11 @@ public class Player extends MovableObject {
     private boolean canKick = false;
     private boolean bombSpawn = false;
 
-    AnimatedSprite frontSprite;
-    AnimatedSprite backSprite;
-    AnimatedSprite leftSprite;
-    AnimatedSprite rightSprite;
-    private Image currentSprite;
+    private transient AnimatedSprite frontSprite;
+    private transient AnimatedSprite backSprite;
+    private transient AnimatedSprite leftSprite;
+    private transient AnimatedSprite rightSprite;
+    private transient Image currentSprite;
 
     private static final double HALF_GRAPHIC_HEIGHT = PLAYER_HEIGHT * GLRATIO / 2;
 
@@ -140,23 +141,25 @@ public class Player extends MovableObject {
 
     public Player(GameWindow window, PlayerType playerType, double xpos, double ypos) {
         super(window, PLAYER_VELOCITY, PLAYER_VELOCITY_DELTA, xpos, ypos);
-        boolean inversed = playerType == PlayerType.PLAYER2;
+        type = playerType;
+        sizeY.setValue(PLAYER_WIDTH);
+        sizeX.setValue(PLAYER_WIDTH);
+        initializeSprites();
+    }
+
+    private void initializeSprites() {
+        boolean inversed = type == PlayerType.PLAYER2;
         currentSprite = SpriteManager.getPlayerFront(0, inversed);
         frontSprite = new AnimatedSprite(x -> SpriteManager.getPlayerFront(x, inversed), WALK_DURATION);
         backSprite = new AnimatedSprite(x -> SpriteManager.getPlayerBack(x, inversed), WALK_DURATION);
         leftSprite = new AnimatedSprite(x -> SpriteManager.getPlayerLeft(x, inversed), WALK_DURATION);
         rightSprite = new AnimatedSprite(x -> SpriteManager.getPlayerRight(x, inversed), WALK_DURATION);
-        sizeY.setValue(PLAYER_WIDTH);
-        sizeX.setValue(PLAYER_WIDTH);
-        type = playerType;
     }
 
     @Override
     public void update(long now) {
-        move(now);
+        super.update(now);
         considerBonuses(now);
-        if (now - lastTeleport > TELEPORT_LAG)
-            teleported = false;
 
         bonusesToRemove.forEach(bonuses::remove);
         bonusesToRemove.clear();
@@ -288,5 +291,14 @@ public class Player extends MovableObject {
         teleported = true;
         setX(x);
         setY(y);
+    }
+
+    private void readObject(java.io.ObjectInputStream in)
+            throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        creationTime = System.nanoTime() - lifeTime;
+        lastTeleport = System.nanoTime() - timeFromTeleport;
+        lastUpdate = System.nanoTime() - 1000000000L/FPS;
+        initializeSprites();
     }
 }

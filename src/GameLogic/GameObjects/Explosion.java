@@ -5,6 +5,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static GameLogic.Config.*;
@@ -15,8 +16,8 @@ import static GameLogic.Config.*;
 
 public class Explosion extends FieldObject {
     private int explosionUnits;
-    AnimatedSprite sprite = new AnimatedSprite(SpriteManager::getExplosion, EXPLOSION_ANIMATION_DURATION);
-    private Image currentSprite = SpriteManager.getExplosion(0);
+    private transient AnimatedSprite sprite;
+    private transient Image currentSprite;
     private Bomb bomb;
     private final ArrayList<GameValue> unitsXs = new ArrayList<>();
     private final ArrayList<GameValue> unitsYs = new ArrayList<>();
@@ -26,6 +27,8 @@ public class Explosion extends FieldObject {
         creationTime = System.nanoTime();
         bomb = thisBomb;
         explosionUnits = thisBomb.getLength();
+        sprite = new AnimatedSprite(SpriteManager::getExplosion, EXPLOSION_ANIMATION_DURATION);
+        currentSprite = SpriteManager.getExplosion(0);
         calculateUnits(explosionUnits);
     }
 
@@ -85,7 +88,8 @@ public class Explosion extends FieldObject {
 
     @Override
     public void update(long now) {
-        if (now - creationTime > EXPLOSION_DURATION)
+        super.update(now);
+        if (lifeTime > EXPLOSION_DURATION)
             end();
         currentSprite = sprite.getSprite(now);
     }
@@ -131,5 +135,12 @@ public class Explosion extends FieldObject {
 
     public void end() {
         gameWindow.removeObject(this);
+    }
+
+    private void readObject(java.io.ObjectInputStream in)
+            throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        creationTime = System.nanoTime() - lifeTime;
+        sprite = new AnimatedSprite(SpriteManager::getExplosion, EXPLOSION_ANIMATION_DURATION);
     }
 }

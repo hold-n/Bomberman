@@ -3,9 +3,6 @@ package Controllers;
 import GameLogic.Game;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import static GameLogic.Config.MENU_HEIGHT;
-import static GameLogic.Config.MENU_WIDTH;
-
 
 /**
  * Created by Max on 04.06.2015.
