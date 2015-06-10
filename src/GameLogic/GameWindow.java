@@ -22,6 +22,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import static GameLogic.Config.*;
@@ -37,6 +39,7 @@ public class GameWindow implements Serializable {
     private transient GraphicsContext headerContext;
     private transient GraphicsContext fieldContext;
 
+    // TODO: remove this reference
     private MapLoader loader;
 
     private final KeyCode exitKey = KeyCode.F10;
@@ -168,7 +171,7 @@ public class GameWindow implements Serializable {
         // TODO: move somewhere
         fieldContext.setFont(new Font("Verdana", fontSize));
         fieldContext.setStroke(Color.RED);
-        fieldContext.setFill(Color.RED);
+        fieldContext.setFill(Color.BLACK);
 
         if (!deserialized) {
             loadFieldObjects();
@@ -290,6 +293,7 @@ public class GameWindow implements Serializable {
             int x = (int)(TILE_GRAPHIC_SIZE * TILES_HOR * 0.2);
             int y = (TILE_GRAPHIC_SIZE * TILES_VERT)/2 + (int)fieldContext.getFont().getSize()/2;
             Integer won = playerDied == PlayerType.PLAYER1 ? 2 : 1;
+            fieldContext.strokeText("Player " + won.toString() + " won!", x, y);
             fieldContext.fillText("Player " + won.toString() + " won!", x, y);
         }
     }
@@ -374,12 +378,7 @@ public class GameWindow implements Serializable {
 
     public void exit() {
         mainTimer.stop();
-        try {
-            game.runMainMenu();
-        }
-        catch (IOException e) {
-            game.exit();
-        }
+        game.runMainMenu();
         // TODO: maybe return a score or something
     }
 
@@ -388,11 +387,21 @@ public class GameWindow implements Serializable {
         playerDied = type;
     }
 
+    // TODO: needed?
     private static final long serialVersionUID = 7526472295622776147L;
 
     public void save() {
         try {
-            FileOutputStream fileStream = new FileOutputStream(DEFAULT_SAVE);
+            URL resource = Config.class.getResource(DEFAULT_SAVE);
+            File file;
+            try {
+                file = new File(resource.toURI());
+            }
+            catch (URISyntaxException e) {
+                e.printStackTrace();
+                return;
+            }
+            FileOutputStream fileStream = new FileOutputStream(file);
             ObjectOutputStream out = new ObjectOutputStream(fileStream);
             out.writeObject(this);
             out.close();
@@ -406,7 +415,16 @@ public class GameWindow implements Serializable {
 
     public static GameWindow load(String savePath) {
         try {
-            FileInputStream fileStream = new FileInputStream(savePath);
+            URL resource = Config.class.getResource(DEFAULT_SAVE);
+            File file;
+            try {
+                file = new File(resource.toURI());
+            }
+            catch (URISyntaxException e) {
+                e.printStackTrace();
+                return null;
+            }
+            FileInputStream fileStream = new FileInputStream(file);
             ObjectInputStream in = new ObjectInputStream(fileStream);
             GameWindow result = (GameWindow)in.readObject();
             return result;

@@ -119,11 +119,12 @@ public class Explosion extends FieldObject {
     public boolean collides(FieldObject other) {
         if (other.getBoundary() == null)
             return false;
+        boolean doesCollide = false;
         for (int i = 0; i < unitsXs.size(); i++) {
             ExplosionUnit unit = new ExplosionUnit(gameWindow, unitsXs.get(i).getLogical(), unitsYs.get(i).getLogical());
-            return CollisionHandler.collidesStatic(unit, other);
+            doesCollide |= CollisionHandler.collidesStatic(unit, other, EXPLOSION_OVERLAP);
         }
-        return false;
+        return doesCollide;
     }
 
     @Override

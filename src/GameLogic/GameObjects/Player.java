@@ -160,11 +160,12 @@ public class Player extends MovableObject {
 
     private void initializeSprites() {
         setSprites(type != PlayerType.PLAYER1);
-        currentSprite = SpriteManager.getPlayerFront(0, type != PlayerType.PLAYER1);
     }
 
     private void setSprites(boolean inversed) {
         spriteInversed = inversed;
+        // TODO: would be better if he would be turned correctly
+        currentSprite = SpriteManager.getPlayerFront(0, type != PlayerType.PLAYER1);
         frontSprite = new AnimatedSprite(x -> SpriteManager.getPlayerFront(x, inversed), WALK_DURATION);
         backSprite = new AnimatedSprite(x -> SpriteManager.getPlayerBack(x, inversed), WALK_DURATION);
         leftSprite = new AnimatedSprite(x -> SpriteManager.getPlayerLeft(x, inversed), WALK_DURATION);
@@ -230,7 +231,7 @@ public class Player extends MovableObject {
                 if (now - tempBonus.getPickUpTime() > tempBonus.getDuration()) {
                     bonus.discard(this);
                     bonusesToRemove.add(bonus);
-                    setSprites(type == PlayerType.PLAYER1);
+                    setSprites(type != PlayerType.PLAYER1);
                     flickering = false;
                 }
             }

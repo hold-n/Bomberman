@@ -3,6 +3,7 @@ package GameLogic;
 import GameLogic.GameObjects.Direction;
 import GameLogic.GameObjects.FieldObject;
 import GameLogic.GameObjects.MovableObject;
+import GameLogic.GameObjects.Player;
 
 import static GameLogic.Config.*;
 

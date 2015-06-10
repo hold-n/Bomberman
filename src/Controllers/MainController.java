@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
  * Created by Max on 04.06.2015.
  */
 
-public class MainMenuController {
+public class MainController {
     private static Game game;
 
     public static void bindTo(Game gameToBind) {
@@ -28,6 +28,11 @@ public class MainMenuController {
     @FXML
     private void about(ActionEvent actionEvent) {
         game.about();
+    }
+
+    @FXML
+    private void closeAbout(ActionEvent actionEvent) {
+        game.closeAbout();
     }
 
     @FXML

@@ -1,8 +1,9 @@
 package GameLogic;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Properties;
 
 /**
@@ -15,8 +16,8 @@ public final class Config {
     static {
         FileInputStream in;
         try {
-            in = new FileInputStream("src/config.properties");
-            properties.load(in);
+            InputStream stream = Config.class.getResourceAsStream("/Resources/config.properties");
+            properties.load(stream);
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -24,7 +25,6 @@ public final class Config {
         }
         catch (IOException e) {
             e.printStackTrace();
-            // TODO: add support for incorrect config
         }
     }
 

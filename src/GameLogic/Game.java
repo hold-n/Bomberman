@@ -1,8 +1,9 @@
 package GameLogic;
 
-import Controllers.MainMenuController;
-import GameLogic.MapLoaders.FileLoader;
+import Controllers.MainController;
+import GameLogic.MapLoaders.FileMapLoader;
 import GameLogic.MapLoaders.MapLoader;
+import GameLogic.MapLoaders.TestMapLoader;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -25,6 +26,7 @@ public class Game implements Serializable {
 
     private StageStyle style;
     private transient Stage stage;
+    private transient Stage tempStage;
     private transient Parent mainMenu;
     private GameWindow gameWindow;
 
@@ -43,7 +45,7 @@ public class Game implements Serializable {
         // TODO: allow resizing and track window size
         stage.setTitle(TITLE);
         stage.setResizable(false);
-        MainMenuController.bindTo(this);
+        MainController.bindTo(this);
         getStage().getIcons().add(new Image(FAVICON, 32, 32, false, true));
     }
 
@@ -51,8 +53,15 @@ public class Game implements Serializable {
         runMainMenu();
     }
 
-    public void  runMainMenu() throws IOException {
-        mainMenu = FXMLLoader.load(getClass().getResource("../Views/MainMenu.fxml"));
+    public void  runMainMenu() {
+        try {
+            mainMenu = FXMLLoader.load(getClass().getResource("../Views/MainMenu.fxml"));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
         Scene scene = new Scene(mainMenu);
         stage.setScene(scene);
         stage.show();
@@ -66,11 +75,30 @@ public class Game implements Serializable {
     }
 
     public void about() {
-        // TODO
+        Parent aboutMenu;
+        try {
+            aboutMenu = FXMLLoader.load(getClass().getResource("../Views/About.fxml"));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+        tempStage = new Stage();
+        tempStage.setResizable(false);
+        tempStage.setTitle("About");
+        tempStage.getIcons().add(new Image(FAVICON, 32, 32, false, true));
+        Scene scene = new Scene(aboutMenu);
+        tempStage.setScene(scene);
+        tempStage.show();
+        centerStage(tempStage);
+    }
+
+    public void closeAbout() {
+        tempStage.close();
     }
 
     public void launchGameLoop() {
-        gameWindow = new GameWindow(this, new FileLoader());
+        gameWindow = new GameWindow(this, new FileMapLoader());
         stage.setScene(gameWindow.getScene());
         gameWindow.run();
     }

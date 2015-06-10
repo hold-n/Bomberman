@@ -7,19 +7,24 @@ import GameLogic.GameObjects.Tiles.PortalTile;
 import GameLogic.GameObjects.Tiles.SolidTile;
 import GameLogic.GameWindow;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import static GameLogic.Config.*;
 
 /**
  * Created by Max on 09.06.2015.
  */
-public class FileLoader implements MapLoader {
+public class FileMapLoader implements MapLoader {
     @Override
     public void loadMap(GameWindow gameWindow) {
-        try {
-            FileReader reader = new FileReader(MAP1);
+        try{
+            InputStream reader = FileMapLoader.class.getResourceAsStream(MAP1);
+
             int portalCount = -1;
             char sign;
             int count;
