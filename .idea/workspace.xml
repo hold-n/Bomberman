@@ -7,45 +7,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\Controllers\MainMenuController.class" afterPath="" />
-      <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\MapLoaders\FileLoader.class" afterPath="" />
-      <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\Main.class" afterPath="" />
-      <change type="DELETED" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\config.properties" afterPath="" />
-      <change type="MOVED" beforePath="A:\Учёба\ООП\Курсовой\Project\src\Controllers\MainMenuController.java" afterPath="$PROJECT_DIR$/src/Controllers/MainController.java" />
-      <change type="MOVED" beforePath="A:\Учёба\ООП\Курсовой\Project\src\GameLogic\MapLoaders\FileLoader.java" afterPath="$PROJECT_DIR$/src/GameLogic/MapLoaders/FileMapLoader.java" />
-      <change type="MOVED" beforePath="A:\Учёба\ООП\Курсовой\Project\src\Main.java" afterPath="$PROJECT_DIR$/src/BombermanMain/Main.java" />
-      <change type="MOVED" beforePath="A:\Учёба\ООП\Курсовой\Project\src\config.properties" afterPath="$PROJECT_DIR$/src/Resources/config.properties" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameObjects\Bonuses\Bonus.class" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameObjects\Bonuses\Bonus.class" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\CollisionHandler.class" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\CollisionHandler.class" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\Config.class" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\Config.class" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameObjects\Explosion.class" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameObjects\Explosion.class" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\Game.class" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\Game.class" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameWindow$1.class" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameWindow$1.class" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameWindow$2.class" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameWindow$2.class" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameWindow$3.class" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameWindow$3.class" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameWindow$4.class" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameWindow$4.class" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameWindow$5.class" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameWindow$5.class" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameWindow.class" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameWindow.class" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameObjects\Player$1.class" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameObjects\Player$1.class" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameObjects\Player.class" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\GameObjects\Player.class" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\TempObject.class" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\TempObject.class" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\Saves\save.bms" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\Saves\save.bms" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Saves/save.bms" afterPath="$PROJECT_DIR$/src/Saves/save.bms" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\MapLoaders\1.map" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\GameLogic\MapLoaders\1.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/MapLoaders/1.map" afterPath="$PROJECT_DIR$/src/GameLogic/MapLoaders/1.map" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\Views\About.fxml" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\Views\About.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Views/About.fxml" afterPath="$PROJECT_DIR$/src/Views/About.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/Bonus.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/Bonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/CollisionHandler.java" afterPath="$PROJECT_DIR$/src/GameLogic/CollisionHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/Config.java" afterPath="$PROJECT_DIR$/src/GameLogic/Config.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/Explosion.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/Explosion.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/DebuffBonus.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/DebuffBonus.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/Game.java" afterPath="$PROJECT_DIR$/src/GameLogic/Game.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameWindow.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameWindow.java" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\Views\MainMenu.fxml" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\Views\MainMenu.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Views/MainMenu.fxml" afterPath="$PROJECT_DIR$/src/Views/MainMenu.fxml" />
-      <change type="MODIFICATION" beforePath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\Views\MainStyles.css" afterPath="A:\Учёба\ООП\Курсовой\Project\out\production\MolecularBomberman\Views\MainStyles.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Views/MainStyles.css" afterPath="$PROJECT_DIR$/src/Views/MainStyles.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/GameObjects/Player.java" afterPath="$PROJECT_DIR$/src/GameLogic/GameObjects/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/JavaFXApp.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/JavaFXApp.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameLogic/SpriteManager.java" afterPath="$PROJECT_DIR$/src/GameLogic/SpriteManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Resources/config.properties" afterPath="$PROJECT_DIR$/src/Resources/config.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -111,7 +80,7 @@
         <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Player.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="169" column="41" selection-start-line="169" selection-start-column="41" selection-end-line="169" selection-end-column="41" />
+              <caret line="167" column="28" selection-start-line="167" selection-start-column="28" selection-end-line="167" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -119,11 +88,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Config.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GameLogic/Config.java">
+      <file leaf-file-name="MovableObject.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/MovableObject.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+              <caret line="140" column="16" selection-start-line="140" selection-start-column="16" selection-end-line="140" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestMapLoader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameLogic/MapLoaders/TestMapLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="33" column="23" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -143,7 +122,7 @@
         <entry file="file://$PROJECT_DIR$/src/GameLogic/SpriteManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#getPlayerFront#0;class#SpriteManager#0" expanded="false" />
@@ -155,21 +134,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapLoader.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GameLogic/MapLoaders/MapLoader.java">
+      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controllers/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Resources/config.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="72" column="22" selection-start-line="72" selection-start-column="22" selection-end-line="72" selection-end-column="22" />
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -179,27 +148,7 @@
         <entry file="file://$PROJECT_DIR$/src/GameLogic/MapLoaders/FileMapLoader.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="35" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameWindow.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.80759495">
-              <caret line="173" column="0" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GameLogic/Game.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="100" column="46" selection-start-line="100" selection-start-column="46" selection-end-line="100" selection-end-column="46" />
+              <caret line="45" column="20" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -209,7 +158,27 @@
         <entry file="file://$PROJECT_DIR$/src/GameLogic/MapLoaders/1.map">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+              <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerType.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/PlayerType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameValue.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/GameLogic/GameValue.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.22405271">
+              <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -247,7 +216,6 @@
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/TemporaryBonus.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Tiles/ImpassableTile.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/TemporaryEffect.java" />
-        <option value="$PROJECT_DIR$/src/GameLogic/SpriteManager.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/MovementChecker.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/MapLoaders/TestMapLoader.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/MoveableObject.java" />
@@ -262,7 +230,6 @@
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderTimer.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderLabel.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/HeaderObjects/HeaderObject.java" />
-        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/DebuffBonus.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/MovableObject.java" />
         <option value="$PROJECT_DIR$/src/config.properties" />
         <option value="$PROJECT_DIR$/src/Controllers/MainController.java" />
@@ -273,17 +240,19 @@
         <option value="$PROJECT_DIR$/src/BombermanMain/Main.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/MapLoaders/FileLoader.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/CollisionHandler.java" />
-        <option value="$PROJECT_DIR$/src/Views/About.fxml" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/Bonus.java" />
         <option value="$PROJECT_DIR$/src/Views/MainMenu.fxml" />
         <option value="$PROJECT_DIR$/src/Views/MainStyles.css" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Explosion.java" />
-        <option value="$PROJECT_DIR$/src/GameLogic/Game.java" />
-        <option value="$PROJECT_DIR$/src/GameLogic/Config.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/MapLoaders/FileMapLoader.java" />
         <option value="$PROJECT_DIR$/src/GameLogic/MapLoaders/1.map" />
+        <option value="$PROJECT_DIR$/src/GameLogic/Config.java" />
         <option value="$PROJECT_DIR$/src/Resources/config.properties" />
+        <option value="$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/DebuffBonus.java" />
+        <option value="$PROJECT_DIR$/src/GameLogic/Game.java" />
+        <option value="$PROJECT_DIR$/src/Views/About.fxml" />
         <option value="$PROJECT_DIR$/src/GameLogic/GameWindow.java" />
+        <option value="$PROJECT_DIR$/src/GameLogic/SpriteManager.java" />
       </list>
     </option>
   </component>
@@ -329,7 +298,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -394,48 +364,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="GameLogic" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GameLogic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CollisionHandler.java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -520,8 +450,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -535,7 +464,7 @@
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="dynamic.classpath" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../UML" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../bomberman" />
     <property name="FullScreen" value="false" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -764,12 +693,13 @@
       <workItem from="1359379250712" duration="1302000" />
       <workItem from="1433886460473" duration="1441000" />
       <workItem from="1433903045918" duration="41000" />
-      <workItem from="1433970900126" duration="5079000" />
+      <workItem from="1433970900126" duration="5226000" />
+      <workItem from="1436257513509" duration="317000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7863000" />
+    <option name="totallyTimeSpent" value="8327000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -777,14 +707,11 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="92" y="92" width="1182" height="544" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33385828" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24743778" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
@@ -793,14 +720,17 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="92" y="92" width="1182" height="544" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32283464" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -819,7 +749,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="60" />
+      <option name="time" value="62" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -839,7 +769,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="40" column="29" selection-start-line="40" selection-start-column="29" selection-end-line="40" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -875,13 +804,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/PlayerType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -952,9 +874,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="112" column="8" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1014,24 +933,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameValue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/DebuffBonus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="75" column="33" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GameLogic/AnimatedSprite.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1046,30 +947,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/MovableObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="138" column="26" selection-start-line="138" selection-start-column="26" selection-end-line="138" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controllers/MainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/MapLoaders/TestMapLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="57" selection-start-line="27" selection-start-column="57" selection-end-line="27" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MolecularBomberman.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16803955">
@@ -1077,32 +954,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BombermanMain/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GameLogic/CollisionHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="108" column="16" selection-start-line="108" selection-start-column="16" selection-end-line="108" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Views/About.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1110,7 +965,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="20" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1137,14 +991,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/Game.java">
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/MapLoaders/MapLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="100" column="46" selection-start-line="100" selection-start-column="46" selection-end-line="100" selection-end-column="46" />
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Bonuses/DebuffBonus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BombermanMain/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Views/About.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -1152,7 +1029,29 @@
     <entry file="file://$PROJECT_DIR$/src/GameLogic/Config.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+          <caret line="99" column="55" selection-start-line="99" selection-start-column="55" selection-end-line="99" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Resources/config.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="75" column="35" selection-start-line="75" selection-start-column="35" selection-end-line="75" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="295" column="8" selection-start-line="295" selection-start-column="8" selection-end-line="295" selection-end-column="8" />
           <folding />
         </state>
       </provider>
@@ -1165,42 +1064,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/MapLoaders/MapLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/MapLoaders/FileMapLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="35" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/MapLoaders/1.map">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/config.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="22" selection-start-line="72" selection-start-column="22" selection-end-line="72" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GameLogic/SpriteManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#getPlayerFront#0;class#SpriteManager#0" expanded="false" />
@@ -1211,20 +1078,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controllers/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="169" column="41" selection-start-line="169" selection-start-column="41" selection-end-line="169" selection-end-column="41" />
+          <caret line="167" column="28" selection-start-line="167" selection-start-column="28" selection-end-line="167" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/MovableObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.80759495">
-          <caret line="173" column="0" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="140" column="16" selection-start-line="140" selection-start-column="16" selection-end-line="140" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/MapLoaders/TestMapLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="23" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/MapLoaders/FileMapLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="20" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/MapLoaders/1.map">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameObjects/PlayerType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/GameValue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22405271">
+          <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
           <folding />
         </state>
       </provider>

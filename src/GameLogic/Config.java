@@ -96,6 +96,8 @@ public final class Config {
             Long.valueOf(properties.getProperty("explosion.duration"));
     public static final long BOMB_LIFE_TIME =
             Long.valueOf(properties.getProperty("bomb.life.time"));
+    public static final long SHORT_BOMB_LIFE_TIME =
+            Long.valueOf(properties.getProperty("short.bomb.life.time"));
     public static final long TEMP_EFFECT_DURATION =
             Long.valueOf(properties.getProperty("temp.effect.duration"));
     public static final long TELEPORT_LAG =

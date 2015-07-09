@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 import static GameLogic.Config.*;
 
@@ -16,27 +17,36 @@ import static GameLogic.Config.*;
 
 public class SpriteManager {
     private static final Image backgroundTile =
-            new Image(BACKGROUND_TILE_URL, TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
+            new Image(SpriteManager.class.getResource(BACKGROUND_TILE_URL).toExternalForm(),
+                    TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
     private static final Image solidTile =
-            new Image(SOLID_TILE_URL, TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
+            new Image(SpriteManager.class.getResource(SOLID_TILE_URL).toExternalForm(),
+                    TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
     private static final Image explodableTile =
-            new Image(EXPLODABLE_TILE_URL, TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
+            new Image(SpriteManager.class.getResource(EXPLODABLE_TILE_URL).toExternalForm(),
+                    TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
     private static final Image portalTile =
-            new Image(PORTAL_TILE_URL, TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
+            new Image(SpriteManager.class.getResource(PORTAL_TILE_URL).toExternalForm(),
+                    TILE_GRAPHIC_SIZE, TILE_GRAPHIC_SIZE, true, true);
     private static final Image bonusBomb =
-            new Image(BONUS_BOMB, (new GameValue(BONUS_SIZE).getGraphic()),
+            new Image(SpriteManager.class.getResource(BONUS_BOMB).toExternalForm(),
+                    (new GameValue(BONUS_SIZE).getGraphic()),
                     (new GameValue(BONUS_SIZE).getGraphic()), true, true);
     private static final Image bonuseExplosion =
-            new Image(BONUS_EXPLOSION, (new GameValue(BONUS_SIZE).getGraphic()),
+            new Image(SpriteManager.class.getResource(BONUS_EXPLOSION).toExternalForm(),
+                    (new GameValue(BONUS_SIZE).getGraphic()),
                     (new GameValue(BONUS_SIZE).getGraphic()), true, true);
     private static final Image bonusSpeed =
-            new Image(BONUS_SPEED, (new GameValue(BONUS_SIZE).getGraphic()),
+            new Image(SpriteManager.class.getResource(BONUS_SPEED).toExternalForm(),
+                    (new GameValue(BONUS_SIZE).getGraphic()),
                     (new GameValue(BONUS_SIZE).getGraphic()), true, true);
     private static final Image bonusKick =
-            new Image(BONUS_KICK, (new GameValue(BONUS_SIZE).getGraphic()),
+            new Image(SpriteManager.class.getResource(BONUS_KICK).toExternalForm(),
+                    (new GameValue(BONUS_SIZE).getGraphic()),
                     (new GameValue(BONUS_SIZE).getGraphic()), true, true);
     private static final Image bonusDebuff =
-            new Image(BONUS_DEBUFF, (new GameValue(BONUS_SIZE).getGraphic()),
+            new Image(SpriteManager.class.getResource(BONUS_DEBUFF).toExternalForm(),
+                    (new GameValue(BONUS_SIZE).getGraphic()),
                     (new GameValue(BONUS_SIZE).getGraphic()), true, true);
     private static final Image[] playerFront = new Image[PLAYER_FRAMES_NUM];
     private static final Image[] playerBack = new Image[PLAYER_FRAMES_NUM];
@@ -88,20 +98,23 @@ public class SpriteManager {
         for (int i = 0; i < PLAYER_FRAMES_NUM; i++) {
             String url = PLAYER_FRONT_START + (new Integer(i)).toString() + PLAYER_FRONT_END;
             playerFront[i] =
-                    new Image(url, playerWidth.getGraphic(), playerHeight.getGraphic(), true, true);
+                    new Image(SpriteManager.class.getResource(url).toExternalForm(),
+                            playerWidth.getGraphic(), playerHeight.getGraphic(), true, true);
             playerFrontInv[i] = inverseImage(playerFront[i]);
         }
         for (int i = 0; i < PLAYER_FRAMES_NUM; i++) {
             String url = PLAYER_BACK_START + (new Integer(i)).toString() + PLAYER_BACK_END;
             playerBack[i] =
-                    new Image(url, playerWidth.getGraphic(), playerHeight.getGraphic(), true, true);
+                    new Image(SpriteManager.class.getResource(url).toExternalForm(),
+                            playerWidth.getGraphic(), playerHeight.getGraphic(), true, true);
             playerBackInv[i] =
                     inverseImage(playerBack[i]);
         }
         for (int i = 0; i < PLAYER_FRAMES_NUM; i++) {
             String url = PLAYER_SIDE_START + (new Integer(i)).toString() + PLAYER_SIDE_END;
             playerSideRight[i] =
-                    new Image(url, playerWidth.getGraphic(), playerHeight.getGraphic(), true, true);
+                    new Image(SpriteManager.class.getResource(url).toExternalForm(),
+                            playerWidth.getGraphic(), playerHeight.getGraphic(), true, true);
             playerSideLeft[i] = getFlippedImage(playerSideRight[i]);
             playerSideRightInv[i] = inverseImage(playerSideRight[i]);
             playerSideLeftInv[i] = inverseImage(playerSideLeft[i]);
@@ -109,13 +122,15 @@ public class SpriteManager {
         for (int i = 0; i < BOMB_FRAMES; i++) {
             String url = BOMB_START + (new Integer(i)).toString() + BOMB_END;
             bomb[i] =
-                    new Image(url, bombSize.getGraphic(), bombSize.getGraphic(), true, true);
+                    new Image(SpriteManager.class.getResource(url).toExternalForm(),
+                            bombSize.getGraphic(), bombSize.getGraphic(), true, true);
         }
 
         for (int i = 0; i < EXPLOSION_FRAMES; i++) {
             String url = EXPLOSION_START + (new Integer(i)).toString() + EXPLOSION_END;
             explosion[i] =
-                    new Image(url, explosionSize.getGraphic(), explosionSize.getGraphic(), true, true);
+                    new Image(SpriteManager.class.getResource(url).toExternalForm(),
+                            explosionSize.getGraphic(), explosionSize.getGraphic(), true, true);
         }
     }
 

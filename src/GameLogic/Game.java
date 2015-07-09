@@ -14,7 +14,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.net.URL;
 
 import static GameLogic.Config.*;
 
@@ -55,7 +57,8 @@ public class Game implements Serializable {
 
     public void  runMainMenu() {
         try {
-            mainMenu = FXMLLoader.load(getClass().getResource("../Views/MainMenu.fxml"));
+            URL resourse = Game.class.getResource("/Views/MainMenu.fxml");
+            mainMenu = FXMLLoader.load(resourse);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -76,8 +79,9 @@ public class Game implements Serializable {
 
     public void about() {
         Parent aboutMenu;
+        URL resource = Game.class.getResource("/Views/About.fxml");
         try {
-            aboutMenu = FXMLLoader.load(getClass().getResource("../Views/About.fxml"));
+            aboutMenu = FXMLLoader.load(resource);
         }
         catch (IOException e) {
             e.printStackTrace();

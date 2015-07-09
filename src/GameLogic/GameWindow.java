@@ -283,10 +283,10 @@ public class GameWindow implements Serializable {
             bonus.draw(fieldContext);
         for (Bomb bomb : bombs)
             bomb.draw(fieldContext);
-        for (Player player : players)
-            player.draw(fieldContext);
         for (Explosion explosion : explosions)
             explosion.draw(fieldContext);
+        for (Player player : players)
+            player.draw(fieldContext);
         for (HeaderObject obj : headerObjects)
             obj.draw(headerContext);
         if (playerDied != null) {
@@ -415,24 +415,18 @@ public class GameWindow implements Serializable {
 
     public static GameWindow load(String savePath) {
         try {
-            URL resource = Config.class.getResource(DEFAULT_SAVE);
-            File file;
-            try {
-                file = new File(resource.toURI());
-            }
-            catch (URISyntaxException e) {
-                e.printStackTrace();
-                return null;
-            }
-            FileInputStream fileStream = new FileInputStream(file);
-            ObjectInputStream in = new ObjectInputStream(fileStream);
+            InputStream input = GameWindow.class.getResourceAsStream(DEFAULT_SAVE);
+            ObjectInputStream in = new ObjectInputStream(input);
             GameWindow result = (GameWindow)in.readObject();
             return result;
         }
         catch (IOException e) {
-            return null;
-        } catch (ClassNotFoundException e) {
-            return null;
+            e.printStackTrace();
+            return  null;
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return  null;
         }
     }
 

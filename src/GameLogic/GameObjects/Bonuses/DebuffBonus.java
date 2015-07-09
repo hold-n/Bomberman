@@ -66,7 +66,7 @@ public class DebuffBonus extends TemporaryBonus {
             case 3:
                 effect = TemporaryEffect.FAST_EXPLOSION;
                 player.setUseTempBombLifeTime(true);
-                player.setTempBombLifeTime((int)(BOMB_LIFE_TIME * 0.5));
+                player.setTempBombLifeTime((int)(SHORT_BOMB_LIFE_TIME));
                 break;
             default:
                 effect = TemporaryEffect.DECREASE_SPEED;
