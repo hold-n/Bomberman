@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package Controllers; // hello
+=======
+package Controllers; //a
+>>>>>>> lalala
 
 import GameLogic.Game;
 import javafx.event.ActionEvent;
